@@ -8,7 +8,7 @@ Version: 1.0.0
 
 Resumen de cómo empezar: [Instalación de Ambiente de Dearrollo Local](https://bitbucket.org/antonio7439/poli-estaci-n-san-nicol-s-portal/wiki/Instalaci%C3%B3n%20de%20Ambiente%20de%20Desarrollo%20Local)
 
-## Comandos básicos de Git ##
+### Comandos básicos de Git ###
 
 https://confluence.atlassian.com/bitbucketserver/basic-git-commands-776639767.html
 
