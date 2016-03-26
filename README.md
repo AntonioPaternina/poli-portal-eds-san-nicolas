@@ -1,29 +1,19 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+### ¿Para qué es este repositorio? ###
 
-### What is this repository for? ###
+* Resumen
 
-* Quick summary
+Este repositorio contiene el código fuente del proyecto Portal Web para la Estación de Servicio San Nicolás. En la sección "Wiki" se pueden encontrar instrucciones de cómo realizar varias tareas relacionadas con el proyecto. En la sección "Issues" hay un gestor de incidencias.
+
 * Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
 
-### How do I get set up? ###
+1.0.0
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+### ¿Cómo empiezo? ###
 
-### Contribution guidelines ###
+* Resumen de cómo empezar: [Instalación de Ambiente de Dearrollo Local](https://bitbucket.org/antonio7439/poli-estaci-n-san-nicol-s-portal/wiki/Instalaci%C3%B3n%20de%20Ambiente%20de%20Desarrollo%20Local)
 
-* Writing tests
-* Code review
-* Other guidelines
+### ¿A quién recurro en caso de problemas? ###
 
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+Si tienes algún problema puedes escribir acpaternina@poli.edu.co
