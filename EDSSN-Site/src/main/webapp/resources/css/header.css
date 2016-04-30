@@ -1,0 +1,15 @@
+#top_logo {
+    float: left;
+}
+
+#top_header {
+    text-align: center;
+    vertical-align: middle;
+    padding-top: 40px;
+    font-size: 5em;
+    color: darkblue;
+}
+
+#top_header_login {
+    float: right;
+}
