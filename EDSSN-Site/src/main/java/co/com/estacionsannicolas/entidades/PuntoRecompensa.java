@@ -2,6 +2,7 @@ package co.com.estacionsannicolas.entidades;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 /**
  * Representa la cantidad de puntos de recompensa de un cliente
@@ -12,6 +13,18 @@ import javax.persistence.Entity;
 public class PuntoRecompensa extends EntidadBase implements Serializable {
 
     private Long cantidadPuntos;
+    @ManyToOne
+    private MarketingCampaign marketingCampaign;
+    @ManyToOne
+    private UsuarioCliente cliente;
+
+    public UsuarioCliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(UsuarioCliente cliente) {
+        this.cliente = cliente;
+    }
 
     public Long getCantidadPuntos() {
         return cantidadPuntos;
@@ -19,6 +32,14 @@ public class PuntoRecompensa extends EntidadBase implements Serializable {
 
     public void setCantidadPuntos(Long cantidadPuntos) {
         this.cantidadPuntos = cantidadPuntos;
+    }
+
+    public MarketingCampaign getMarketingCampaign() {
+        return marketingCampaign;
+    }
+
+    public void setMarketingCampaign(MarketingCampaign marketingCampaign) {
+        this.marketingCampaign = marketingCampaign;
     }
 
 }

@@ -7,7 +7,6 @@
     <properties>
       <property name="hibernate.format_sql" value="true"/>
       <property name="hibernate.show_sql" value="true"/>
-      <property name="hibernate.jdbc.batch_size" value="20"/>
       <property name="hibernate.cache.use_second_level_cache" value="false"/>
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>

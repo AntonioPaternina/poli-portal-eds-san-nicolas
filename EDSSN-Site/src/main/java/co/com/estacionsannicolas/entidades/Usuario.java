@@ -7,9 +7,6 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -29,7 +26,7 @@ public abstract class Usuario extends EntidadBase implements Serializable {
     private String password;
     private String nombreCompleto;
     private String direccion;
-    @OneToMany
+    @OneToMany(mappedBy = "usuario")
     private List<TelefonoContacto> telefonos;
     @Enumerated(EnumType.STRING)
     private Genero sexo;

@@ -2,6 +2,7 @@ package co.com.estacionsannicolas.entidades;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 /**
  * Telefonos de contacto
@@ -11,6 +12,8 @@ import javax.persistence.Entity;
 @Entity
 public class TelefonoContacto extends EntidadBase implements Serializable {
 
+    @ManyToOne
+    private Usuario usuario;
     private String telefono;
 
     public String getTelefono() {
@@ -19,6 +22,14 @@ public class TelefonoContacto extends EntidadBase implements Serializable {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
 }

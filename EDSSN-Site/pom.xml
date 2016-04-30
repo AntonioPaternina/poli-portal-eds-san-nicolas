@@ -1,28 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
+    
     <groupId>com.edssn</groupId>
     <artifactId>EDSSN-Site</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-
+    
     <name>EDSSN-Site</name>
-
+    
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+    </properties>   
     
     <dependencies>
+        <!-- el perfil web (Servlet/JSP) -->
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>
             <version>7.0</version>
             <scope>provided</scope>
         </dependency>
-        
-        <!-- Framework de persistencia -->
+        <!-- CDI Contexts and Dependency Injection -->
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>1.2</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.weld.servlet</groupId>
+            <artifactId>weld-servlet</artifactId>
+            <version>2.3.4.Final</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- JSF JavaServer Faces -->
+        <dependency>
+            <groupId>javax.faces</groupId>
+            <artifactId>javax.faces-api</artifactId>
+            <version>2.2</version>
+            <scope>provided</scope>            
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.faces</artifactId>
+            <version>2.2.8</version>
+            <scope>runtime</scope>
+        </dependency>
+        <!-- Framework de persistencia JPA/Hibernate -->
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -38,7 +64,6 @@
             <artifactId>hibernate-jpa-2.1-api</artifactId>
             <version>1.0.0.Final</version>
         </dependency>
-
         <!-- Framework para loggear -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -55,9 +80,14 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.7.21</version>
         </dependency>
-
+        <!-- librerías de utilidades -->
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
     </dependencies>
-
+    
     <build>
         <plugins>
             <plugin>
@@ -107,4 +137,5 @@
             </plugin>
         </plugins>
     </build>
+    <description>Este es el proyecto del sitio web de la Estación de Servicio San Nicolás.</description>
 </project>

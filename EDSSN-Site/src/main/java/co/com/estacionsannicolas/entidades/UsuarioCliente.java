@@ -16,6 +16,26 @@ public class UsuarioCliente extends Usuario {
 
     @OneToMany(mappedBy = "cliente")
     private List<Vehiculo> vehiculos;
+    @OneToMany(mappedBy = "cliente")
+    private List<PuntoRecompensa> puntosRecompensa;
+    @OneToMany(mappedBy = "cliente")
+    private List<SolicitudRedencion> solicitudesRedencion;
+
+    public List<SolicitudRedencion> getSolicitudesRedencion() {
+        return solicitudesRedencion;
+    }
+
+    public void setSolicitudesRedencion(List<SolicitudRedencion> solicitudesRedencion) {
+        this.solicitudesRedencion = solicitudesRedencion;
+    }
+
+    public List<PuntoRecompensa> getPuntosRecompensa() {
+        return puntosRecompensa;
+    }
+
+    public void setPuntosRecompensa(List<PuntoRecompensa> puntosRecompensa) {
+        this.puntosRecompensa = puntosRecompensa;
+    }
 
     public List<Vehiculo> getVehiculos() {
         return vehiculos;

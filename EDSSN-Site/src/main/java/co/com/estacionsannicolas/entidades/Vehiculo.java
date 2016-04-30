@@ -14,4 +14,13 @@ public class Vehiculo extends EntidadBase implements Serializable {
 
     @ManyToOne
     private UsuarioCliente cliente;
+
+    public UsuarioCliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(UsuarioCliente cliente) {
+        this.cliente = cliente;
+    }
+
 }

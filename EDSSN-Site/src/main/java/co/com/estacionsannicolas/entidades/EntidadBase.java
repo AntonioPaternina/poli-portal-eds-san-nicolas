@@ -4,6 +4,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import org.apache.commons.lang.builder.ToStringBuilder;
 
 /**
  * Es la entidad base
@@ -14,7 +15,7 @@ import javax.persistence.MappedSuperclass;
 public class EntidadBase {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public Long getId() {
@@ -25,4 +26,8 @@ public class EntidadBase {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this);
+    }
 }
