@@ -8,7 +8,8 @@
     <packaging>war</packaging>
     
     <name>EDSSN-Site</name>
-    
+    <description>Este es el proyecto del sitio web de la Estación de Servicio San Nicolás.</description>
+
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -74,7 +75,24 @@
             <groupId>org.primefaces.themes</groupId>  
             <artifactId>all-themes</artifactId>  
             <version>1.0.10</version>  
-        </dependency> 
+        </dependency>
+        <!-- Framework para autenticación y autorización Spring Security -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>4.0.4.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>4.0.4.RELEASE</version>
+        </dependency>
+        <!-- requerido por Spring Security -->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
+        </dependency>
         <!-- Framework para loggear -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -156,5 +174,4 @@
             </plugin>
         </plugins>
     </build>
-    <description>Este es el proyecto del sitio web de la Estación de Servicio San Nicolás.</description>
 </project>
