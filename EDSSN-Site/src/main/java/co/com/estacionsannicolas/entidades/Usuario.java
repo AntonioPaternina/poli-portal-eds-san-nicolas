@@ -24,6 +24,7 @@ public abstract class Usuario extends EntidadBase implements Serializable {
 
     private String username;
     private String password;
+    private boolean activo;
     private String nombreCompleto;
     private String direccion;
     @OneToMany(mappedBy = "usuario")
@@ -32,6 +33,16 @@ public abstract class Usuario extends EntidadBase implements Serializable {
     private Genero sexo;
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
+    @OneToMany(mappedBy = "usuario")
+    private List<RolUsuario> roles;
+
+    public List<RolUsuario> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<RolUsuario> roles) {
+        this.roles = roles;
+    }
 
     public String getUsername() {
         return username;
@@ -87,6 +98,14 @@ public abstract class Usuario extends EntidadBase implements Serializable {
 
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 
 }

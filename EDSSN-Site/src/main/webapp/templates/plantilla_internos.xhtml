@@ -3,8 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:p="http://primefaces.org/ui">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <h:outputStylesheet library="css" name="default.css"/>
@@ -18,17 +17,10 @@
                 <p:graphicImage library="images" name="MobilandPegasus.png" />
             </div>
             <div id="top_header_login">
-                <c:choose >
-                    <c:when test="#{request.userPrincipal == null}">
-                        <h:outputLink value="login.xhtml">Iniciar Sesión</h:outputLink>
-                    </c:when>
-                    <c:otherwise>
-                        <form action="#{request.contextPath}/logout" method="post">
-                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                            <button id="boton_cerrar_sesion" type="submit">Cerrar Sesión</button>
-                        </form>        
-                    </c:otherwise>
-                </c:choose>
+                <h:outputLink  value="login.xhtml">Iniciar Sesión</h:outputLink>
+                <h:form>
+                    <h:commandLink action="#{loginController.logout}" value="Logout"></h:commandLink>
+                </h:form>
             </div>
             <div id="top_header">                    
                 <ui:insert name="top">
@@ -42,7 +34,6 @@
                     <h:form>
                         <p:menu>
                             <p:submenu label="Inicio">
-                                <p:menuitem value="Pagina Principal" icon="ui-icon-star" url="index.xhtml"  />
                                 <p:menuitem value="Acerca de nosotros" icon="ui-icon-star" />
                                 <p:menuitem value="Nuestra historia"  icon="ui-icon-star" />
                                 <p:menuitem value="Cómo llegar"  icon="ui-icon-star" />                                
