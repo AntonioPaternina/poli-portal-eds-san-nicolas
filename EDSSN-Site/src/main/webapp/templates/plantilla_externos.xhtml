@@ -20,7 +20,9 @@
             <div id="top_header_login">
                 <c:choose >
                     <c:when test="#{request.userPrincipal == null}">
-                        <h:outputLink value="login.xhtml">Iniciar Sesión</h:outputLink>
+                        <h:outputLink value="#{request.contextPath}/login.xhtml">Iniciar Sesión</h:outputLink>
+                        |
+                        <h:outputLink value="#{request.contextPath}/registro/registro.xhtml">Regístrate</h:outputLink>
                     </c:when>
                     <c:otherwise>
                         <form action="#{request.contextPath}/logout" method="post">
@@ -42,7 +44,7 @@
                     <h:form>
                         <p:menu>
                             <p:submenu label="Inicio">
-                                <p:menuitem value="Pagina Principal" icon="ui-icon-star" url="index.xhtml"  />
+                                <p:menuitem value="Pagina Principal" icon="ui-icon-star" url="/index.xhtml"  />
                                 <p:menuitem value="Acerca de nosotros" icon="ui-icon-star" />
                                 <p:menuitem value="Nuestra historia"  icon="ui-icon-star" />
                                 <p:menuitem value="Cómo llegar"  icon="ui-icon-star" />                                

@@ -1,4 +1,4 @@
-package co.com.estacionsannicolas.entidades;
+package co.com.estacionsannicolas.servicio.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -27,6 +27,7 @@ public abstract class Usuario extends EntidadBase implements Serializable {
     private boolean activo;
     private String nombreCompleto;
     private String direccion;
+    private String email;
     @OneToMany(mappedBy = "usuario")
     private List<TelefonoContacto> telefonos;
     @Enumerated(EnumType.STRING)
@@ -106,6 +107,14 @@ public abstract class Usuario extends EntidadBase implements Serializable {
 
     public void setActivo(boolean activo) {
         this.activo = activo;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 }

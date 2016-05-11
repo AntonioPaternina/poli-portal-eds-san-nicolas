@@ -1,4 +1,4 @@
-package co.com.estacionsannicolas.entidades;
+package co.com.estacionsannicolas.servicio.entidades;
 
 /**
  * Los posibles estados de una solicitud de redención

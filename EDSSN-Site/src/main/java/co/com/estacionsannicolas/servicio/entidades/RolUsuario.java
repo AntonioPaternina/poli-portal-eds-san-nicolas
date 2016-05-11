@@ -1,27 +1,26 @@
-package co.com.estacionsannicolas.entidades;
+package co.com.estacionsannicolas.servicio.entidades;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 /**
- * Telefonos de contacto
  *
  * @author Antonio Paternina <acpaternina@poli.edu.co>
  */
 @Entity
-public class TelefonoContacto extends EntidadBase implements Serializable {
+public class RolUsuario extends EntidadBase implements Serializable {
 
+    private String nombre;
     @ManyToOne
     private Usuario usuario;
-    private String telefono;
 
-    public String getTelefono() {
-        return telefono;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public Usuario getUsuario() {

@@ -1,7 +1,8 @@
-package co.com.estacionsannicolas.security;
+package co.com.estacionsannicolas.config.security;
 
-import co.com.estacionsannicolas.config.AppConfig;
 import javax.sql.DataSource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -16,17 +17,19 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * @author Antonio Paternina <acpaternina@poli.edu.co>
  */
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class ConfiguracionSpringSecurity extends WebSecurityConfigurerAdapter {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConfiguracionSpringSecurity.class);
 
     private DataSource dataSource;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        ApplicationContext ctx = new AnnotationConfigApplicationContext(AppConfig.class);
+        LOGGER.debug("Inicia configuración global de SpringSecurity");
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(ConfiguracionSpring.class);
         dataSource = ctx.getBean(DataSource.class);
 
         auth
-                //.inMemoryAuthentication()
                 .jdbcAuthentication()
                 .dataSource(dataSource)
                 .usersByUsernameQuery(
@@ -41,6 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/javax.faces.resource/**").permitAll()
                 .antMatchers("/index.xhtml").permitAll()
+                .antMatchers("/registro/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

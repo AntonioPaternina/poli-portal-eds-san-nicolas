@@ -1,4 +1,4 @@
-package co.com.estacionsannicolas.entidades;
+package co.com.estacionsannicolas.servicio.entidades;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
