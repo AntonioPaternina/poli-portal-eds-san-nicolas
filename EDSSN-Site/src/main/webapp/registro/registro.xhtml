@@ -40,6 +40,9 @@
                         </p:inputText>
                         <p:message for="email" />
 
+                        <input type="hidden"
+                               name="${_csrf.parameterName}"
+                               value="${_csrf.token}" /> 
 
                         <f:facet name="footer">
                             <p:commandButton value="Registro" actionListener="#{usuarioClienteBean.registro}"

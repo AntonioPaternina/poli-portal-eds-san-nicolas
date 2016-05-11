@@ -26,6 +26,11 @@ public class UsuarioClienteBean extends BaseBean {
     private Genero sexo;
     private Date fechaNacimiento;
     private List<Vehiculo> vehiculos;
+    
+    public String registro() {
+        
+        return "";
+    }
 
     /*
      * GETTERS & SETTERS 

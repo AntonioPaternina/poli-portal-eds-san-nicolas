@@ -30,7 +30,7 @@ public abstract class Usuario extends EntidadBase implements Serializable {
     private String email;
     @OneToMany(mappedBy = "usuario")
     private List<TelefonoContacto> telefonos;
-    @Enumerated(EnumType.STRING)
+    @Enumerated
     private Genero sexo;
     @Temporal(TemporalType.DATE)
     private Date fechaNacimiento;
