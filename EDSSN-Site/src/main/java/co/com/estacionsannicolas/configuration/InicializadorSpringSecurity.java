@@ -1,4 +1,4 @@
-package co.com.estacionsannicolas.config.security;
+package co.com.estacionsannicolas.configuration;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 
@@ -9,7 +9,4 @@ import org.springframework.security.web.context.AbstractSecurityWebApplicationIn
  */
 public class InicializadorSpringSecurity extends AbstractSecurityWebApplicationInitializer {
 
-    public InicializadorSpringSecurity() {
-        super(ConfiguracionSpringSecurity.class);
-    }
 }

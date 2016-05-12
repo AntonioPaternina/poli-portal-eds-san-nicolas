@@ -5,16 +5,12 @@ import co.com.estacionsannicolas.servicio.entidades.TelefonoContacto;
 import co.com.estacionsannicolas.servicio.entidades.Vehiculo;
 import java.util.Date;
 import java.util.List;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Named;
 
 /**
  * Componente que maneja el registro de nuevos usuarios
  *
  * @author Antonio Paternina <acpaternina@poli.edu.co>
  */
-@Named
-@SessionScoped
 public class UsuarioClienteBean extends BaseBean {
 
     private String username;
@@ -26,11 +22,6 @@ public class UsuarioClienteBean extends BaseBean {
     private Genero sexo;
     private Date fechaNacimiento;
     private List<Vehiculo> vehiculos;
-    
-    public String registro() {
-        
-        return "";
-    }
 
     /*
      * GETTERS & SETTERS 

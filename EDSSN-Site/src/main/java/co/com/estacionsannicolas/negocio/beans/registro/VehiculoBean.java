@@ -1,16 +1,12 @@
 package co.com.estacionsannicolas.negocio.beans.registro;
 
 import co.com.estacionsannicolas.servicio.entidades.TipoVehiculo;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 
 /**
  * Bean manejado que representa un vehículo
  *
  * @author Antonio Paternina <acpaternina@poli.edu.co>
  */
-@Named
-@RequestScoped
 public class VehiculoBean extends BaseBean {
 
     private String placa;

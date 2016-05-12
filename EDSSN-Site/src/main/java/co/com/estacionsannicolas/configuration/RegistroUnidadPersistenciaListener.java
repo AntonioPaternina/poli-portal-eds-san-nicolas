@@ -1,4 +1,4 @@
-package co.com.estacionsannicolas.config.hibernate;
+package co.com.estacionsannicolas.configuration;
 
 import javax.persistence.Persistence;
 import javax.servlet.ServletContextEvent;
