@@ -2,8 +2,6 @@ angular.module('edssnApp', ['commonDirectives', 'services', 'spring-security-csr
         .controller('MainController', ['$scope', 'UserService', function ($scope, UserService) {
                 $scope.vm = {};
 
-                getUser();
-
                 function getUser() {
                     UserService.getUser().then(function (user) {
                         $scope.vm.username = user.username;

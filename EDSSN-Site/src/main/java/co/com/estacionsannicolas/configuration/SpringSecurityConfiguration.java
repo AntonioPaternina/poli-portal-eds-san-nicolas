@@ -47,6 +47,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
+                .antMatchers("/index.html").permitAll()
                 .antMatchers("/resources/public/**").permitAll()
                 .antMatchers("/resources/img/**").permitAll()
                 .antMatchers("/resources/bower_components/**").permitAll()
@@ -55,7 +56,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .defaultSuccessUrl("/resources/public/index.html")
+                .defaultSuccessUrl("/index.html")
                 .loginProcessingUrl("/login")
                 .usernameParameter("username")
                 .passwordParameter("password")

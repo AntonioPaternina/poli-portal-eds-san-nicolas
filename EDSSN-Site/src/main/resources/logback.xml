@@ -8,9 +8,9 @@
         </encoder>
     </appender>
 
-    <logger name="org.springframework" level="ERROR"/>
-    <logger name="org.dozer" level="ERROR"/>
-    <logger name="org.hibernate" level="ERROR"/>
+    <logger name="org.springframework" level="DEBUG"/>
+    <logger name="org.dozer" level="INFO"/>
+    <logger name="org.hibernate" level="INFO"/>
 
     <root level="info">
         <appender-ref ref="STDOUT" />
