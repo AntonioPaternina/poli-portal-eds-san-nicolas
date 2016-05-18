@@ -11,8 +11,18 @@
         <link rel="stylesheet" href="/resources/public/css/edssn.css" />
     </head>
     <body id="edssnApp"          
-          class="pure-skin-theme" ng-controller="MainController">
-        <header class="page-header pure-g">
+          class="pure-skin-theme" 
+          ng-controller="MainController">
+
+        <div class="please-wait-dialog" 
+             ng-hide="vm.appReady">
+            <img alt="Espera"
+                 class="please-wait-spinner" 
+                 src="/resources/img/loading.gif">
+        </div>
+
+        <header class="page-header pure-g not-ready" 
+                ng-class="{'app-ready': vm.appReady}">
             <div class="pure-u-lg-1-2 pure-u-1">
 
                 <a class="pure-menu-heading" href="#">
@@ -23,9 +33,9 @@
             <div class="pure-u-lg-1-2 pure-u-1 utilities">
                 <div class="header-element username">
                     <div class="username-placeholder" 
-                         ng-hide="vm.userName">                             
+                         ng-hide="vm.username">                             
                     </div>
-                    <span ng-cloak>{{vm.userName}}</span>
+                    <span ng-cloak>{{vm.username}}</span>
                 </div>
                 <div class="header-element">
                     <a class="logout" 
