@@ -1,7 +1,5 @@
 package co.com.estacionsannicolas.configuration;
 
-import co.com.estacionsannicolas.converter.ConvertidorRolPerfilUsuario;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -16,9 +14,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @EnableWebMvc
 @ComponentScan(basePackages = "co.com.estacionsannicolas")
 public class SpringMvcConfiguration extends WebMvcConfigurerAdapter {
-
-    @Autowired
-    private ConvertidorRolPerfilUsuario convertidorRolPerfilUsuario;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

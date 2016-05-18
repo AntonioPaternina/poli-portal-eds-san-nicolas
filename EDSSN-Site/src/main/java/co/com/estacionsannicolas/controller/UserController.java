@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -24,7 +25,7 @@ public class UserController extends BaseController {
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.POST)
-    public void createUser(UserBean user) {
+    public void createUser(@RequestBody UserBean user) {
         userService.createUser(user, UserRoleTypeEnum.CUSTOMER);
     }
 
@@ -37,12 +38,12 @@ public class UserController extends BaseController {
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.PUT)
-    public UserBean updateUser(UserBean user) {
+    public UserBean updateUser(@RequestBody UserBean user) {
         return userService.updateUser(user);
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
-    public void deleteUser(UserBean user) {
+    public void deleteUser(@RequestBody UserBean user) {
         userService.deleteUser(user.getUsername());
     }
 
