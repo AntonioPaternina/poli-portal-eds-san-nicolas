@@ -1,0 +1,111 @@
+package co.com.estacionsannicolas.beans;
+
+import co.com.estacionsannicolas.enums.GenderEnum;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public class UserBean extends BaseBean {
+
+    private String nationalId;
+    private String username;
+    private String password;
+    private String fullName;
+    private String email;
+    private boolean acive;
+    private String address;
+    private List<ContactNumberBean> contactNumbers;
+    private GenderEnum gender;
+    private Date birthdate;
+    private Set<UserRoleBean> userRoles = new HashSet<>();
+
+    public String getNationalId() {
+        return nationalId;
+    }
+
+    public void setNationalId(String nationalId) {
+        this.nationalId = nationalId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public boolean isAcive() {
+        return acive;
+    }
+
+    public void setAcive(boolean acive) {
+        this.acive = acive;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public List<ContactNumberBean> getContactNumbers() {
+        return contactNumbers;
+    }
+
+    public void setContactNumbers(List<ContactNumberBean> contactNumbers) {
+        this.contactNumbers = contactNumbers;
+    }
+
+    public GenderEnum getGender() {
+        return gender;
+    }
+
+    public void setGender(GenderEnum gender) {
+        this.gender = gender;
+    }
+
+    public Date getBirthdate() {
+        return birthdate;
+    }
+
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
+    }
+
+    public Set<UserRoleBean> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(Set<UserRoleBean> userRoles) {
+        this.userRoles = userRoles;
+    }
+
+}

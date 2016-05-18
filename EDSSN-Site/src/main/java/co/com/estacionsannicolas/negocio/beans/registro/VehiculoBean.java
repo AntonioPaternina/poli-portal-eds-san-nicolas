@@ -1,6 +1,6 @@
 package co.com.estacionsannicolas.negocio.beans.registro;
 
-import co.com.estacionsannicolas.servicio.entidades.TipoVehiculo;
+import co.com.estacionsannicolas.enums.VehicleTypeEnum;
 
 /**
  * Bean manejado que representa un vehículo
@@ -17,7 +17,7 @@ public class VehiculoBean extends BaseBean {
 
     private UsuarioClienteBean cliente;
 
-    private TipoVehiculo tipoVehiculo;
+    private VehicleTypeEnum tipoVehiculo;
 
     public String getPlaca() {
         return placa;
@@ -51,11 +51,11 @@ public class VehiculoBean extends BaseBean {
         this.cliente = cliente;
     }
 
-    public TipoVehiculo getTipoVehiculo() {
+    public VehicleTypeEnum getTipoVehiculo() {
         return tipoVehiculo;
     }
 
-    public void setTipoVehiculo(TipoVehiculo tipoVehiculo) {
+    public void setTipoVehiculo(VehicleTypeEnum tipoVehiculo) {
         this.tipoVehiculo = tipoVehiculo;
     }
 

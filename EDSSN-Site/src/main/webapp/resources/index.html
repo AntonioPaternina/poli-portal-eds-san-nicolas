@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Estación San Nicolás</title>
+        <meta name="description" content="Sitio web de la Estación de Servicio San Nicolás en Cereté, Córdoba" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="/resources/bower_components/pure/pure.css" />
+        <link rel="stylesheet" href="/resources/bower_components/pure/grids-responsive.css" />
+        <link rel="stylesheet" href="/resources/public/css/skin-builder-pure.css" />
+        <link rel="stylesheet" href="/resources/public/css/edssn.css" />
+    </head>
+    <body id="edssnApp"          
+          class="pure-skin-theme" ng-controller="MainController">
+        <header class="page-header pure-g">
+            <div class="pure-u-lg-1-2 pure-u-1">
+
+                <a class="pure-menu-heading" href="#">
+                    <img class="logo" alt="Logo" src="/resources/img/MobilandPegasus.png">
+                </a>
+                <span class="header-element page-title">Estación San Nicolás</span>
+            </div>
+            <div class="pure-u-lg-1-2 pure-u-1 utilities">
+                <div class="header-element username">
+                    <div class="username-placeholder" 
+                         ng-hide="vm.userName">                             
+                    </div>
+                    <span ng-cloak>{{vm.userName}}</span>
+                </div>
+                <div class="header-element">
+                    <a class="logout" 
+                       href="#" 
+                       ng-click="logout()">Logout
+                    </a>
+                </div>
+            </div>
+        </header>
+
+
+        <script type="text/javascript" data-main="/resources/js/setup-edssn"
+        src="/resources/bower_components/requirejs/require.js"></script>
+    </body>
+</html>

@@ -1,16 +1,17 @@
 package co.com.estacionsannicolas.service;
 
-import co.com.estacionsannicolas.model.UserProfile;
+import co.com.estacionsannicolas.entities.UserRoleEntity;
+import co.com.estacionsannicolas.enums.UserRoleTypeEnum;
 import java.util.List;
 
 
 
 public interface UserProfileService {
 
-	UserProfile findById(int id);
+	UserRoleEntity findById(int id);
 
-	UserProfile findByType(String type);
+	UserRoleEntity findByType(UserRoleTypeEnum type);
 	
-	List<UserProfile> findAll();
+	List<UserRoleEntity> findAll();
 	
 }

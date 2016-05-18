@@ -1,6 +1,6 @@
 package co.com.estacionsannicolas.converter;
 
-import co.com.estacionsannicolas.model.UserProfile;
+import co.com.estacionsannicolas.entities.UserRoleEntity;
 import co.com.estacionsannicolas.service.UserProfileService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  * A converter class used in views to map id's to actual userProfile objects.
  */
 @Component
-public class ConvertidorRolPerfilUsuario implements Converter<Object, UserProfile> {
+public class ConvertidorRolPerfilUsuario implements Converter<Object, UserRoleEntity> {
 
     static final Logger logger = LoggerFactory.getLogger(ConvertidorRolPerfilUsuario.class);
 
@@ -25,9 +25,9 @@ public class ConvertidorRolPerfilUsuario implements Converter<Object, UserProfil
      * @see
      * org.springframework.core.convert.converter.Converter#convert(java.lang.Object)
      */
-    public UserProfile convert(Object element) {
+    public UserRoleEntity convert(Object element) {
         Integer id = Integer.parseInt((String) element);
-        UserProfile profile = userProfileService.findById(id);
+        UserRoleEntity profile = userProfileService.findById(id);
         logger.info("Profile : {}", profile);
         return profile;
     }

@@ -1,22 +1,23 @@
 package co.com.estacionsannicolas.service;
 
-import co.com.estacionsannicolas.model.User;
+import co.com.estacionsannicolas.beans.UserBean;
+import co.com.estacionsannicolas.enums.UserRoleTypeEnum;
 import java.util.List;
 
 public interface UserService {
 
-    User buscarPorId(int id);
+    UserBean findById(Long id);
 
-    User buscarPorSsoId(String sso);
+    UserBean findByUsername(String username);
 
-    void crearUsuario(User user);
+    void createUser(UserBean user, UserRoleTypeEnum roleType);
 
-    void actualizarUsuario(User user);
+    UserBean updateUser(UserBean user);
 
-    void eliminarPorSsoId(String sso);
+    void deleteUser(String username);
 
-    List<User> buscarTodos();
+    List<UserBean> findAll();
 
-    boolean isSsoIdUnico(Integer id, String sso);
+    boolean isUsernameUnique(Long id, String username);
 
 }

@@ -1,8 +1,8 @@
 package co.com.estacionsannicolas.negocio.beans.registro;
 
-import co.com.estacionsannicolas.servicio.entidades.Genero;
-import co.com.estacionsannicolas.servicio.entidades.TelefonoContacto;
-import co.com.estacionsannicolas.servicio.entidades.Vehiculo;
+import co.com.estacionsannicolas.enums.GenderEnum;
+import co.com.estacionsannicolas.entities.ContactNumberEntity;
+import co.com.estacionsannicolas.entities.VehicleEntity;
 import java.util.Date;
 import java.util.List;
 
@@ -18,10 +18,10 @@ public class UsuarioClienteBean extends BaseBean {
     private String nombreCompleto;
     private String direccion;
     private String email;
-    private List<TelefonoContacto> telefonos;
-    private Genero sexo;
+    private List<ContactNumberEntity> telefonos;
+    private GenderEnum sexo;
     private Date fechaNacimiento;
-    private List<Vehiculo> vehiculos;
+    private List<VehicleEntity> vehiculos;
 
     /*
      * GETTERS & SETTERS 
@@ -58,19 +58,19 @@ public class UsuarioClienteBean extends BaseBean {
         this.direccion = direccion;
     }
 
-    public List<TelefonoContacto> getTelefonos() {
+    public List<ContactNumberEntity> getTelefonos() {
         return telefonos;
     }
 
-    public void setTelefonos(List<TelefonoContacto> telefonos) {
+    public void setTelefonos(List<ContactNumberEntity> telefonos) {
         this.telefonos = telefonos;
     }
 
-    public Genero getSexo() {
+    public GenderEnum getSexo() {
         return sexo;
     }
 
-    public void setSexo(Genero sexo) {
+    public void setSexo(GenderEnum sexo) {
         this.sexo = sexo;
     }
 
@@ -82,11 +82,11 @@ public class UsuarioClienteBean extends BaseBean {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public List<Vehiculo> getVehiculos() {
+    public List<VehicleEntity> getVehiculos() {
         return vehiculos;
     }
 
-    public void setVehiculos(List<Vehiculo> vehiculos) {
+    public void setVehiculos(List<VehicleEntity> vehiculos) {
         this.vehiculos = vehiculos;
     }
 
