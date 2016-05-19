@@ -8,6 +8,7 @@ require.config({
     paths: {
         angular: '../../bower_components/angular/angular',
         angularMessages: '../../bower_components/angular-messages/angular-messages',
+        angularRoute: '../../bower_components/angular-route/angular-route',
         csrfInterceptor: '../../bower_components/spring-security-csrf-token-interceptor/dist/spring-security-csrf-token-interceptor.min',
         lodash: "../../bower_components/lodash/dist/lodash",
         commonDirectives: '../../public/js/common-directives',
@@ -24,6 +25,9 @@ require.config({
         angularMessages: {
             deps: ['angular']
         },
+        angularRoute: {
+            deps: ['angular']
+        },
         commonDirectives: {
             deps: ['angular', 'lodash']
         },
@@ -31,7 +35,7 @@ require.config({
             deps: ['angular', 'lodash', 'csrfInterceptor']
         },
         edssnApp: {
-            deps: ['lodash', 'angular', 'angularMessages', 'commonDirectives', 'services']
+            deps: ['lodash', 'angular', 'angularMessages', 'angularRoute', 'commonDirectives', 'services']
         }
     }
 });

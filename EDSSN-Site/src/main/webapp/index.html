@@ -4,50 +4,29 @@
         <meta charset="utf-8" />
         <title>Estación San Nicolás</title>
         <meta name="description" content="Sitio web de la Estación de Servicio San Nicolás en Cereté, Córdoba" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" href="/resources/bower_components/pure/pure.css" />
-        <link rel="stylesheet" href="/resources/bower_components/pure/grids-responsive.css" />
-        <link rel="stylesheet" href="/resources/public/css/skin-builder-pure.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />        
+        <link rel="stylesheet" href="/resources/bower_components/pure/pure-min.css" />
+        <!--[if lte IE 8]>
+        <link rel="stylesheet" href="/resources/bower_components/pure/grids-responsive-old-ie-min.css" />
+        <![endif]-->
+        <!--[if gt IE 8]><!-->
+        <link rel="stylesheet" href="/resources/bower_components/pure/grids-responsive-min.css" />
+        <!--<![endif]-->
+        <link rel="stylesheet" href="/resources/bower_components/fontawesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/resources/public/css/skin-builder-pure.css" />        
         <link rel="stylesheet" href="/resources/public/css/edssn.css" />
     </head>
     <body id="edssnApp"          
-          class="pure-skin-theme" 
           ng-controller="MainController">
 
-        <div class="please-wait-dialog" 
-             ng-hide="vm.appReady">
-            <img alt="Espera"
-                 class="please-wait-spinner" 
-                 src="/resources/img/loading.gif">
-        </div>
+    <main-header></main-header>
 
-        <header class="page-header pure-g not-ready" 
-                ng-class="{'app-ready': vm.appReady}">
-            <div class="pure-u-lg-1-2 pure-u-1">
+    <div ng-view></div>
 
-                <a class="pure-menu-heading" href="#">
-                    <img class="logo" alt="Logo" src="/resources/img/MobilandPegasus.png">
-                </a>
-                <span class="header-element page-title">Estación San Nicolás</span>
-            </div>
-            <div class="pure-u-lg-1-2 pure-u-1 utilities">
-                <div class="header-element username">
-                    <div class="username-placeholder" 
-                         ng-hide="vm.username">                             
-                    </div>
-                    <span ng-cloak>{{vm.username}}</span>
-                </div>
-                <div class="header-element">
-                    <a class="logout" 
-                       href="#" 
-                       ng-click="logout()">Logout
-                    </a>
-                </div>
-            </div>
-        </header>
-
-
-        <script type="text/javascript" data-main="/resources/public/js/setup-edssn"
-        src="/resources/bower_components/requirejs/require.js"></script>
-    </body>
+    <!--
+    <main-footer></main-footer>
+    -->
+    <script type="text/javascript" data-main="/resources/public/js/setup-edssn"
+    src="/resources/bower_components/requirejs/require.js"></script>
+</body>
 </html>

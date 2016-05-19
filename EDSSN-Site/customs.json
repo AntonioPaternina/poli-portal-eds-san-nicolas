@@ -4,7 +4,10 @@
             "attributes": {
                 "extra-styles": {}
             }
-        }
+        },
+        "main-footer": {},
+        "main-header": {},
+        "splash-header": {}
     },
     "attributes": {}
 }

@@ -28,7 +28,7 @@ angular.module('common', ['ngMessages'])
                         }
                     }).then(function (response) {
                         if (response.data === 'ok') {
-                            window.location.replace('/resources/index.html');
+                            window.location.replace('/');
                         } else {
                             $scope.vm.errorMessages = [];
                             $scope.vm.errorMessages.push({description: 'Usuario y/o contraseña inválidos'});

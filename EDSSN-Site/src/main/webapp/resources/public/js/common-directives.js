@@ -2,6 +2,24 @@
  * Contains reusable directives (widgets) that can be used anywhere in the application
  */
 angular.module('commonDirectives', [])
+        .directive('mainHeader', function () {
+            return {
+                restrict: 'E',
+                templateUrl: '/resources/public/partials/site-header.html'
+            };
+        })
+        .directive('mainFooter', function () {
+            return {
+                restrict: 'E',
+                templateUrl: '/resources/public/partials/site-footer.html'
+            };
+        })
+        .directive('splashHeader', function () {
+            return {
+                restrict: 'E',
+                templateUrl: '/resources/public/partials/splash-header.html'
+            };
+        })
         .directive('commonErrorMessages', function () {
             return {
                 restrict: 'E',
@@ -9,7 +27,7 @@ angular.module('commonDirectives', [])
                     scope.extraStyles = attrs.extraStyles;
                 },
                 templateUrl: '/resources/public/partials/error-messages.html'
-            }
+            };
         })
         .directive('checkPasswordsMatch', function () {
             return {

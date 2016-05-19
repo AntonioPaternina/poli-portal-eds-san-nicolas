@@ -1,0 +1,61 @@
+<div class="edssn-login-container">
+    <common-error-messages extra-styles="access-screen"></common-error-messages>
+    <div class="login-container">
+        <form ng-submit="ctrl.onLogin()"
+              name="form" 
+              class="pure-form login-form" 
+              novalidate>
+            <fieldset class="pure-group">
+                <legend>Iniciar Sesión</legend>               
+                <div class="form-field">
+                    <input type="text" 
+                           name="username" 
+                           ng-model="vm.username"
+                           ng-focus="onFocus('username')"  
+                           ng-blur="onBlur('username')" 
+                           ng-minlength="3"
+                           required
+                           class="pure-input-1" 
+                           placeholder="usuario">
+
+                    <div ng-show="isErrorMessageListVisible('username')" 
+                         ng-messages="form.username.$error" 
+                         ng-cloak
+                         class="error-messages">
+                        <div ng-message="required">requerido</div>
+                        <div ng-message="minlength">debe ser de 6 o más caracteres</div>
+                    </div>
+                </div>
+                <div class="last-form-field">
+                    <input type="password" 
+                           name="password"
+                           ng-model="vm.password"
+                           ng-focus="onFocus('password')"  
+                           ng-blur="onBlur('password')"                                    
+                           ng-minlength="3"                                    
+                           class="pure-input-1" 
+                           placeholder="contraseña" 
+                           required>
+
+                    <div class="error-messages" 
+                         ng-show="isErrorMessageListVisible('password')" 
+                         ng-messages="form.password.$error" 
+                         ng-cloak>
+                        <div ng-message="required">requerido</div>
+                        <div ng-message="minlength">debe ser de 6 o más caracteres</div>
+                        <div ng-message="pattern">debe tener por lo menos un número y una mayúscula</div>
+                    </div>
+                </div>
+            </fieldset>
+
+            <button type="submit" 
+                    class="pure-button pure-input-1 pure-button-primary">
+                Iniciar Sesión
+            </button>
+            <a class="new-user-link" 
+               href="/#/signup">
+                Regístrate
+            </a>
+        </form>
+    </div>
+</div>
