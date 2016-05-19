@@ -3,7 +3,7 @@ angular.module('edssnApp', ['ngRoute', 'commonDirectives', 'services', 'spring-s
 
 /* CONTROLLERS */
 angular.module('edssnApp')
-        .controller('MainController', ['$scope', '$http', '$httpParamSerializerJQLike', '$location', 'UserService', function ($scope, $http, $httpParamSerializerJQLike, $location, UserService) {
+        .controller('MainController', ['$scope', '$http', '$httpParamSerializerJQLike', '$location', '$rootScope', 'UserService', function ($scope, $http, $httpParamSerializerJQLike, $location, $rootScope, UserService) {
                 $scope.vm = {
                     isFormSent: false,
                     errorMessages: []
@@ -49,7 +49,7 @@ angular.module('edssnApp')
                     }).then(function (response) {
                         if (response.data === 'ok') {
                             $location.url('/#');
-                            $scope.loggedInUsername = username;
+                            $rootScope.loggedInUsername = username;
                         } else {
                             $scope.vm.errorMessages = [];
                             $scope.vm.errorMessages.push({description: 'Usuario y/o contraseña inválidos'});
@@ -57,7 +57,8 @@ angular.module('edssnApp')
                     });
                 };
             }])
-        .controller('LoginController', ['$http', '$httpParamSerializerJQLike', '$location', '$scope', function ($http, $httpParamSerializerJQLike, $location, $scope) {
+        .controller('LoginController', ['$http', '$httpParamSerializerJQLike', '$location', '$scope', '$controller', function ($http, $httpParamSerializerJQLike, $location, $scope, $controller) {
+                angular.extend(this, $controller('MainController', {$scope: $scope}));
                 this.onLogin = function () {
                     console.log('Inicio de sesión con usuario: ' + $scope.vm.username + ' y contraseña ' + $scope.vm.password);
 
@@ -72,7 +73,8 @@ angular.module('edssnApp')
                 };
 
             }])
-        .controller('SignupCtrl', ['$http', '$scope', function ($http, $scope) {
+        .controller('SignupCtrl', ['$http', '$scope', '$controller', function ($http, $scope, $controller) {
+                angular.extend(this, $controller('MainController', {$scope: $scope}));
                 var controller = this;
                 controller.signup = function () {
                     console.log('Registrando al usuario con username ' + $scope.vm.username + ' y contraseña ' + $scope.vm.password);
