@@ -61,13 +61,13 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .successHandler(new AuthenticationSuccessHandlerImpl(new SavedRequestAwareAuthenticationSuccessHandler()))
-                .loginPage("/resources/public/login.html")
+                .loginPage("/#/login")
                 .and()
                 .httpBasic()
                 .and()
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/resources/public/login.html")
+                .logoutSuccessUrl("/#/")
                 .permitAll();
 
         /*
