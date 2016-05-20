@@ -10,12 +10,15 @@ angular.module('edssnApp')
                 };
                 var focusedField;
 
-                function getUser() {
+                $scope.getUser = function getUser() {
                     UserService.getUser().then(function (user) {
-                        $scope.vm.username = user.username;
+                        $rootScope.loggedInUser = user;
                     }, function (errorMessage) {
                         // TODO
                     });
+                };
+                if (!$rootScope.loggedInUser) {
+                    $scope.getUser();
                 }
 
                 $scope.logout = function () {
@@ -49,7 +52,7 @@ angular.module('edssnApp')
                     }).then(function (response) {
                         if (response.data === 'ok') {
                             $location.url('/#');
-                            $rootScope.loggedInUsername = username;
+                            $scope.getUser();
                         } else {
                             $scope.vm.errorMessages = [];
                             $scope.vm.errorMessages.push({description: 'Usuario y/o contraseña inválidos'});

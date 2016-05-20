@@ -32,7 +32,10 @@ public class UserController extends BaseController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET)
     public UserBean getUser(Principal principal) {
-        UserBean user = userService.findByUsername(principal.getName());
+        UserBean user = null;
+        if (principal != null) {
+            user = userService.findByUsername(principal.getName());
+        }
         return user;
     }
 
