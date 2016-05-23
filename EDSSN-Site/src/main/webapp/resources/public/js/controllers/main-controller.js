@@ -13,7 +13,7 @@ angular.module('edssnApp')
                     UserService.getUser().then(function (user) {
                         $rootScope.loggedInUser = user;
                     }, function (errorMessage) {
-                        // TODO
+                        // TODO handle this error
                     });
                 };
                 if (!$rootScope.loggedInUser) {

@@ -18,7 +18,6 @@ public class PersistenceContextLoaderOnInitialization
 
     @Override
     public void contextDestroyed(ServletContextEvent event) {
-        // TODO
-        // cerrar los recursos cuando se acaba el contexto
+        // TODO cerrar los recursos cuando se acaba el contexto
     }
 }

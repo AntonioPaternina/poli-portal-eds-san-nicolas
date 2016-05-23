@@ -17,7 +17,7 @@ public class DozerHelper {
             dest.add(mapper.map(element, destType));
         }
 
-        List s1 = new ArrayList();
+        List<U> s1 = new ArrayList<>();
         s1.add(null);
         dest.removeAll(s1);
 

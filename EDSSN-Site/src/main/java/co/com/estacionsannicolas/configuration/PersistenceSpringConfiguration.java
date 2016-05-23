@@ -43,12 +43,12 @@ public class PersistenceSpringConfiguration {
 
     @Bean
     public EntityManagerFactory entityManagerFactory() {
-        LocalContainerEntityManagerFactoryBean lef = new LocalContainerEntityManagerFactoryBean();
-        lef.setDataSource(dataSource());
-        lef.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        lef.setPackagesToScan("co.com.estacionsannicolas.*");
-        lef.afterPropertiesSet();
-        return lef.getObject();
+        LocalContainerEntityManagerFactoryBean emf = new LocalContainerEntityManagerFactoryBean();
+        emf.setDataSource(dataSource());
+        emf.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+        emf.setPackagesToScan("co.com.estacionsannicolas.*");
+        emf.afterPropertiesSet();
+        return emf.getObject();
     }
 
     @Bean
