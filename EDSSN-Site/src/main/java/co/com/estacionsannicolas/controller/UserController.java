@@ -26,7 +26,7 @@ public class UserController extends BaseController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.POST)
     public void createUser(@RequestBody UserBean user) {
-        userService.createUser(user, UserRoleTypeEnum.CUSTOMER);
+        userService.create(user, UserRoleTypeEnum.CUSTOMER);
     }
 
     @ResponseStatus(HttpStatus.OK)
@@ -42,14 +42,16 @@ public class UserController extends BaseController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.PUT)
     public UserBean updateUser(@RequestBody UserBean user) {
-        return userService.updateUser(user);
+        return userService.update(user);
     }
 
     @RequestMapping(method = RequestMethod.DELETE)
     public void deleteUser(@RequestBody UserBean user) {
-        userService.deleteUser(user.getUsername());
+        userService.delete(user.getUsername());
     }
 
+    
+    // TODO restrict this to admin role only
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public List<UserBean> getAll() {
         return userService.findAll();

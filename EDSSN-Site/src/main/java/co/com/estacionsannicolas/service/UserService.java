@@ -10,11 +10,11 @@ public interface UserService {
 
     UserBean findByUsername(String username);
 
-    void createUser(UserBean user, UserRoleTypeEnum roleType);
+    void create(UserBean user, UserRoleTypeEnum roleType);
 
-    UserBean updateUser(UserBean user);
+    UserBean update(UserBean user);
 
-    void deleteUser(String username);
+    void delete(String username);
 
     List<UserBean> findAll();
 

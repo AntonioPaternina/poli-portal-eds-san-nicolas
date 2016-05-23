@@ -1,6 +1,8 @@
 <div class="edssn-login-container">
     <div class="login-container">
-        <common-error-messages extra-styles="access-screen"></common-error-messages>
+        <common-error-messages error-messages="vm.errorMessages" 
+                               extra-styles="access-screen">
+        </common-error-messages>
         <form name="form" 
               ng-submit="ctrl.signup()" 
               class="pure-form login-form" 

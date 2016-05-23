@@ -19,6 +19,9 @@ public class UserBean extends BaseBean {
     private GenderEnum gender;
     private Date birthdate;
     private Set<UserRoleBean> userRoles = new HashSet<>();
+    private Set<VehicleBean> vehicles;
+    private Set<AwardPointBean> awardPoints;
+    private Set<AwardRequestBean> awardRequests;
 
     public String getNationalId() {
         return nationalId;
@@ -106,6 +109,30 @@ public class UserBean extends BaseBean {
 
     public void setUserRoles(Set<UserRoleBean> userRoles) {
         this.userRoles = userRoles;
+    }
+
+    public Set<VehicleBean> getVehicles() {
+        return vehicles;
+    }
+
+    public void setVehicles(Set<VehicleBean> vehicles) {
+        this.vehicles = vehicles;
+    }
+
+    public Set<AwardPointBean> getAwardPoints() {
+        return awardPoints;
+    }
+
+    public void setAwardPoints(Set<AwardPointBean> awardPoints) {
+        this.awardPoints = awardPoints;
+    }
+
+    public Set<AwardRequestBean> getAwardRequests() {
+        return awardRequests;
+    }
+
+    public void setAwardRequests(Set<AwardRequestBean> awardRequests) {
+        this.awardRequests = awardRequests;
     }
 
 }

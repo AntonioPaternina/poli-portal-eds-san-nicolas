@@ -1,8 +1,10 @@
 package co.com.estacionsannicolas.service;
 
 import co.com.estacionsannicolas.beans.UserBean;
+import co.com.estacionsannicolas.entities.MarketingCampaignEntity;
 import co.com.estacionsannicolas.entities.UserEntity;
 import co.com.estacionsannicolas.entities.UserRoleEntity;
+import co.com.estacionsannicolas.enums.DefaultMarketingCampaigns;
 import co.com.estacionsannicolas.enums.UserRoleTypeEnum;
 import java.util.List;
 
@@ -26,6 +28,9 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    
+    @Autowired
+    private MarketingCampaignService marketingCampaignService;
 
     @Override
     public UserBean findById(Long id) {
@@ -48,17 +53,21 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
-    public void createUser(UserBean userBean, UserRoleTypeEnum roleType) {
+    public void create(UserBean userBean, UserRoleTypeEnum roleType) {
         UserEntity userEntity = mapper.map(userBean, UserEntity.class);
         UserRoleEntity customerRole = userRoleRepository.findByType(roleType);
         userEntity.getUserRoles().add(customerRole);
         userEntity.setPassword(passwordEncoder.encode(userBean.getPassword()));
         userEntity.setAcive(true);
+        
+        MarketingCampaignEntity tanquearSiPagaCampaign = marketingCampaignService.findByName(DefaultMarketingCampaigns.TANQUEAR_SI_PAGA.getName());
+        // TODO create award point for this default campaign
+        
         userEntityRepository.save(userEntity);
     }
 
     @Override
-    public UserBean updateUser(UserBean userBean) {
+    public UserBean update(UserBean userBean) {
         UserEntity savedUser = userEntityRepository.findOne(userBean.getId());
         UserEntity userToSave = mapper.map(userBean, UserEntity.class);
         if (savedUser != null) {
@@ -76,7 +85,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
-    public void deleteUser(String ssoId) {
+    public void delete(String ssoId) {
         userEntityRepository.deleteByUsername(ssoId);
     }
 

@@ -1,4 +1,4 @@
-angular.module('services', [])
+angular.module('edssnApp')
         .service('UserService', ['$http', '$q', function ($http, $q) {
                 return {
                     getUser: function () {

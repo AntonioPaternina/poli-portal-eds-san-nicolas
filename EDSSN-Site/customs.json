@@ -2,7 +2,8 @@
     "elements": {
         "common-error-messages": {
             "attributes": {
-                "extra-styles": {}
+                "extra-styles": {},
+                "error-messages": {}
             }
         },
         "main-footer": {},

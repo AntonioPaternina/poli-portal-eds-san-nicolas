@@ -1,9 +1,12 @@
 package co.com.estacionsannicolas.initializer;
 
 import co.com.estacionsannicolas.beans.UserBean;
+import co.com.estacionsannicolas.entities.MarketingCampaignEntity;
 import co.com.estacionsannicolas.entities.UserRoleEntity;
+import co.com.estacionsannicolas.enums.DefaultMarketingCampaigns;
 import co.com.estacionsannicolas.enums.UserRoleTypeEnum;
 import co.com.estacionsannicolas.repositories.UserRoleRepository;
+import co.com.estacionsannicolas.service.MarketingCampaignService;
 import co.com.estacionsannicolas.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,10 +28,22 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private MarketingCampaignService marketingCampaignService;
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         initializeUserRoles();
         createDefaultUsers();
+
+        if (marketingCampaignService.findByName(DefaultMarketingCampaigns.TANQUEAR_SI_PAGA.getName()) == null) {
+            MarketingCampaignEntity tanquearSiPagaCampaign = new MarketingCampaignEntity();
+            tanquearSiPagaCampaign.setName(DefaultMarketingCampaigns.TANQUEAR_SI_PAGA.getName());
+
+            // TODO add default awards to the campaign
+            
+            marketingCampaignService.save(tanquearSiPagaCampaign);
+        }
     }
 
     private void createDefaultUsers() {
@@ -40,7 +55,7 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
             admin.setEmail("acpaternina@poli.edu.co");
             admin.setFullName("Antonio Paternina");
             admin.setNationalId("123456789");
-            userService.createUser(admin, UserRoleTypeEnum.ADMIN);
+            userService.create(admin, UserRoleTypeEnum.ADMIN);
         }
     }
 
