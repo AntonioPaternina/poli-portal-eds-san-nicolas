@@ -1,6 +1,7 @@
 package co.com.estacionsannicolas.controller;
 
 import co.com.estacionsannicolas.beans.UserBean;
+import co.com.estacionsannicolas.entities.UserRoleEntity;
 import co.com.estacionsannicolas.enums.UserRoleTypeEnum;
 import co.com.estacionsannicolas.service.UserService;
 import java.security.Principal;
@@ -9,6 +10,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -50,8 +52,7 @@ public class UserController extends BaseController {
         userService.delete(user.getUsername());
     }
 
-    
-    // TODO restrict this to admin role only
+    @Secured(UserRoleEntity.ADMIN)
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public List<UserBean> getAll() {
         return userService.findAll();

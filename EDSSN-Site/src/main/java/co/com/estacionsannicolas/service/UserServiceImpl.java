@@ -1,9 +1,10 @@
 package co.com.estacionsannicolas.service;
 
+import co.com.estacionsannicolas.beans.AwardPointBean;
+import co.com.estacionsannicolas.beans.MarketingCampaignBean;
 import co.com.estacionsannicolas.beans.UserBean;
-import co.com.estacionsannicolas.entities.MarketingCampaignEntity;
+import co.com.estacionsannicolas.beans.UserRoleBean;
 import co.com.estacionsannicolas.entities.UserEntity;
-import co.com.estacionsannicolas.entities.UserRoleEntity;
 import co.com.estacionsannicolas.enums.DefaultMarketingCampaigns;
 import co.com.estacionsannicolas.enums.UserRoleTypeEnum;
 import java.util.List;
@@ -14,7 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import co.com.estacionsannicolas.util.DozerHelper;
 import co.com.estacionsannicolas.repositories.UserRepository;
-import co.com.estacionsannicolas.repositories.UserRoleRepository;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service("userService")
 @Transactional
@@ -24,11 +26,11 @@ public class UserServiceImpl extends BaseService implements UserService {
     private UserRepository userEntityRepository;
 
     @Autowired
-    private UserRoleRepository userRoleRepository;
+    private UserRoleService userRoleService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-    
+
     @Autowired
     private MarketingCampaignService marketingCampaignService;
 
@@ -54,16 +56,26 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     @Override
     public void create(UserBean userBean, UserRoleTypeEnum roleType) {
+        setUserRole(roleType, userBean);
+        userBean.setPassword(passwordEncoder.encode(userBean.getPassword()));
+        userBean.setAcive(true);
+        setAwardPointsForTanquearSiPaga(userBean);
+
         UserEntity userEntity = mapper.map(userBean, UserEntity.class);
-        UserRoleEntity customerRole = userRoleRepository.findByType(roleType);
-        userEntity.getUserRoles().add(customerRole);
-        userEntity.setPassword(passwordEncoder.encode(userBean.getPassword()));
-        userEntity.setAcive(true);
-        
-        MarketingCampaignEntity tanquearSiPagaCampaign = marketingCampaignService.findByName(DefaultMarketingCampaigns.TANQUEAR_SI_PAGA.getName());
-        // TODO create award point for this default campaign
-        
         userEntityRepository.save(userEntity);
+    }
+
+    private void setAwardPointsForTanquearSiPaga(UserBean userBean) {
+        MarketingCampaignBean tanquearSiPagaCampaign = marketingCampaignService.findByName(DefaultMarketingCampaigns.TANQUEAR_SI_PAGA.getName());
+        AwardPointBean tanquearSiPagaPoints = new AwardPointBean();
+        tanquearSiPagaPoints.setMarketingCampaign(tanquearSiPagaCampaign);
+        Set<AwardPointBean> points = new HashSet<>();
+        userBean.setAwardPoints(points);
+    }
+
+    private void setUserRole(UserRoleTypeEnum roleType, UserBean userBean) {
+        UserRoleBean customerRole = userRoleService.findByType(roleType);
+        userBean.getUserRoles().add(customerRole);
     }
 
     @Override

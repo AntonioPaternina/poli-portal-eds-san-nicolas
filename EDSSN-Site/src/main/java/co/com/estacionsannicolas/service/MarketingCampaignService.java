@@ -1,10 +1,10 @@
 package co.com.estacionsannicolas.service;
 
-import co.com.estacionsannicolas.entities.MarketingCampaignEntity;
+import co.com.estacionsannicolas.beans.MarketingCampaignBean;
 
 public interface MarketingCampaignService {
 
-    MarketingCampaignEntity findByName(String campaignName);
+    MarketingCampaignBean findByName(String campaignName);
 
-    MarketingCampaignEntity save(MarketingCampaignEntity campaign);
+    MarketingCampaignBean save(MarketingCampaignBean campaign);
 }

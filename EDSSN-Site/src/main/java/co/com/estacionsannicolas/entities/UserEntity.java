@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javax.persistence.CascadeType;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -68,7 +69,7 @@ public class UserEntity extends BaseEntity implements Serializable {
 
     @OneToMany(mappedBy = "user")
     private Set<VehicleEntity> vehicles;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AwardPointEntity> awardPoints;
     @OneToMany(mappedBy = "user")
     private Set<AwardRequestEntity> awardRequests;

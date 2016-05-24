@@ -13,6 +13,9 @@ import javax.persistence.Table;
 @Table(name = "UserRole")
 public class UserRoleEntity extends BaseEntity implements Serializable {
 
+    public static final String ADMIN = "ADMIN";
+    public static final String CUSTOMER = "CUSTOMER";
+
     @Column(length = 15, unique = true, nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRoleTypeEnum type;

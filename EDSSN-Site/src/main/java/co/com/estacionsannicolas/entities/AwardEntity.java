@@ -8,7 +8,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-@DiscriminatorValue("P")
+@DiscriminatorValue("A")
 public class AwardEntity extends ProductEntity {
 
     private Long costInPoints;
