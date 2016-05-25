@@ -74,6 +74,15 @@ public class UserEntity extends BaseEntity implements Serializable {
     @OneToMany(mappedBy = "user")
     private Set<AwardRequestEntity> awardRequests;
 
+    public void addAwardPoint(AwardPointEntity awardPoint) {
+        if (awardPoints == null) {
+            awardPoints = new HashSet<>();
+        }
+
+        awardPoint.setUser(this);
+        awardPoints.add(awardPoint);
+    }
+
     public String getNationalId() {
         return nationalId;
     }

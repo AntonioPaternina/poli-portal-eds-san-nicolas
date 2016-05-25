@@ -1,5 +1,7 @@
 package co.com.estacionsannicolas.controller;
 
+import co.com.estacionsannicolas.beans.UserBean;
+import co.com.estacionsannicolas.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,9 @@ public class BaseController {
 
     @Autowired
     private AuthenticationTrustResolver authenticationTrustResolver;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     protected MessageSource messageSource;
@@ -34,5 +39,9 @@ public class BaseController {
             userName = principal.toString();
         }
         return userName;
+    }
+
+    protected UserBean getCurrentUser() {
+        return userService.findByUsername(getPrincipal());
     }
 }

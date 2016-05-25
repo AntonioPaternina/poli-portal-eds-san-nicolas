@@ -1,11 +1,14 @@
 package co.com.estacionsannicolas.beans;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class AwardPointBean extends BaseBean {
 
     private Long numberOfPoints;
 
     private MarketingCampaignBean marketingCampaign;
 
+    @JsonIgnore
     private UserBean user;
 
     public Long getNumberOfPoints() {

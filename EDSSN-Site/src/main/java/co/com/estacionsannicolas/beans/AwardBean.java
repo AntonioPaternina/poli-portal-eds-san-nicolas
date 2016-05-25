@@ -1,13 +1,16 @@
 package co.com.estacionsannicolas.beans;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.List;
 
 public class AwardBean extends ProductBean {
 
     private Long costInPoints;
 
+    @JsonIgnore
     private List<MarketingCampaignBean> marketingCampaigns;
 
+    @JsonIgnore
     private List<AwardRequestBean> awardRequests;
 
     public Long getCostInPoints() {

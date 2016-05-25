@@ -12,7 +12,8 @@ require.config({
         mainController: '/resources/public/js/controllers/main-controller',
         signupController: '/resources/public/js/controllers/signup-controller',
         loginController: '/resources/public/js/controllers/login-controller',
-        userController: '/resources/public/js/controllers/user-controller'
+        userController: '/resources/public/js/controllers/user-controller',
+        accountController: '/resources/public/js/controllers/account-controller'
     },
     shim: {
         angular: {
@@ -50,11 +51,14 @@ require.config({
         },
         userController: {
             deps: ['angular', 'edssnApp']
+        },
+        accountController: {
+            deps: ['angular', 'edssnApp']
         }
     }
 });
 
-require(['edssnApp', 'edssnAppRoutes', 'directives', 'mainController', 'loginController', 'signupController', 'userController', 'userService'], function () {
+require(['edssnApp', 'edssnAppRoutes', 'directives', 'mainController', 'loginController', 'signupController', 'userController', 'accountController', 'userService'], function () {
 
     angular.bootstrap(document.getElementById('edssnApp'), ['edssnApp'], {
         // TODO this is set to false because of an unknown error, must be fixed

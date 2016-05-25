@@ -1,6 +1,17 @@
 angular.module('edssnApp')
-        .service('UserService', ['$http', '$q', function ($http, $q) {
+        .service('UserService', ['$http', '$q', '$location', '$window', function ($http, $q, $location, $window) {
                 return {
+                    getAwardPointsForCurrentUser: function () {
+                        var deferred = $q.defer();
+                        $http.get('/account/award-points').then(function (response) {
+                            if (response.status === 200) {
+                                deferred.resolve(response.data);
+                            } else {
+                                deferred.reject("Error obteniendo los puntos de recompensa del usuario");
+                            }
+                        });
+                        return deferred.promise;
+                    },
                     getUser: function () {
                         var deferred = $q.defer();
                         $http.get('/user').then(function (response) {
@@ -17,11 +28,7 @@ angular.module('edssnApp')
                             method: 'POST',
                             url: '/logout'
                         }).then(function (response) {
-                            if (response.status === 200) {
-                                window.location.reload();
-                            } else {
-                                console.log("Ha fallado el cierre de sesión");
-                            }
+                            $window.location.replace('/');
                         });
                     }
                 };

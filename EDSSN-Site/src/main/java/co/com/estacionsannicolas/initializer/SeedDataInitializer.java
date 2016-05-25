@@ -41,9 +41,9 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        initializeUserRoles();
-        createDefaultUsers();
+        initializeUserRoles();        
         createTanquearSiPagaCampaign();
+        createDefaultUsers();
     }
 
     private void createTanquearSiPagaCampaign() {
@@ -74,15 +74,33 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
     }
 
     private void createDefaultUsers() {
+        createDefaultAdmin();
+        createDefaultCustomer();
+    }
+
+    private void createDefaultAdmin() {
         if (userService.findByUsername("admin") == null) {
             UserBean admin = new UserBean();
             admin.setUsername("admin");
             admin.setPassword("Admin01.");
             admin.setAcive(true);
-            admin.setEmail("acpaternina@poli.edu.co");
+            admin.setEmail("edssn_test1@gmail.com");
             admin.setFullName("Antonio Paternina");
             admin.setNationalId("123456789");
             userService.create(admin, UserRoleTypeEnum.ADMIN);
+        }
+    }
+
+    private void createDefaultCustomer() {
+        if (userService.findByUsername("customer") == null) {
+            UserBean customer = new UserBean();
+            customer.setUsername("customer");
+            customer.setPassword("Admin01.");
+            customer.setAcive(true);
+            customer.setEmail("edssn_test2@gmail.com");
+            customer.setFullName("Antonio Paternina");
+            customer.setNationalId("46434648435");
+            userService.create(customer, UserRoleTypeEnum.CUSTOMER);
         }
     }
 

@@ -1,0 +1,16 @@
+<div class="edssn-login-container">
+    <table class="pure-table">
+        <thead>
+            <tr>
+                <th>Nombre de la Campaña</th>
+                <th>Número de Puntos</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="awardPoint in awardPoints">
+                <td>{{awardPoint.marketingCampaign.name}}</td>
+                <td>{{awardPoint.numberOfPoints}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -14,10 +14,10 @@ angular.module('edssnApp')
                             controller: 'SignupController',
                             controllerAs: 'ctrl'
                         })
-                        .when('/my-account', {
-                            templateUrl: '/resources/public/partials/my-account.html',
-                            controller: 'UserController',
-                            controllerAs: 'userCtrl'
+                        .when('/account', {
+                            templateUrl: '/resources/public/partials/account.html',
+                            controller: 'AccountController',
+                            controllerAs: 'ctrl'
                         })
                         .otherwise({
                             redirectTo: '/'

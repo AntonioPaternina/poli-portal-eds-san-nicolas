@@ -1,9 +1,10 @@
 package co.com.estacionsannicolas.service;
 
-import co.com.estacionsannicolas.beans.AwardPointBean;
 import co.com.estacionsannicolas.beans.MarketingCampaignBean;
 import co.com.estacionsannicolas.beans.UserBean;
 import co.com.estacionsannicolas.beans.UserRoleBean;
+import co.com.estacionsannicolas.entities.AwardPointEntity;
+import co.com.estacionsannicolas.entities.MarketingCampaignEntity;
 import co.com.estacionsannicolas.entities.UserEntity;
 import co.com.estacionsannicolas.enums.DefaultMarketingCampaigns;
 import co.com.estacionsannicolas.enums.UserRoleTypeEnum;
@@ -59,18 +60,24 @@ public class UserServiceImpl extends BaseService implements UserService {
         setUserRole(roleType, userBean);
         userBean.setPassword(passwordEncoder.encode(userBean.getPassword()));
         userBean.setAcive(true);
-        setAwardPointsForTanquearSiPaga(userBean);
 
         UserEntity userEntity = mapper.map(userBean, UserEntity.class);
         userEntityRepository.save(userEntity);
+
+        if (UserRoleTypeEnum.CUSTOMER.equals(roleType)) {
+            initializeAwardPointsForTanquearSiPaga(userEntity);
+            userEntityRepository.save(userEntity);
+        }
     }
 
-    private void setAwardPointsForTanquearSiPaga(UserBean userBean) {
+    private void initializeAwardPointsForTanquearSiPaga(UserEntity userEntity) {
         MarketingCampaignBean tanquearSiPagaCampaign = marketingCampaignService.findByName(DefaultMarketingCampaigns.TANQUEAR_SI_PAGA.getName());
-        AwardPointBean tanquearSiPagaPoints = new AwardPointBean();
-        tanquearSiPagaPoints.setMarketingCampaign(tanquearSiPagaCampaign);
-        Set<AwardPointBean> points = new HashSet<>();
-        userBean.setAwardPoints(points);
+
+        AwardPointEntity tanquearSiPagaPoints = new AwardPointEntity();
+        tanquearSiPagaPoints.setMarketingCampaign(mapper.map(tanquearSiPagaCampaign, MarketingCampaignEntity.class));
+        tanquearSiPagaPoints.setNumberOfPoints(0L);
+
+        userEntity.addAwardPoint(tanquearSiPagaPoints);
     }
 
     private void setUserRole(UserRoleTypeEnum roleType, UserBean userBean) {

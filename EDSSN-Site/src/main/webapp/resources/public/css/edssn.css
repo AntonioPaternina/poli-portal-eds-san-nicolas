@@ -129,6 +129,14 @@ a.pure-button-primary {
     z-index: 2;   
 }
 
+.edssn-account-container {
+    position: absolute;
+    top: 20%;
+    width: 100%;
+    min-height: 12%;
+    z-index: 2;   
+}
+
 .edssn-content-head {
     font-weight: 400;
     text-transform: uppercase;

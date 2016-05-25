@@ -1,5 +1,6 @@
 package co.com.estacionsannicolas.beans;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
 import java.util.List;
 
@@ -11,8 +12,10 @@ public class MarketingCampaignBean extends BaseBean {
 
     private Date endDate;
 
+    @JsonIgnore
     private List<AwardBean> awards;
 
+    @JsonIgnore
     private List<AwardPointBean> awardPoints;
 
     public String getName() {

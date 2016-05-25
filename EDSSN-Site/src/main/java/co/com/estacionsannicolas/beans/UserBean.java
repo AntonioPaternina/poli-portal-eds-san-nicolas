@@ -1,6 +1,7 @@
 package co.com.estacionsannicolas.beans;
 
 import co.com.estacionsannicolas.enums.GenderEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -10,6 +11,7 @@ public class UserBean extends BaseBean {
 
     private String nationalId;
     private String username;
+    @JsonIgnore
     private String password;
     private String fullName;
     private String email;
@@ -18,10 +20,23 @@ public class UserBean extends BaseBean {
     private List<ContactNumberBean> contactNumbers;
     private GenderEnum gender;
     private Date birthdate;
+    @JsonIgnore
     private Set<UserRoleBean> userRoles = new HashSet<>();
+    @JsonIgnore
     private Set<VehicleBean> vehicles;
+    @JsonIgnore
     private Set<AwardPointBean> awardPoints;
+    @JsonIgnore
     private Set<AwardRequestBean> awardRequests;
+
+    public void addAwardPoint(AwardPointBean awardPoint) {
+        if (awardPoints == null) {
+            awardPoints = new HashSet<>();
+        }
+
+        awardPoint.setUser(this);
+        awardPoints.add(awardPoint);
+    }
 
     public String getNationalId() {
         return nationalId;
