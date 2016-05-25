@@ -3,6 +3,10 @@ require.config({
         angular: '/resources/bower_components/angular/angular',
         angularMessages: '/resources/bower_components/angular-messages/angular-messages',
         angularRoute: '/resources/bower_components/angular-route/angular-route',
+        angularAnimate: '/resources/bower_components/angular-animate/angular-animate',
+        angularTouch: '/resources/bower_components/angular-touch/angular-touch',
+        angularBootstrap: '/resources/bower_components/angular-bootstrap/ui-bootstrap-tpls',
+        angulari18n: '/resources/bower_components/angular-i18n/angular-locale_es-co',
         csrfInterceptor: '/resources/bower_components/spring-security-csrf-token-interceptor/dist/spring-security-csrf-token-interceptor.min',
         lodash: "/resources/bower_components/lodash/dist/lodash",
         edssnApp: '/resources/public/js/edssn-app',
@@ -28,8 +32,20 @@ require.config({
         angularRoute: {
             deps: ['angular']
         },
+        angularAnimate: {
+            deps: ['angular']
+        },
+        angularTouch: {
+            deps: ['angular']
+        },
+        angularBootstrap: {
+            deps: ['angular', 'angularTouch', 'angularAnimate']
+        },
+        angulari18n: {
+            deps: ['angular']
+        },
         edssnApp: {
-            deps: ['lodash', 'angular', 'angularMessages', 'angularRoute', 'csrfInterceptor']
+            deps: ['lodash', 'angular', 'angularMessages', 'angularRoute', 'csrfInterceptor', 'angularBootstrap', 'angulari18n']
         },
         directives: {
             deps: ['angular', 'lodash', 'edssnApp']

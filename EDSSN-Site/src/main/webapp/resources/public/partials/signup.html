@@ -1,15 +1,15 @@
 <div class="edssn-login-container">
-    <div class="login-container">
+    <div class="signup-container">
         <common-error-messages error-messages="vm.errorMessages" 
                                extra-styles="access-screen">
         </common-error-messages>
         <form name="form" 
-              ng-submit="ctrl.signup()" 
+              ng-submit="signup()" 
               class="pure-form login-form" 
               novalidate>
             <fieldset class="pure-group">
                 <legend>¿Eres un usuario nuevo?</legend>
-                <div class="form-field">
+                <div class="form-field">                    
                     <input type="text" 
                            name="username"
                            ng-model="vm.username"
@@ -27,25 +27,7 @@
                         <div ng-message="required">el usuario es requerido</div>
                         <div ng-message="minlength">debe tener mínimo 6 caracteres</div>
                     </div>
-                </div>
-                <div class="form-field">
-                    <input type="email" 
-                           name="email"
-                           ng-model="vm.email"
-                           ng-focus="onFocus('email')" 
-                           ng-blur="onBlur('email')"                  
-                           class="pure-input-1" 
-                           placeholder="e-mail" 
-                           required>
-
-                    <div class="error-messages" 
-                         ng-show="isErrorMessageListVisible('email')" 
-                         ng-messages="form.email.$error"
-                         ng-cloak>
-                        <div ng-message="required">El e-mail es requerido</div>
-                        <div ng-message="email">debe ser un e-mail válido</div>
-                    </div>
-                </div>
+                </div>              
                 <div class="form-field">
                     <input type="password" 
                            name="password" 
@@ -66,7 +48,7 @@
                         <div ng-message="minlength">debe tener mínimo 6 caracteres</div>
                         <div ng-message="pattern">debe tener al menos un número y una mayúscula</div>
                     </div>
-                </div>
+                </div>                
                 <div class="form-field">
                     <input type="password" 
                            name="confirmPassword"
@@ -129,6 +111,24 @@
                     </div>
                 </div>
                 <div class="form-field">
+                    <input type="email" 
+                           name="email"
+                           ng-model="vm.email"
+                           ng-focus="onFocus('email')" 
+                           ng-blur="onBlur('email')"                  
+                           class="pure-input-1" 
+                           placeholder="e-mail" 
+                           required>
+
+                    <div class="error-messages" 
+                         ng-show="isErrorMessageListVisible('email')" 
+                         ng-messages="form.email.$error"
+                         ng-cloak>
+                        <div ng-message="required">El e-mail es requerido</div>
+                        <div ng-message="email">debe ser un e-mail válido</div>
+                    </div>
+                </div>
+                <div class="form-field">
                     <input type="text" 
                            name="address" 
                            ng-model="vm.address" 
@@ -160,6 +160,29 @@
                         <div ng-message="minlength">debe tener mínimo 7 caracteres</div>
                     </div>
                 </div>
+                <div class="form-field">
+                    <input type="text" 
+                           name="birthdate"
+                           class="form-control" 
+                           uib-datepicker-popup="{{dateFormat}}" 
+                           ng-model="vm.birthdate" 
+                           is-open="birthdatePopup.opened" 
+                           datepicker-options="dateOptions" 
+                           close-text="{{datePickerCloseText}}" 
+                           clear-text="{{datePickerClearText}}"
+                           current-text="{{datePickerCurrentText}}"
+                           alt-input-formats="altInputFormats" 
+                           placeholder="Cumpleaños (dd/mm/aaaa)" 
+                           ng-click="openBirthdatePopup()" />
+                    <div class="error-messages" 
+                         ng-show="isErrorMessageListVisible('birthdate')" 
+                         ng-messages="form.birthdate.$error"
+                         ng-cloak>                                
+                        <!-- TODO add validations for date -->
+                    </div>
+
+                </div>
+
             </fieldset>
 
             <button type="submit" 

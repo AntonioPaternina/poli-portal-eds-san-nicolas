@@ -2,6 +2,8 @@ package co.com.estacionsannicolas.beans;
 
 import co.com.estacionsannicolas.enums.GenderEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -11,7 +13,7 @@ public class UserBean extends BaseBean {
 
     private String nationalId;
     private String username;
-    @JsonIgnore
+    @JsonProperty(access = Access.WRITE_ONLY)
     private String password;
     private String fullName;
     private String email;

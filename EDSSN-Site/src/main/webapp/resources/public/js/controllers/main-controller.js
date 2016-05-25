@@ -59,4 +59,14 @@ angular.module('edssnApp')
                         }
                     });
                 };
+                $scope.dateFormat = 'dd/MM/yyyy';
+                $scope.altInputFormats = ['d!/M!/yyyy'];
+                $scope.datePickerCloseText = "Cerrar";
+                $scope.datePickerCurrentText = "Hoy";
+                $scope.datePickerClearText = "Limpiar";
+                $scope.dateOptions = {
+                    formatYear: 'yyyy',
+                    startingDay: 1,
+                    showWeeks: false
+                };
             }]);

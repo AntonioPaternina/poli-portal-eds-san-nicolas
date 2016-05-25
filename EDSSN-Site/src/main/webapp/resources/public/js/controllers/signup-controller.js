@@ -1,8 +1,18 @@
 angular.module('edssnApp')
         .controller('SignupController', ['$http', '$scope', '$controller', function ($http, $scope, $controller) {
                 angular.extend(this, $controller('MainController', {$scope: $scope}));
-                var controller = this;
-                controller.signup = function () {
+
+                $scope.birthdatePopup = {
+                    opened: false
+                };
+
+                $scope.dateOptions.maxDate = new Date();
+                $scope.dateOptions.minDate = new Date(1800, 0, 0);
+                $scope.openBirthdatePopup = function () {
+                    $scope.birthdatePopup.opened = true;
+                };
+
+                $scope.signup = function () {
                     console.log('Registrando al usuario con username ' + $scope.vm.username + ' y contraseña ' + $scope.vm.password);
 
                     $scope.vm.isFormSent = true;
@@ -17,7 +27,8 @@ angular.module('edssnApp')
                         email: $scope.vm.email,
                         nationalId: $scope.vm.nationalId,
                         fullName: $scope.vm.fullName,
-                        address: $scope.vm.address
+                        address: $scope.vm.address,
+                        birthdate: $scope.vm.birthdate
                     };
 
                     $http({

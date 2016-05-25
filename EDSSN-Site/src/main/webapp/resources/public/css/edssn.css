@@ -1,3 +1,6 @@
+/** For angular-ui boostrap (http://angular-ui.github.io/bootstrap/) */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
 /*
  * General Use Styles
  */
@@ -283,14 +286,6 @@ header a {
     background: firebrick;
 }
 
-.max-cal {
-    max-width: 5em;
-    height: 1.1em;
-    border-radius: 3px;
-    margin-left: 0.2em;
-    font-size: 90%;
-}
-
 .username {
     font-size: 85%;
     margin-left: 1em;
@@ -327,6 +322,13 @@ a.logout:hover {
 @media screen and (min-width: 14em) {
     .login-container {
         max-width: 14em;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (min-width: 14em) {
+    .signup-container {
+        max-width: 16em;
         margin: 0 auto;
     }
 }
@@ -431,7 +433,7 @@ a.logout:hover {
 }
 
 .form-field {
-    height: 3.35em;
+    height: 4em;
 }
 
 .last-form-field {
@@ -598,13 +600,6 @@ a.logout:hover {
     margin-top: -50px;
     padding-top: 1em;
     z-index: -10;
-}
-
-
-@media screen and (max-width: 585px) {
-    .today-calories-container {
-        display: block;
-    }
 }
 
 
