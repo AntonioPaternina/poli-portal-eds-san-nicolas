@@ -180,8 +180,61 @@
                          ng-cloak>                                
                         <!-- TODO add validations for date -->
                     </div>
-
                 </div>
+
+                <div class="btn-group form-field">
+                    <p>Sexo</p>
+                    <label ng-repeat="gender in genre"
+                           class="btn btn-primary" 
+                           ng-model="vm.gender" 
+                           uib-btn-radio="'{{gender.value}}'">
+                        {{gender.label}}
+                    </label>
+                </div>
+                <div class="error-messages" 
+                     ng-show="isErrorMessageListVisible('gender')" 
+                     ng-messages="form.gender.$error"
+                     ng-cloak>                                
+                    <!-- TODO add validations for gender -->
+                </div>
+
+
+                <div>
+                    <h1 class="edssn-signup-vehicles-title">Añade tus vehículos</h1>
+                    <div class="form-field">
+                        <input id="tmp_plate" 
+                               type="text" 
+                               ng-model="tmp_plate"
+                               placeholder="placa"/>
+                    </div>
+                    <div class="form-field">
+                        <input id="tmp_brand" 
+                               type="text" 
+                               ng-model="tmp_brand" 
+                               placeholder="marca" />
+                    </div>
+                    <div class="form-field">
+
+                        <input id="tmp_model" 
+                               type="text" 
+                               ng-model="tmp_model" 
+                               placeholder="modelo" />
+                    </div>
+                    <div class="form-field">
+                        <label for="tmp_type">Tipo de Vehículo</label>
+                        <select id="tmp_type" 
+                                ng-model="tmp_type" 
+                                placeholder="tipo">
+                            <option ng-repeat="tipo in tipos" 
+                                    value="{{tipo.value}}">{{tipo.label}}</option>
+                        </select>
+                    </div>
+                    <button type="button" 
+                            ng-click="addRow()">
+                        Añadir Vehículo
+                    </button>
+                </div>
+                <div id="grid1" ui-grid="gridOpts" class="edssn-signup-vehicles-grid"></div>
 
             </fieldset>
 

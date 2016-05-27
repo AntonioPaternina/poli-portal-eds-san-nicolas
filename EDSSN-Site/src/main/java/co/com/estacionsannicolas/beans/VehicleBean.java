@@ -4,7 +4,7 @@ import co.com.estacionsannicolas.enums.VehicleTypeEnum;
 
 public class VehicleBean extends BaseBean {
 
-    private String licencePlate;
+    private String licensePlate;
 
     private String brand;
 
@@ -14,12 +14,12 @@ public class VehicleBean extends BaseBean {
 
     private VehicleTypeEnum vehicleType;
 
-    public String getLicencePlate() {
-        return licencePlate;
+    public String getLicensePlate() {
+        return licensePlate;
     }
 
-    public void setLicencePlate(String licencePlate) {
-        this.licencePlate = licencePlate;
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
     }
 
     public String getBrand() {

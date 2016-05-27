@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name = "Vehicle")
 public class VehicleEntity extends BaseEntity implements Serializable {
 
-    private String licencePlate;
+    private String licensePlate;
 
     private String brand;
 
@@ -24,12 +24,12 @@ public class VehicleEntity extends BaseEntity implements Serializable {
     @Enumerated(EnumType.ORDINAL)
     private VehicleTypeEnum vehicleType;
 
-    public String getLicencePlate() {
-        return licencePlate;
+    public String getLicensePlate() {
+        return licensePlate;
     }
 
-    public void setLicencePlate(String licencePlate) {
-        this.licencePlate = licencePlate;
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
     }
 
     public String getBrand() {

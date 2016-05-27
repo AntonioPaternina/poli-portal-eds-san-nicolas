@@ -67,7 +67,7 @@ public class UserEntity extends BaseEntity implements Serializable {
                 @JoinColumn(name = "user_role_id")})
     private Set<UserRoleEntity> userRoles = new HashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<VehicleEntity> vehicles;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AwardPointEntity> awardPoints;

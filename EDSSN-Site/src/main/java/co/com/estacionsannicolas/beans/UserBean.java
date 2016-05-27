@@ -24,7 +24,6 @@ public class UserBean extends BaseBean {
     private Date birthdate;
     @JsonIgnore
     private Set<UserRoleBean> userRoles = new HashSet<>();
-    @JsonIgnore
     private Set<VehicleBean> vehicles;
     @JsonIgnore
     private Set<AwardPointBean> awardPoints;

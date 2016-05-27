@@ -10,5 +10,7 @@
         "main-header": {},
         "splash-header": {}
     },
-    "attributes": {}
+    "attributes": {
+        "ui-grid": {}
+    }
 }

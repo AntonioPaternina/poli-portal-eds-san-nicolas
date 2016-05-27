@@ -53,6 +53,14 @@
     background: none;
 }
 
+.edssn-signup-vehicles-grid {
+    width: 500px;
+    height: 250px;
+}
+.edssn-signup-vehicles-title {
+    font-size: 1.5em;
+}
+
 /*
  * Button Styles
  */

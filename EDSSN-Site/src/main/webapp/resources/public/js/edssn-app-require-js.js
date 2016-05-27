@@ -7,6 +7,7 @@ require.config({
         angularTouch: '/resources/bower_components/angular-touch/angular-touch',
         angularBootstrap: '/resources/bower_components/angular-bootstrap/ui-bootstrap-tpls',
         angulari18n: '/resources/bower_components/angular-i18n/angular-locale_es-co',
+        angularGrid: '/resources/bower_components/angular-ui-grid/ui-grid',
         csrfInterceptor: '/resources/bower_components/spring-security-csrf-token-interceptor/dist/spring-security-csrf-token-interceptor.min',
         lodash: "/resources/bower_components/lodash/dist/lodash",
         edssnApp: '/resources/public/js/edssn-app',
@@ -41,11 +42,14 @@ require.config({
         angularBootstrap: {
             deps: ['angular', 'angularTouch', 'angularAnimate']
         },
+        angularGrid: {
+            deps: ['angular']
+        },
         angulari18n: {
             deps: ['angular']
         },
         edssnApp: {
-            deps: ['lodash', 'angular', 'angularMessages', 'angularRoute', 'csrfInterceptor', 'angularBootstrap', 'angulari18n']
+            deps: ['lodash', 'angular', 'angularMessages', 'angularRoute', 'csrfInterceptor', 'angularBootstrap', 'angulari18n', 'angularGrid']
         },
         directives: {
             deps: ['angular', 'lodash', 'edssnApp']

@@ -12,6 +12,67 @@ angular.module('edssnApp')
                     $scope.birthdatePopup.opened = true;
                 };
 
+                var columnDefs = [{
+                        name: 'placa',
+                        field: 'licensePlate'
+                    }, {
+                        name: 'marca',
+                        field: 'brand'
+                    }, {
+                        name: 'modelo',
+                        field: 'model'
+                    }, {
+                        name: 'tipo',
+                        field: 'vehicleType'
+                    }
+                ];
+
+                $scope.vm.vehicles = [];
+                $scope.tipos = [{
+                        label: 'Automovil',
+                        value: 'AUTOMOVIL'
+                    }, {
+                        label: 'Bus',
+                        value: 'BUS'
+                    }, {
+                        label: 'Buseta',
+                        value: 'BUSETA'
+                    }, {
+                        label: 'Camión',
+                        value: 'CAMION'
+                    }, {
+                        label: 'Campero',
+                        value: 'CAMPERO'
+                    }, {
+                        label: 'Carrotanque',
+                        value: 'CARROTANQUE'
+                    }, {
+                        label: 'Moto',
+                        value: 'MOTO'
+                    }];
+
+                $scope.gridOpts = {
+                    columnDefs: columnDefs,
+                    data: $scope.vm.vehicles
+                };
+
+                $scope.addRow = function () {
+                    $scope.gridOpts.data.push({
+                        licensePlate: $scope.tmp_plate,
+                        brand: $scope.tmp_brand,
+                        model: $scope.tmp_model,
+                        vehicleType: $scope.tmp_type
+                    });
+                };
+
+                $scope.genre = [{
+                        label: 'Femenino',
+                        value: 'FEMALE'
+                    }, {
+                        label: 'Masculino',
+                        value: 'MALE'
+                    }];
+
                 $scope.signup = function () {
                     console.log('Registrando al usuario con username ' + $scope.vm.username + ' y contraseña ' + $scope.vm.password);
 
@@ -28,7 +89,9 @@ angular.module('edssnApp')
                         nationalId: $scope.vm.nationalId,
                         fullName: $scope.vm.fullName,
                         address: $scope.vm.address,
-                        birthdate: $scope.vm.birthdate
+                        birthdate: $scope.vm.birthdate,
+                        vehicles: $scope.vm.vehicles,
+                        gender: $scope.vm.gender
                     };
 
                     $http({

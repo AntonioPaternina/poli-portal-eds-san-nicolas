@@ -16,8 +16,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import co.com.estacionsannicolas.util.DozerHelper;
 import co.com.estacionsannicolas.repositories.UserRepository;
-import java.util.HashSet;
-import java.util.Set;
 
 @Service("userService")
 @Transactional
@@ -57,27 +55,40 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     @Override
     public void create(UserBean userBean, UserRoleTypeEnum roleType) {
-        setUserRole(roleType, userBean);
-        userBean.setPassword(passwordEncoder.encode(userBean.getPassword()));
-        userBean.setAcive(true);
+        try {
+            setUserRole(roleType, userBean);
+            userBean.setPassword(passwordEncoder.encode(userBean.getPassword()));
+            userBean.setAcive(true);
 
-        UserEntity userEntity = mapper.map(userBean, UserEntity.class);
-        userEntityRepository.save(userEntity);
+            UserEntity userEntity = mapper.map(userBean, UserEntity.class);
 
-        if (UserRoleTypeEnum.CUSTOMER.equals(roleType)) {
-            initializeAwardPointsForTanquearSiPaga(userEntity);
-            userEntityRepository.save(userEntity);
+            setUserForVehicles(userEntity);
+            initializeAwardPointsForTanquearSiPaga(userEntity, roleType);
+
+            userEntityRepository.saveAndFlush(userEntity);
+        } catch (Exception e) {
+            logger.error("Error creating user", e);
         }
     }
 
-    private void initializeAwardPointsForTanquearSiPaga(UserEntity userEntity) {
-        MarketingCampaignBean tanquearSiPagaCampaign = marketingCampaignService.findByName(DefaultMarketingCampaigns.TANQUEAR_SI_PAGA.getName());
+    private void setUserForVehicles(UserEntity userEntity) {
+        if (userEntity.getVehicles() != null) {
+            userEntity.getVehicles().stream().forEach((vehicle) -> {
+                vehicle.setUser(userEntity);
+            });
+        }
+    }
 
-        AwardPointEntity tanquearSiPagaPoints = new AwardPointEntity();
-        tanquearSiPagaPoints.setMarketingCampaign(mapper.map(tanquearSiPagaCampaign, MarketingCampaignEntity.class));
-        tanquearSiPagaPoints.setNumberOfPoints(0L);
+    private void initializeAwardPointsForTanquearSiPaga(UserEntity userEntity, UserRoleTypeEnum roleType) {
+        if (UserRoleTypeEnum.CUSTOMER.equals(roleType)) {
+            MarketingCampaignBean tanquearSiPagaCampaign = marketingCampaignService.findByName(DefaultMarketingCampaigns.TANQUEAR_SI_PAGA.getName());
 
-        userEntity.addAwardPoint(tanquearSiPagaPoints);
+            AwardPointEntity tanquearSiPagaPoints = new AwardPointEntity();
+            tanquearSiPagaPoints.setMarketingCampaign(mapper.map(tanquearSiPagaCampaign, MarketingCampaignEntity.class));
+            tanquearSiPagaPoints.setNumberOfPoints(0L);
+
+            userEntity.addAwardPoint(tanquearSiPagaPoints);
+        }
     }
 
     private void setUserRole(UserRoleTypeEnum roleType, UserBean userBean) {
