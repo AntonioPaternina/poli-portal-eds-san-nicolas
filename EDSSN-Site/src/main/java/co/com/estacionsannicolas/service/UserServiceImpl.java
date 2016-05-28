@@ -98,20 +98,15 @@ public class UserServiceImpl extends BaseService implements UserService {
 
     @Override
     public UserBean update(UserBean userBean) {
-        UserEntity savedUser = userEntityRepository.findOne(userBean.getId());
-        UserEntity userToSave = mapper.map(userBean, UserEntity.class);
-        if (savedUser != null) {
-            savedUser.setUsername(userToSave.getUsername());
-            if (!userToSave.getPassword().equals(savedUser.getPassword())) {
-                savedUser.setPassword(passwordEncoder.encode(userToSave.getPassword()));
-            }
-            savedUser.setFullName(userToSave.getFullName());
-            savedUser.setEmail(userToSave.getEmail());
-            savedUser.setUserRoles(userToSave.getUserRoles());
-
-            savedUser = userEntityRepository.saveAndFlush(savedUser);
+        UserBean savedUser = null;
+        try {
+            UserEntity userToSave = mapper.map(userBean, UserEntity.class);
+            userToSave = userEntityRepository.saveAndFlush(userToSave);
+            savedUser = mapper.map(userToSave, UserBean.class);
+        } catch (Exception e) {
+            logger.error("Error saving user {}", userBean, e);
         }
-        return mapper.map(savedUser, UserBean.class);
+        return savedUser;
     }
 
     @Override

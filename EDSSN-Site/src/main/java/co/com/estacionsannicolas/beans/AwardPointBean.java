@@ -11,6 +11,10 @@ public class AwardPointBean extends BaseBean {
     @JsonIgnore
     private UserBean user;
 
+    public void addPoints(long pointsToAdd) {
+        numberOfPoints += pointsToAdd;
+    }
+
     public Long getNumberOfPoints() {
         return numberOfPoints;
     }

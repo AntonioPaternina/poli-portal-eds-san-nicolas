@@ -6,7 +6,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "ContactNumber")
+@Table(name = "CONTACT_NUMBER")
 public class ContactNumberEntity extends BaseEntity implements Serializable {
 
     @ManyToOne

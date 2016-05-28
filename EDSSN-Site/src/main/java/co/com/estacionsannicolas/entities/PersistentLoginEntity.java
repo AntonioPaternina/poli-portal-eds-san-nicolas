@@ -10,7 +10,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "PersistentLogin")
+@Table(name = "PERSISTENT_LOGIN")
 public class PersistentLoginEntity extends BaseEntity implements Serializable {
 
     @Column(unique = true, nullable = false)

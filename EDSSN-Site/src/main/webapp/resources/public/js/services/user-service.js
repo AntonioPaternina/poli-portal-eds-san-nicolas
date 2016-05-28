@@ -23,6 +23,22 @@ angular.module('edssnApp')
                         });
                         return deferred.promise;
                     },
+                    assignCoupon: function (coupon) {
+                        var deferred = $q.defer();
+                        $http({
+                            method: 'POST',
+                            url: '/account/assign-promotion-code',
+                            data: "code=" + coupon,
+                            headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+                        }).then(function (response) {
+                            if (response.status === 200) {
+                                deferred.resolve(response.data);
+                            } else {
+                                deferred.reject('Error assigning promotion code');
+                            }
+                        });
+                        return deferred.promise;
+                    },
                     logout: function () {
                         $http({
                             method: 'POST',

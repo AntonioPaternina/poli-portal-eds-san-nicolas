@@ -6,7 +6,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "AwardPoint")
+@Table(name = "AWARD_POINT")
 public class AwardPointEntity extends BaseEntity implements Serializable {
 
     private Long numberOfPoints;

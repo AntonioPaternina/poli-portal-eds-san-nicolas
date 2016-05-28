@@ -1,11 +1,11 @@
 package co.com.estacionsannicolas.enums;
 
-import co.com.estacionsannicolas.entities.UserRoleEntity;
+import co.com.estacionsannicolas.entities.RoleEntity;
 import java.io.Serializable;
 
 public enum UserRoleTypeEnum implements Serializable {
-    CUSTOMER(UserRoleEntity.CUSTOMER),
-    ADMIN(UserRoleEntity.ADMIN);
+    CUSTOMER(RoleEntity.CUSTOMER),
+    ADMIN(RoleEntity.ADMIN);
 
     String userRoleType;
 

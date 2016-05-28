@@ -12,7 +12,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "MarketingCampaign")
+@Table(name = "MARKETING_CAMPAIGN")
 public class MarketingCampaignEntity extends BaseEntity implements Serializable {
 
     private String name;

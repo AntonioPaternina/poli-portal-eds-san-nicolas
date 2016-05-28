@@ -1,6 +1,6 @@
 package co.com.estacionsannicolas.service;
 
-import co.com.estacionsannicolas.entities.UserRoleEntity;
+import co.com.estacionsannicolas.entities.RoleEntity;
 import co.com.estacionsannicolas.enums.UserRoleTypeEnum;
 import java.util.List;
 
@@ -17,17 +17,17 @@ public class UserProfileServiceImpl extends BaseService implements UserProfileSe
     private UserRoleRepository perfilUsuarioRepositorio;
 
     @Override
-    public UserRoleEntity findById(int id) {
+    public RoleEntity findById(int id) {
         return perfilUsuarioRepositorio.findOne(id);
     }
 
     @Override
-    public UserRoleEntity findByType(UserRoleTypeEnum type) {
+    public RoleEntity findByType(UserRoleTypeEnum type) {
         return perfilUsuarioRepositorio.findByType(type);
     }
 
     @Override
-    public List<UserRoleEntity> findAll() {
+    public List<RoleEntity> findAll() {
         return perfilUsuarioRepositorio.findAll();
     }
 }

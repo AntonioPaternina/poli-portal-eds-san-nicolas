@@ -1,7 +1,7 @@
 package co.com.estacionsannicolas.controller;
 
 import co.com.estacionsannicolas.beans.UserBean;
-import co.com.estacionsannicolas.entities.UserRoleEntity;
+import co.com.estacionsannicolas.entities.RoleEntity;
 import co.com.estacionsannicolas.enums.UserRoleTypeEnum;
 import co.com.estacionsannicolas.service.UserService;
 import java.security.Principal;
@@ -52,7 +52,7 @@ public class UserController extends BaseController {
         userService.delete(user.getUsername());
     }
 
-    @Secured(UserRoleEntity.ADMIN)
+    @Secured(RoleEntity.ADMIN)
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public List<UserBean> getAll() {
         return userService.findAll();

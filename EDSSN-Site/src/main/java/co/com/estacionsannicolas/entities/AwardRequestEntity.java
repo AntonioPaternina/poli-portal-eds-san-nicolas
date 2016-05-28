@@ -12,7 +12,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "AwardRequest")
+@Table(name = "AWARD_REQUEST")
 public class AwardRequestEntity extends BaseEntity implements Serializable {
 
     @Temporal(TemporalType.TIMESTAMP)

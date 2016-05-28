@@ -10,8 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "UserRole")
-public class UserRoleEntity extends BaseEntity implements Serializable {
+@Table(name = "ROLES")
+public class RoleEntity extends BaseEntity implements Serializable {
 
     public static final String ADMIN = "ADMIN";
     public static final String CUSTOMER = "CUSTOMER";

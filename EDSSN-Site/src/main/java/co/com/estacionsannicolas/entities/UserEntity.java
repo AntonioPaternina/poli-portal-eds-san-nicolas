@@ -23,7 +23,7 @@ import javax.persistence.TemporalType;
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "USERS")
 public class UserEntity extends BaseEntity implements Serializable {
 
     @NotEmpty
@@ -65,7 +65,7 @@ public class UserEntity extends BaseEntity implements Serializable {
         @JoinColumn(name = "user_id")},
             inverseJoinColumns = {
                 @JoinColumn(name = "user_role_id")})
-    private Set<UserRoleEntity> userRoles = new HashSet<>();
+    private Set<RoleEntity> userRoles = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<VehicleEntity> vehicles;
@@ -163,11 +163,11 @@ public class UserEntity extends BaseEntity implements Serializable {
         this.birthdate = birthdate;
     }
 
-    public Set<UserRoleEntity> getUserRoles() {
+    public Set<RoleEntity> getUserRoles() {
         return userRoles;
     }
 
-    public void setUserRoles(Set<UserRoleEntity> userRoles) {
+    public void setUserRoles(Set<RoleEntity> userRoles) {
         this.userRoles = userRoles;
     }
 

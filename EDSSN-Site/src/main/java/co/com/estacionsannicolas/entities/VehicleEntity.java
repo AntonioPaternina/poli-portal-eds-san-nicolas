@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Vehicle")
+@Table(name = "VEHICLE")
 public class VehicleEntity extends BaseEntity implements Serializable {
 
     private String licensePlate;

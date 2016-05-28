@@ -2,13 +2,15 @@ package co.com.estacionsannicolas.initializer;
 
 import co.com.estacionsannicolas.beans.AwardBean;
 import co.com.estacionsannicolas.beans.MarketingCampaignBean;
+import co.com.estacionsannicolas.beans.PromotionCodeBatchRequestBean;
 import co.com.estacionsannicolas.beans.UserBean;
-import co.com.estacionsannicolas.entities.UserRoleEntity;
+import co.com.estacionsannicolas.entities.RoleEntity;
 import co.com.estacionsannicolas.enums.DefaultMarketingCampaigns;
 import co.com.estacionsannicolas.enums.UserRoleTypeEnum;
 import co.com.estacionsannicolas.repositories.UserRoleRepository;
 import co.com.estacionsannicolas.service.AwardService;
 import co.com.estacionsannicolas.service.MarketingCampaignService;
+import co.com.estacionsannicolas.service.PromotionCodeService;
 import co.com.estacionsannicolas.service.UserService;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -38,12 +40,29 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
     @Autowired
     private AwardService awardService;
 
+    @Autowired
+    private PromotionCodeService promotionCodeService;
+
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        initializeUserRoles();        
+        initializeUserRoles();
         createTanquearSiPagaCampaign();
         createDefaultUsers();
+        createDefaultPromotionCodesForTanquearSiPaga();
+    }
+
+    private void createDefaultPromotionCodesForTanquearSiPaga() {
+        MarketingCampaignBean tanquearSiPaga = marketingCampaignService.findByName(DefaultMarketingCampaigns.TANQUEAR_SI_PAGA.getName());
+        if (tanquearSiPaga != null && promotionCodeService.getCountByCampaign(tanquearSiPaga) == 0) {
+            PromotionCodeBatchRequestBean batchRequestInfo = new PromotionCodeBatchRequestBean();
+            batchRequestInfo.setAwardPointsPercode(100);
+            batchRequestInfo.setCodeLength(12);
+            batchRequestInfo.setMarketingCampaign(tanquearSiPaga);
+            batchRequestInfo.setNumberOfCodesToCreate(100);
+
+            promotionCodeService.generateRandomCodes(batchRequestInfo);
+        }
     }
 
     private void createTanquearSiPagaCampaign() {
@@ -106,12 +125,12 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
 
     private void initializeUserRoles() {
         if (userRoleRepository.count() == 0) {
-            List<UserRoleEntity> roles = new ArrayList<>();
-            UserRoleEntity customerRole = new UserRoleEntity();
+            List<RoleEntity> roles = new ArrayList<>();
+            RoleEntity customerRole = new RoleEntity();
             customerRole.setType(UserRoleTypeEnum.CUSTOMER);
             roles.add(customerRole);
 
-            UserRoleEntity adminRole = new UserRoleEntity();
+            RoleEntity adminRole = new RoleEntity();
             adminRole.setType(UserRoleTypeEnum.ADMIN);
             roles.add(adminRole);
 
