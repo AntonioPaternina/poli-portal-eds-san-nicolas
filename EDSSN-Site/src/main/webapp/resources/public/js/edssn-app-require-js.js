@@ -13,6 +13,7 @@ require.config({
         edssnApp: '/resources/public/js/edssn-app',
         directives: '/resources/public/js/directives/directives',
         userService: '/resources/public/js/services/user-service',
+        securityService: '/resources/public/js/services/security-service',
         edssnAppRoutes: '/resources/public/js/routes/edssn-app-routes',
         mainController: '/resources/public/js/controllers/main-controller',
         signupController: '/resources/public/js/controllers/signup-controller',
@@ -57,6 +58,9 @@ require.config({
         userService: {
             deps: ['angular', 'lodash', 'edssnApp']
         },
+        securityService: {
+            deps: ['angular', 'lodash', 'edssnApp']
+        },
         edssnAppRoutes: {
             deps: ['angular', 'edssnApp']
         },
@@ -78,7 +82,16 @@ require.config({
     }
 });
 
-require(['edssnApp', 'edssnAppRoutes', 'directives', 'mainController', 'loginController', 'signupController', 'userController', 'accountController', 'userService'], function () {
+require(['edssnApp',
+    'edssnAppRoutes',
+    'directives',
+    'mainController',
+    'loginController',
+    'signupController',
+    'userController',
+    'accountController',
+    'userService',
+    'securityService'], function () {
 
     angular.bootstrap(document.getElementById('edssnApp'), ['edssnApp'], {
         // TODO this is set to false because of an unknown error, must be fixed

@@ -58,7 +58,7 @@ angular.module('edssnApp')
                                     .push({description: 'Usuario y/o contraseña inválidos'});
                         }
                     });
-                };
+                };                                
                 $scope.dateFormat = 'dd/MM/yyyy';
                 $scope.altInputFormats = ['d!/M!/yyyy'];
                 $scope.datePickerCloseText = "Cerrar";

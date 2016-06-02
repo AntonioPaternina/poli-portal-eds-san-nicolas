@@ -1,9 +1,28 @@
 <nav class="edssn-main-menu navbar navbar-inverse navbar-fixed-top">
     <ul class="nav navbar-nav">
-        <li class=""><a href="/#/" class="">Inicio</a></li>            
-        <li class="" ng-hide="loggedInUser"><a href="/#/signup" class="">Regístrate</a></li>
-        <li class="" ng-hide="loggedInUser"><a href="/#/login" class="">Iniciar Sesión</a></li>
-        <li class="" ng-show="loggedInUser"><a href="#/account" class="">{{loggedInUser.fullName}} ({{loggedInUser.username}})</a></li>
-        <li class="" ng-show="loggedInUser"><a href class="" ng-click="logout()">Cerrar Sesión</a></li>
+        <li class=""><a href="/#/">Inicio</a></li>        
+        <li ng-hide="loggedInUser" 
+            ng-cloak>
+            <a href="/#/signup" >Regístrate</a>
+        </li>
+        <li ng-hide="loggedInUser" 
+            ng-cloak>
+            <a href="/#/login" >Iniciar Sesión</a>
+        </li>
+
+        <li ng-show="loggedInUser" 
+            allowed="ADMIN" 
+            ng-if="loggedInUser"
+            ng-cloak>
+            <a href="/#/users" >Administrar Usuarios</a>
+        </li>
+        <li ng-show="loggedInUser" 
+            ng-cloak>
+            <a href="#/account" >{{loggedInUser.fullName}} ({{loggedInUser.username}})</a>
+        </li>
+        <li ng-show="loggedInUser" 
+            ng-cloak>
+            <a href class="" ng-click="logout()">Cerrar Sesión</a>
+        </li>
     </ul>
 </nav>

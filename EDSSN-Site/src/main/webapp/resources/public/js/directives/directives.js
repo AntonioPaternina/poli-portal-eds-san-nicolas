@@ -41,4 +41,16 @@ angular.module('edssnApp')
                     };
                 }
             };
-        });
+        })
+        .directive('allowed', ['SecurityService', function (SecurityService) {
+                return {
+                    link: function (scope, element, attributes) {
+                        var thisElement = element;
+                        SecurityService.allowed(attributes.allowed).then(function (allowed) {
+                            if (!allowed) {
+                                thisElement.addClass('hidden');
+                            }
+                        });
+                    }
+                };
+            }]);

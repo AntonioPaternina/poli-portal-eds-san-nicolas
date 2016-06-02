@@ -22,7 +22,7 @@ public class UserBean extends BaseBean {
     private List<ContactNumberBean> contactNumbers;
     private GenderEnum gender;
     private Date birthdate;
-    @JsonIgnore
+    @JsonProperty(access = Access.READ_ONLY)
     private Set<UserRoleBean> userRoles = new HashSet<>();
     private Set<VehicleBean> vehicles;
     @JsonIgnore
