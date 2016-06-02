@@ -5,9 +5,9 @@
     <div class="login-container">
         <form ng-submit="ctrl.onLogin()"
               name="form" 
-              class="pure-form login-form" 
+              class="" 
               novalidate>
-            <fieldset class="pure-group">
+            <fieldset class="">
                 <legend>Iniciar Sesión</legend>               
                 <div class="form-field">
                     <input type="text" 
@@ -17,13 +17,13 @@
                            ng-blur="onBlur('username')" 
                            ng-minlength="3"
                            required
-                           class="pure-input-1" 
+                           class="form-control" 
                            placeholder="usuario">
 
                     <div ng-show="isErrorMessageListVisible('username')" 
                          ng-messages="form.username.$error" 
                          ng-cloak
-                         class="error-messages">
+                         class="edssn-error-messages">
                         <div ng-message="required">requerido</div>
                         <div ng-message="minlength">debe ser de 6 o más caracteres</div>
                     </div>
@@ -35,11 +35,11 @@
                            ng-focus="onFocus('password')"  
                            ng-blur="onBlur('password')"                                    
                            ng-minlength="3"                                    
-                           class="pure-input-1" 
+                           class="form-control" 
                            placeholder="contraseña" 
                            required>
 
-                    <div class="error-messages" 
+                    <div class="edssn-error-messages" 
                          ng-show="isErrorMessageListVisible('password')" 
                          ng-messages="form.password.$error" 
                          ng-cloak>
@@ -51,7 +51,7 @@
             </fieldset>
 
             <button type="submit" 
-                    class="pure-button pure-input-1 pure-button-primary">
+                    class="btn btn-lg btn-primary btn-block">
                 Iniciar Sesión
             </button>
             <a class="new-user-link" 

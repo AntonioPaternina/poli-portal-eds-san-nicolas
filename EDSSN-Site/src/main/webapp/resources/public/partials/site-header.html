@@ -1,14 +1,13 @@
 <div class="header">
-    <div class="edssn-main-menu pure-menu pure-menu-horizontal pure-menu-fixed">
-        <!--
-        <a class="pure-menu-heading" href="/">Estación San Nicolás</a>
-        -->
-        <ul class="pure-menu-list">
-            <li class="pure-menu-item pure-menu-selected"><a href="/#/" class="pure-menu-link">Inicio</a></li>            
-            <li class="pure-menu-item" ng-hide="loggedInUser"><a href="/#/signup" class="pure-menu-link">Regístrate</a></li>
-            <li class="pure-menu-item" ng-hide="loggedInUser"><a href="/#/login" class="pure-menu-link">Iniciar Sesión</a></li>
-            <li class="pure-menu-item" ng-show="loggedInUser"><a href="#/account" class="pure-menu-link">{{loggedInUser.fullName}} ({{loggedInUser.username}})</a></li>
-            <li class="pure-menu-item" ng-show="loggedInUser"><a href class="pure-menu-link" ng-click="logout()">Cerrar Sesión</a></li>
-        </ul>
-    </div>
+    <nav class="edssn-main-menu navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li class=""><a href="/#/" class="">Inicio</a></li>            
+                <li class="" ng-hide="loggedInUser"><a href="/#/signup" class="">Regístrate</a></li>
+                <li class="" ng-hide="loggedInUser"><a href="/#/login" class="">Iniciar Sesión</a></li>
+                <li class="" ng-show="loggedInUser"><a href="#/account" class="">{{loggedInUser.fullName}} ({{loggedInUser.username}})</a></li>
+                <li class="" ng-show="loggedInUser"><a href class="" ng-click="logout()">Cerrar Sesión</a></li>
+            </ul>
+        </div>
+    </nav>
 </div>

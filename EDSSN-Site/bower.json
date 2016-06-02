@@ -17,7 +17,6 @@
         "angular-ui-grid": "~3.1.1",
         "html5-boilerplate": "~5.2.0",
         "lodash": "~2.4.1",
-        "pure": "~0.6.0",
         "fontawesome": "~4.6.3",
         "requirejs": "~2.1.15",
         "spring-security-csrf-token-interceptor": "~0.1.5",

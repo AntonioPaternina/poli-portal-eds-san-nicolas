@@ -5,9 +5,9 @@
         </common-error-messages>
         <form name="form" 
               ng-submit="signup()" 
-              class="pure-form login-form" 
+              class="" 
               novalidate>
-            <fieldset class="pure-group">
+            <fieldset class="">
                 <legend>¿Eres un usuario nuevo?</legend>
                 <div class="form-field">                    
                     <input type="text" 
@@ -16,11 +16,11 @@
                            ng-focus="onFocus('username')" 
                            ng-blur="onBlur('username')"                                    
                            ng-minlength="6" 
-                           class="pure-input-1" 
+                           class="" 
                            placeholder="usuario" 
                            required>
 
-                    <div class="error-messages" 
+                    <div class="edssn-error-messages" 
                          ng-show="isErrorMessageListVisible('username')" 
                          ng-messages="form.username.$error"
                          ng-cloak>
@@ -36,11 +36,11 @@
                            ng-blur="onBlur('password')"
                            ng-minlength="6" 
                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
-                           class="pure-input-1" 
+                           class="" 
                            placeholder="contraseña"
                            required>
 
-                    <div class="error-messages" 
+                    <div class="edssn-error-messages" 
                          ng-show="isErrorMessageListVisible('password')" 
                          ng-messages="form.password.$error"
                          ng-cloak>
@@ -58,11 +58,11 @@
                            ng-minlength="6"
                            check-passwords-match
                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" 
-                           class="pure-input-1"
+                           class=""
                            placeholder="vuelve a escribir la contraseña" 
                            required>
 
-                    <div class="error-messages" 
+                    <div class="edssn-error-messages" 
                          ng-show="isErrorMessageListVisible('confirmPassword')"
                          ng-messages="form.confirmPassword.$error" 
                          ng-cloak>
@@ -79,11 +79,11 @@
                            ng-focus="onFocus('nationalId')" 
                            ng-blur="onBlur('nationalId')"
                            ng-minlength="6" 
-                           class="pure-input-1" 
+                           class="" 
                            placeholder="número de identificación"
                            required>
 
-                    <div class="error-messages" 
+                    <div class="edssn-error-messages" 
                          ng-show="isErrorMessageListVisible('nationalId')" 
                          ng-messages="form.nationalId.$error"
                          ng-cloak>
@@ -98,11 +98,11 @@
                            ng-focus="onFocus('fullName')" 
                            ng-blur="onBlur('fullName')"
                            ng-minlength="2"                                    
-                           class="pure-input-1" 
+                           class="" 
                            placeholder="nombre completo"
                            required>
 
-                    <div class="error-messages" 
+                    <div class="edssn-error-messages" 
                          ng-show="isErrorMessageListVisible('fullName')" 
                          ng-messages="form.fullName.$error"
                          ng-cloak>
@@ -116,11 +116,11 @@
                            ng-model="vm.email"
                            ng-focus="onFocus('email')" 
                            ng-blur="onBlur('email')"                  
-                           class="pure-input-1" 
+                           class="" 
                            placeholder="e-mail" 
                            required>
 
-                    <div class="error-messages" 
+                    <div class="edssn-error-messages" 
                          ng-show="isErrorMessageListVisible('email')" 
                          ng-messages="form.email.$error"
                          ng-cloak>
@@ -135,9 +135,9 @@
                            ng-focus="onFocus('address')" 
                            ng-blur="onBlur('address')"
                            ng-minlength="6"                                    
-                           class="pure-input-1" 
+                           class="" 
                            placeholder="dirección">
-                    <div class="error-messages" 
+                    <div class="edssn-error-messages" 
                          ng-show="isErrorMessageListVisible('address')" 
                          ng-messages="form.address.$error"
                          ng-cloak>                                
@@ -151,9 +151,9 @@
                            ng-focus="onFocus('contactNumber')" 
                            ng-blur="onBlur('contactNumber')"
                            ng-minlength="7"                                    
-                           class="pure-input-1" 
+                           class="" 
                            placeholder="teléfono">
-                    <div class="error-messages" 
+                    <div class="edssn-error-messages" 
                          ng-show="isErrorMessageListVisible('contactNumber')" 
                          ng-messages="form.contactNumber.$error"
                          ng-cloak>                                
@@ -174,7 +174,7 @@
                            alt-input-formats="altInputFormats" 
                            placeholder="Cumpleaños (dd/mm/aaaa)" 
                            ng-click="openBirthdatePopup()" />
-                    <div class="error-messages" 
+                    <div class="edssn-error-messages" 
                          ng-show="isErrorMessageListVisible('birthdate')" 
                          ng-messages="form.birthdate.$error"
                          ng-cloak>                                
@@ -191,7 +191,7 @@
                         {{gender.label}}
                     </label>
                 </div>
-                <div class="error-messages" 
+                <div class="edssn-error-messages" 
                      ng-show="isErrorMessageListVisible('gender')" 
                      ng-messages="form.gender.$error"
                      ng-cloak>                                
@@ -239,7 +239,7 @@
             </fieldset>
 
             <button type="submit" 
-                    class="pure-button pure-input-1 pure-button-primary">
+                    class="">
                 Crear Usuario
             </button>
             <a class="new-user-link" 
