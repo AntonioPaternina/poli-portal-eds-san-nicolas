@@ -80,6 +80,7 @@
     padding: 0.6em;
     background: #2c3f51;
     font-size: 1.2em;
+    text-align: center;
 }
 .edssn-main-menu a {
     color: #AECFE5;
@@ -173,7 +174,7 @@
  */
 .edssn-login-container {
     position: absolute;
-    top: 20%;
+    top: 165px;
     width: 100%;
     min-height: 12%;
     z-index: 2;   
@@ -186,6 +187,8 @@
  * Footer
  */
 .edssn-footer {
+    width: 100%;
+    height: 60px;
     background: #111;
     color: white
 }
@@ -213,9 +216,6 @@
     }
     .content {
         padding: 1em;
-    }
-    .edssn-main-menu {
-        text-align: left;
     }
     .edssn-main-menu ul {
         float: right;
