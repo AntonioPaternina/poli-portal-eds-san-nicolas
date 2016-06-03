@@ -1,4 +1,4 @@
-package co.com.estacionsannicolas.controller;
+package co.com.estacionsannicolas.controllers;
 
 import co.com.estacionsannicolas.beans.AwardPointBean;
 import co.com.estacionsannicolas.service.AccountService;

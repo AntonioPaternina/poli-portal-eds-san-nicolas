@@ -136,7 +136,6 @@
 }
 .edssn-splash-head {
     font-size: 20px;
-    font-weight: bold;
     color: white;
     border: 3px solid white;
     padding: 1em 1.6em;
@@ -156,7 +155,7 @@
 .edssn-content {
     position: absolute;
     top: 87%;
-    left: 0px;
+    left: 0;
     width: 100%;
     min-height: 12%;
     z-index: 2;
@@ -194,6 +193,19 @@
 }
 
 /*
+ * Admin Users
+ */
+.edssn-admin-users-container {
+    position: absolute;
+    top: 80px;
+    width: 100%;
+}
+.edssn-admin-users {
+    width: 100%;
+    text-align: center;
+}
+
+/*
  * Media Queries for Phones and up
  */
 @media screen and (min-width: 14em) {
@@ -223,6 +235,10 @@
     .edssn-splash {
         width: 50%;
         height: 50%;
+    }
+    .edssn-admin-users {
+        width: 50%;
+        margin: 0 auto;
     }
     .edssn-splash-head {
         font-size: 250%;

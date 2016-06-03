@@ -1,4 +1,4 @@
-package co.com.estacionsannicolas.controller;
+package co.com.estacionsannicolas.controllers;
 
 import co.com.estacionsannicolas.beans.UserBean;
 import co.com.estacionsannicolas.entities.RoleEntity;

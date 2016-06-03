@@ -9,7 +9,6 @@ require.config({
         angulari18n: '/resources/bower_components/angular-i18n/angular-locale_es-co',
         angularGrid: '/resources/bower_components/angular-ui-grid/ui-grid',
         csrfInterceptor: '/resources/bower_components/spring-security-csrf-token-interceptor/dist/spring-security-csrf-token-interceptor.min',
-        lodash: "/resources/bower_components/lodash/dist/lodash",
         edssnApp: '/resources/public/js/edssn-app',
         directives: '/resources/public/js/directives/directives',
         userService: '/resources/public/js/services/user-service',
@@ -50,16 +49,16 @@ require.config({
             deps: ['angular']
         },
         edssnApp: {
-            deps: ['lodash', 'angular', 'angularMessages', 'angularRoute', 'csrfInterceptor', 'angularBootstrap', 'angulari18n', 'angularGrid']
+            deps: ['angular', 'angularMessages', 'angularRoute', 'csrfInterceptor', 'angularBootstrap', 'angulari18n', 'angularGrid']
         },
         directives: {
-            deps: ['angular', 'lodash', 'edssnApp']
+            deps: ['angular', 'edssnApp']
         },
         userService: {
-            deps: ['angular', 'lodash', 'edssnApp']
+            deps: ['angular', 'edssnApp']
         },
         securityService: {
-            deps: ['angular', 'lodash', 'edssnApp']
+            deps: ['angular', 'edssnApp']
         },
         edssnAppRoutes: {
             deps: ['angular', 'edssnApp']

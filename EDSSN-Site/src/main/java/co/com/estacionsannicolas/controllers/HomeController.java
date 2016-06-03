@@ -1,4 +1,4 @@
-package co.com.estacionsannicolas.controller;
+package co.com.estacionsannicolas.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="EDSSN-Site:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="EDSSN-Site-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="EDSSN-Site:war exploded" />
+    </root>
+  </artifact>
+</component>
