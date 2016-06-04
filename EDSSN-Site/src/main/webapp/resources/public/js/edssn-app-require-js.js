@@ -13,13 +13,13 @@ require.config({
         edssnApp: '/resources/public/js/edssn-app',
         directives: '/resources/public/js/directives/directives',
         userService: '/resources/public/js/services/user-service',
-        usersService: '/resources/public/js/services/users-service',
+        customerService: '/resources/public/js/services/customer-service',
         securityService: '/resources/public/js/services/security-service',
         edssnAppRoutes: '/resources/public/js/routes/edssn-app-routes',
         mainController: '/resources/public/js/controllers/main-controller',
         signupController: '/resources/public/js/controllers/signup-controller',
         loginController: '/resources/public/js/controllers/login-controller',
-        userController: '/resources/public/js/controllers/user-controller',
+        customerController: '/resources/public/js/controllers/customer-controller',
         accountController: '/resources/public/js/controllers/account-controller'
     },
     shim: {
@@ -62,7 +62,7 @@ require.config({
         userService: {
             deps: ['angular', 'edssnApp']
         },
-        usersService: {
+        customerService: {
             deps: ['angular', 'edssnApp']
         },
         securityService: {
@@ -80,7 +80,7 @@ require.config({
         signupController: {
             deps: ['angular', 'edssnApp']
         },
-        userController: {
+        customerController: {
             deps: ['angular', 'edssnApp']
         },
         accountController: {
@@ -95,10 +95,10 @@ require(['edssnApp',
     'mainController',
     'loginController',
     'signupController',
-    'userController',
+    'customerController',
     'accountController',
     'userService',
-    'usersService',
+    'customerService',
     'securityService'], function () {
 
     angular.bootstrap(document.getElementById('edssnApp'), ['edssnApp'], {

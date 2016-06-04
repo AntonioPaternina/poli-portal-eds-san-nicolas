@@ -1,5 +1,5 @@
 angular.module('edssnApp')
-    .controller('SignupController', ['$http', '$scope', '$controller', function ($http, $scope, $controller) {
+    .controller('SignupController', ['$http', '$scope', '$controller', 'Customer', function ($http, $scope, $controller, Customer) {
         angular.extend(this, $controller('MainController', {$scope: $scope}));
 
         $scope.birthdatePopup = {
@@ -82,34 +82,21 @@ angular.module('edssnApp')
                 return;
             }
 
-            var postData = {
-                username: $scope.vm.username,
-                password: $scope.vm.password,
-                email: $scope.vm.email,
-                nationalId: $scope.vm.nationalId,
-                fullName: $scope.vm.fullName,
-                address: $scope.vm.address,
-                birthdate: $scope.vm.birthdate,
-                vehicles: $scope.vm.vehicles,
-                gender: $scope.vm.gender
-            };
+            $scope.customer = new Customer();
 
-            $http({
-                method: 'POST',
-                url: '/user',
-                data: postData,
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "text/plain"
-                }
-            }).then(function (response) {
-                if (response.status === 200) {
-                    $scope.login($scope.vm.username, $scope.vm.password);
-                } else {
-                    $scope.vm.errorMessages = [];
-                    $scope.vm.errorMessages.push({description: response.data});
-                    console.log("Falló la creación del usuario: " + response.data);
-                }
+            $scope.customer.username = $scope.vm.username;
+            $scope.customer.password = $scope.vm.password;
+            $scope.customer.email = $scope.vm.email;
+            $scope.customer.nationalId = $scope.vm.nationalId;
+            $scope.customer.fullName = $scope.vm.fullName;
+            $scope.customer.address = $scope.vm.address;
+            $scope.customer.birthdate = $scope.vm.birthdate;
+            $scope.customer.vehicles = $scope.vm.vehicles;
+            $scope.customer.gender = $scope.vm.gender;
+
+
+            $scope.customer.$save(function () {
+                $scope.login($scope.vm.username, $scope.vm.password);
             });
         };
     }]);

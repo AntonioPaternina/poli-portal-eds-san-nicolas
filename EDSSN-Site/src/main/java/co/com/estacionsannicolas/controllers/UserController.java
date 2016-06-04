@@ -4,6 +4,7 @@ import co.com.estacionsannicolas.beans.UserBean;
 import co.com.estacionsannicolas.entities.RoleEntity;
 import co.com.estacionsannicolas.enums.RoleTypeEnum;
 import co.com.estacionsannicolas.service.UserService;
+
 import java.security.Principal;
 import java.util.List;
 
@@ -26,12 +27,6 @@ public class UserController extends BaseController {
     private UserService userService;
 
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(method = RequestMethod.POST)
-    public void createUser(@RequestBody UserBean user) {
-        userService.create(user, RoleTypeEnum.CUSTOMER);
-    }
-
-    @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.GET)
     public UserBean getUser(Principal principal) {
         UserBean user = null;
@@ -40,28 +35,4 @@ public class UserController extends BaseController {
         }
         return user;
     }
-
-    @ResponseStatus(HttpStatus.OK)
-    @RequestMapping(method = RequestMethod.PUT)
-    public UserBean updateUser(@RequestBody UserBean user) {
-        return userService.update(user);
-    }
-
-    @RequestMapping(method = RequestMethod.DELETE)
-    public void deleteUser(@RequestBody UserBean user) {
-        userService.delete(user.getUsername());
-    }
-
-    @Secured(RoleEntity.ADMIN)
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public List<UserBean> getAll() {
-        return userService.findAll();
-    }
-
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> errorHandler(Exception e) {
-        logger.error(e.getMessage(), e);
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-    }
-
 }

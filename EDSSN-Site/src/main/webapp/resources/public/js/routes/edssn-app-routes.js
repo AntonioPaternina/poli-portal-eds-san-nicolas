@@ -21,7 +21,7 @@ angular.module('edssnApp')
             })
             .when('/users', {
                 templateUrl: '/resources/partials/users.html',
-                controller: 'UserController',
+                controller: 'CustomerController',
                 controllerAs: 'ctrl'
             })
             .otherwise({

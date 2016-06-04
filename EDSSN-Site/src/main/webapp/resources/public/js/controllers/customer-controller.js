@@ -1,5 +1,5 @@
 angular.module('edssnApp')
-    .controller('UserController', ['$scope', 'UsersService', function ($scope, UsersService) {
+    .controller('CustomerController', ['$scope', 'CustomerService', function ($scope, CustomerService) {
         var columnDefs = [{
             name: 'Usuario',
             field: 'username',
@@ -19,7 +19,7 @@ angular.module('edssnApp')
         }
         ];
 
-        $scope.vm.users = UsersService.query();
+        $scope.vm.users = CustomerService.query();
 
         $scope.gridOpts = {
             columnDefs: columnDefs,

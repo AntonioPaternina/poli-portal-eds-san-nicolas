@@ -53,7 +53,7 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/resources/img/**").permitAll()
                 .antMatchers("/resources/bower_components/**").permitAll()
                 .antMatchers("/login").permitAll()
-                .antMatchers(HttpMethod.POST, "/user").permitAll()
+                .antMatchers(HttpMethod.POST, "/customers").permitAll()
                 .antMatchers(HttpMethod.GET, "/user").permitAll()
                 .anyRequest().authenticated()
                 .and()
