@@ -56,7 +56,8 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
-    public void create(UserBean userBean, RoleTypeEnum roleType) {
+    public UserBean create(UserBean userBean, RoleTypeEnum roleType) {
+        UserBean createdUser = null;
         try {
             setUserRole(roleType, userBean);
             userBean.setPassword(passwordEncoder.encode(userBean.getPassword()));
@@ -67,10 +68,11 @@ public class UserServiceImpl extends BaseService implements UserService {
             setUserForVehicles(userEntity);
             initializeAwardPointsForTanquearSiPaga(userEntity, roleType);
 
-            userEntityRepository.saveAndFlush(userEntity);
+            createdUser = mapper.map(userEntityRepository.saveAndFlush(userEntity), UserBean.class);
         } catch (Exception e) {
             logger.error("Error creating user", e);
         }
+        return createdUser;
     }
 
     private void setUserForVehicles(UserEntity userEntity) {

@@ -10,7 +10,7 @@ public interface UserService {
 
     UserBean findByUsername(String username);
 
-    void create(UserBean user, RoleTypeEnum roleType);
+    UserBean create(UserBean user, RoleTypeEnum roleType);
 
     UserBean update(UserBean user);
 

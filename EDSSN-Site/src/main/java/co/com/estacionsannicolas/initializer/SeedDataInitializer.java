@@ -7,10 +7,7 @@ import co.com.estacionsannicolas.enums.GenderEnum;
 import co.com.estacionsannicolas.enums.RoleTypeEnum;
 import co.com.estacionsannicolas.enums.VehicleTypeEnum;
 import co.com.estacionsannicolas.repositories.RoleRepository;
-import co.com.estacionsannicolas.service.AwardService;
-import co.com.estacionsannicolas.service.MarketingCampaignService;
-import co.com.estacionsannicolas.service.PromotionCodeService;
-import co.com.estacionsannicolas.service.UserService;
+import co.com.estacionsannicolas.service.*;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -28,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 public class SeedDataInitializer implements ApplicationListener<ContextRefreshedEvent> {
 
+    public static final int NUMBER_OF_CODES_TO_CREATE = 1000;
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private static final boolean INSERT_TEST_DATA = true;
@@ -63,6 +61,7 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
             "Porsche", "Ford", "Toyota",
             "Volkswagen", "Honda", "Chevrolet", "Dodge", "Jaguar", "Nissan", "Mazda"};
     public static final VehicleTypeEnum[] VEHICLE_TYPES = VehicleTypeEnum.values();
+    private List<PromotionCodeBean> testPromotionCodes;
 
     @Override
     @Transactional
@@ -70,8 +69,8 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
         initializeUserRoles();
         createTanquearSiPagaCampaign();
         if (INSERT_TEST_DATA) {
-            createDefaultUsers();
             createDefaultPromotionCodesForTanquearSiPaga();
+            createDefaultUsers();
         }
     }
 
@@ -82,9 +81,9 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
             batchRequestInfo.setAwardPointsPercode(100);
             batchRequestInfo.setCodeLength(12);
             batchRequestInfo.setMarketingCampaign(tanquearSiPaga);
-            batchRequestInfo.setNumberOfCodesToCreate(100);
+            batchRequestInfo.setNumberOfCodesToCreate(NUMBER_OF_CODES_TO_CREATE);
 
-            promotionCodeService.generateRandomCodes(batchRequestInfo);
+            testPromotionCodes = promotionCodeService.generateRandomCodes(batchRequestInfo);
         }
     }
 
@@ -158,7 +157,23 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
 
         createRandomVehicleForCustomer(customer);
 
-        userService.create(customer, RoleTypeEnum.CUSTOMER);
+        customer = userService.create(customer, RoleTypeEnum.CUSTOMER);
+
+        randomlyAssignTestCodes(customer);
+    }
+
+    private void randomlyAssignTestCodes(UserBean customer) {
+        if (RandomUtils.nextBoolean()) {
+            try {
+                promotionCodeService.usePromotionCode(customer, getRandomPromotionCode());
+            } catch (Exception e) {
+                logger.error("Error while assigning test promotion code to test user", e);
+            }
+        }
+    }
+
+    private String getRandomPromotionCode() {
+        return testPromotionCodes.get(RandomUtils.nextInt(testPromotionCodes.size())).getCode();
     }
 
     private void createRandomVehicleForCustomer(UserBean customer) {
