@@ -28,7 +28,8 @@ angular.module('edssnApp')
             enableRowSelection: true,
             showSelectionCheckbox: true,
             multiSelect: false,
-            enableSelectAll: false
+            enableSelectAll: false,
+            noUnselect: true
         };
 
         $scope.gridOpts.onRegisterApi = function(gridApi){

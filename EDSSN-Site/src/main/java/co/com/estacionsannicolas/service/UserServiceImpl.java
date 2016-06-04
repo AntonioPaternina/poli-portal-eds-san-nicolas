@@ -2,12 +2,14 @@ package co.com.estacionsannicolas.service;
 
 import co.com.estacionsannicolas.beans.MarketingCampaignBean;
 import co.com.estacionsannicolas.beans.UserBean;
-import co.com.estacionsannicolas.beans.UserRoleBean;
+import co.com.estacionsannicolas.beans.RoleBean;
 import co.com.estacionsannicolas.entities.AwardPointEntity;
 import co.com.estacionsannicolas.entities.MarketingCampaignEntity;
+import co.com.estacionsannicolas.entities.RoleEntity;
 import co.com.estacionsannicolas.entities.UserEntity;
 import co.com.estacionsannicolas.enums.DefaultMarketingCampaigns;
-import co.com.estacionsannicolas.enums.UserRoleTypeEnum;
+import co.com.estacionsannicolas.enums.RoleTypeEnum;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     private UserRepository userEntityRepository;
 
     @Autowired
-    private UserRoleService userRoleService;
+    private RoleService roleService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -54,7 +56,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     }
 
     @Override
-    public void create(UserBean userBean, UserRoleTypeEnum roleType) {
+    public void create(UserBean userBean, RoleTypeEnum roleType) {
         try {
             setUserRole(roleType, userBean);
             userBean.setPassword(passwordEncoder.encode(userBean.getPassword()));
@@ -79,8 +81,8 @@ public class UserServiceImpl extends BaseService implements UserService {
         }
     }
 
-    private void initializeAwardPointsForTanquearSiPaga(UserEntity userEntity, UserRoleTypeEnum roleType) {
-        if (UserRoleTypeEnum.CUSTOMER.equals(roleType)) {
+    private void initializeAwardPointsForTanquearSiPaga(UserEntity userEntity, RoleTypeEnum roleType) {
+        if (RoleTypeEnum.CUSTOMER.equals(roleType)) {
             MarketingCampaignBean tanquearSiPagaCampaign = marketingCampaignService.findByName(DefaultMarketingCampaigns.TANQUEAR_SI_PAGA.getName());
 
             AwardPointEntity tanquearSiPagaPoints = new AwardPointEntity();
@@ -91,8 +93,8 @@ public class UserServiceImpl extends BaseService implements UserService {
         }
     }
 
-    private void setUserRole(UserRoleTypeEnum roleType, UserBean userBean) {
-        UserRoleBean customerRole = userRoleService.findByType(roleType);
+    private void setUserRole(RoleTypeEnum roleType, UserBean userBean) {
+        RoleBean customerRole = roleService.findByType(roleType);
         userBean.getUserRoles().add(customerRole);
     }
 
@@ -118,6 +120,18 @@ public class UserServiceImpl extends BaseService implements UserService {
     public List<UserBean> findAll() {
         List<UserEntity> users = userEntityRepository.findAll();
         return DozerHelper.map(mapper, users, UserBean.class);
+    }
+
+    @Override
+    public List<UserBean> findAllCustomers() {
+        List<UserBean> customers = null;
+        try {
+            RoleEntity customerRole = mapper.map(roleService.findByType(RoleTypeEnum.CUSTOMER), RoleEntity.class);
+            customers = DozerHelper.map(mapper, userEntityRepository.findByUserRoles(customerRole), UserBean.class);
+        } catch (Exception e) {
+            logger.error("Error retrieving customers", e);
+        }
+        return customers;
     }
 
     @Override

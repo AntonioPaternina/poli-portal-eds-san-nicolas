@@ -1,7 +1,7 @@
 package co.com.estacionsannicolas.service;
 
 import co.com.estacionsannicolas.beans.UserBean;
-import co.com.estacionsannicolas.enums.UserRoleTypeEnum;
+import co.com.estacionsannicolas.enums.RoleTypeEnum;
 import java.util.List;
 
 public interface UserService {
@@ -10,13 +10,15 @@ public interface UserService {
 
     UserBean findByUsername(String username);
 
-    void create(UserBean user, UserRoleTypeEnum roleType);
+    void create(UserBean user, RoleTypeEnum roleType);
 
     UserBean update(UserBean user);
 
     void delete(String username);
 
     List<UserBean> findAll();
+
+    List<UserBean> findAllCustomers();
 
     boolean isUsernameUnique(Long id, String username);
 

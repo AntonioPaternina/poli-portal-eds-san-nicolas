@@ -1,20 +1,25 @@
 package co.com.estacionsannicolas.initializer;
 
-import co.com.estacionsannicolas.beans.AwardBean;
-import co.com.estacionsannicolas.beans.MarketingCampaignBean;
-import co.com.estacionsannicolas.beans.PromotionCodeBatchRequestBean;
-import co.com.estacionsannicolas.beans.UserBean;
+import co.com.estacionsannicolas.beans.*;
 import co.com.estacionsannicolas.entities.RoleEntity;
 import co.com.estacionsannicolas.enums.DefaultMarketingCampaigns;
-import co.com.estacionsannicolas.enums.UserRoleTypeEnum;
-import co.com.estacionsannicolas.repositories.UserRoleRepository;
+import co.com.estacionsannicolas.enums.GenderEnum;
+import co.com.estacionsannicolas.enums.RoleTypeEnum;
+import co.com.estacionsannicolas.repositories.RoleRepository;
 import co.com.estacionsannicolas.service.AwardService;
 import co.com.estacionsannicolas.service.MarketingCampaignService;
 import co.com.estacionsannicolas.service.PromotionCodeService;
 import co.com.estacionsannicolas.service.UserService;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
+import org.apache.commons.lang.math.RandomUtils;
+import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +33,10 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    private static final boolean INSERT_TEST_DATA = true;
+
     @Autowired
-    private UserRoleRepository userRoleRepository;
+    private RoleRepository roleRepository;
 
     @Autowired
     private UserService userService;
@@ -48,8 +55,10 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         initializeUserRoles();
         createTanquearSiPagaCampaign();
-        createDefaultUsers();
-        createDefaultPromotionCodesForTanquearSiPaga();
+        if (INSERT_TEST_DATA) {
+            createDefaultUsers();
+            createDefaultPromotionCodesForTanquearSiPaga();
+        }
     }
 
     private void createDefaultPromotionCodesForTanquearSiPaga() {
@@ -93,48 +102,61 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
     }
 
     private void createDefaultUsers() {
-        createDefaultAdmin();
-        createDefaultCustomer();
-    }
-
-    private void createDefaultAdmin() {
         if (userService.findByUsername("admin") == null) {
-            UserBean admin = new UserBean();
-            admin.setUsername("admin");
-            admin.setPassword("Admin01.");
-            admin.setAcive(true);
-            admin.setEmail("edssn_test1@gmail.com");
-            admin.setFullName("Antonio Paternina");
-            admin.setNationalId("123456789");
-            userService.create(admin, UserRoleTypeEnum.ADMIN);
+            createDefaultAdmin();
+            createDefaultCustomers();
         }
     }
 
-    private void createDefaultCustomer() {
-        if (userService.findByUsername("customer") == null) {
+    private void createDefaultAdmin() {
+        UserBean admin = new UserBean();
+        admin.setUsername("admin");
+        admin.setPassword("Admin01.");
+        admin.setAcive(true);
+        admin.setEmail("edssn_test1@gmail.com");
+        admin.setFullName("Antonio Paternina");
+        admin.setNationalId("123456789");
+        userService.create(admin, RoleTypeEnum.ADMIN);
+    }
+
+    private void createDefaultCustomers() {
+        for (int i = 0; i < 30; i++) {
+            GenderEnum[] genders = GenderEnum.values();
+
             UserBean customer = new UserBean();
-            customer.setUsername("customer");
+            customer.setUsername("customer" + RandomStringUtils.randomAlphanumeric(5));
             customer.setPassword("Admin01.");
             customer.setAcive(true);
-            customer.setEmail("edssn_test2@gmail.com");
-            customer.setFullName("Antonio Paternina");
-            customer.setNationalId("46434648435");
-            userService.create(customer, UserRoleTypeEnum.CUSTOMER);
+            customer.setEmail(RandomStringUtils.randomAlphabetic(6) + "@gmail.com");
+            customer.setFullName("Test Customer " + RandomStringUtils.randomAlphanumeric(5));
+            customer.setNationalId(RandomStringUtils.randomNumeric(8));
+            customer.setGender(genders[RandomUtils.nextInt(2)]);
+
+            Set<VehicleBean> vehicleBeanSet = new HashSet<>();
+            VehicleBean vehicleBean = new VehicleBean();
+            vehicleBean.setBrand("Marca");
+            vehicleBean.setLicensePlate(RandomStringUtils.randomAlphanumeric(6));
+            vehicleBean.setModel(RandomStringUtils.randomNumeric(3));
+            vehicleBean.setUser(customer);
+            vehicleBeanSet.add(vehicleBean);
+            customer.setVehicles(vehicleBeanSet);
+
+            userService.create(customer, RoleTypeEnum.CUSTOMER);
         }
     }
 
     private void initializeUserRoles() {
-        if (userRoleRepository.count() == 0) {
+        if (roleRepository.count() == 0) {
             List<RoleEntity> roles = new ArrayList<>();
             RoleEntity customerRole = new RoleEntity();
-            customerRole.setType(UserRoleTypeEnum.CUSTOMER);
+            customerRole.setType(RoleTypeEnum.CUSTOMER);
             roles.add(customerRole);
 
             RoleEntity adminRole = new RoleEntity();
-            adminRole.setType(UserRoleTypeEnum.ADMIN);
+            adminRole.setType(RoleTypeEnum.ADMIN);
             roles.add(adminRole);
 
-            userRoleRepository.save(roles);
+            roleRepository.save(roles);
         }
     }
 }

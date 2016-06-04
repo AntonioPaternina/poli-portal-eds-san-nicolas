@@ -23,7 +23,7 @@ public class UserBean extends BaseBean {
     private GenderEnum gender;
     private Date birthdate;
     @JsonProperty(access = Access.READ_ONLY)
-    private Set<UserRoleBean> userRoles = new HashSet<>();
+    private Set<RoleBean> userRoles = new HashSet<>();
     private Set<VehicleBean> vehicles;
     @JsonIgnore
     private Set<AwardPointBean> awardPoints;
@@ -119,11 +119,11 @@ public class UserBean extends BaseBean {
         this.birthdate = birthdate;
     }
 
-    public Set<UserRoleBean> getUserRoles() {
+    public Set<RoleBean> getUserRoles() {
         return userRoles;
     }
 
-    public void setUserRoles(Set<UserRoleBean> userRoles) {
+    public void setUserRoles(Set<RoleBean> userRoles) {
         this.userRoles = userRoles;
     }
 

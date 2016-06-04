@@ -2,7 +2,7 @@ package co.com.estacionsannicolas.controllers;
 
 import co.com.estacionsannicolas.beans.UserBean;
 import co.com.estacionsannicolas.entities.RoleEntity;
-import co.com.estacionsannicolas.enums.UserRoleTypeEnum;
+import co.com.estacionsannicolas.enums.RoleTypeEnum;
 import co.com.estacionsannicolas.service.UserService;
 import java.security.Principal;
 import java.util.List;
@@ -28,7 +28,7 @@ public class UserController extends BaseController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(method = RequestMethod.POST)
     public void createUser(@RequestBody UserBean user) {
-        userService.create(user, UserRoleTypeEnum.CUSTOMER);
+        userService.create(user, RoleTypeEnum.CUSTOMER);
     }
 
     @ResponseStatus(HttpStatus.OK)

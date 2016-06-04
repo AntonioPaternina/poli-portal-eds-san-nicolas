@@ -1,6 +1,6 @@
 package co.com.estacionsannicolas.entities;
 
-import co.com.estacionsannicolas.enums.UserRoleTypeEnum;
+import co.com.estacionsannicolas.enums.RoleTypeEnum;
 import java.io.Serializable;
 
 import javax.persistence.Column;
@@ -18,13 +18,13 @@ public class RoleEntity extends BaseEntity implements Serializable {
 
     @Column(length = 15, unique = true, nullable = false)
     @Enumerated(EnumType.STRING)
-    private UserRoleTypeEnum type;
+    private RoleTypeEnum type;
 
-    public UserRoleTypeEnum getType() {
+    public RoleTypeEnum getType() {
         return type;
     }
 
-    public void setType(UserRoleTypeEnum type) {
+    public void setType(RoleTypeEnum type) {
         this.type = type;
     }
 
