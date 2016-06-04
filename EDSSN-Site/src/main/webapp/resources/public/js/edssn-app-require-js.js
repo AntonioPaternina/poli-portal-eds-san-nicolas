@@ -5,6 +5,7 @@ require.config({
         angularRoute: '/resources/bower_components/angular-route/angular-route',
         angularAnimate: '/resources/bower_components/angular-animate/angular-animate',
         angularTouch: '/resources/bower_components/angular-touch/angular-touch',
+        angularResource: '/resources/bower_components/angular-resource/angular-resource',
         angularBootstrap: '/resources/bower_components/angular-bootstrap/ui-bootstrap-tpls',
         angulari18n: '/resources/bower_components/angular-i18n/angular-locale_es-co',
         angularGrid: '/resources/bower_components/angular-ui-grid/ui-grid',
@@ -12,6 +13,7 @@ require.config({
         edssnApp: '/resources/public/js/edssn-app',
         directives: '/resources/public/js/directives/directives',
         userService: '/resources/public/js/services/user-service',
+        usersService: '/resources/public/js/services/users-service',
         securityService: '/resources/public/js/services/security-service',
         edssnAppRoutes: '/resources/public/js/routes/edssn-app-routes',
         mainController: '/resources/public/js/controllers/main-controller',
@@ -39,6 +41,9 @@ require.config({
         angularTouch: {
             deps: ['angular']
         },
+        angularResource: {
+            deps: ['angular']
+        },
         angularBootstrap: {
             deps: ['angular', 'angularTouch', 'angularAnimate']
         },
@@ -49,12 +54,15 @@ require.config({
             deps: ['angular']
         },
         edssnApp: {
-            deps: ['angular', 'angularMessages', 'angularRoute', 'csrfInterceptor', 'angularBootstrap', 'angulari18n', 'angularGrid']
+            deps: ['angular', 'angularMessages', 'angularRoute', 'csrfInterceptor', 'angularBootstrap', 'angulari18n', 'angularGrid', 'angularResource']
         },
         directives: {
             deps: ['angular', 'edssnApp']
         },
         userService: {
+            deps: ['angular', 'edssnApp']
+        },
+        usersService: {
             deps: ['angular', 'edssnApp']
         },
         securityService: {
@@ -90,6 +98,7 @@ require(['edssnApp',
     'userController',
     'accountController',
     'userService',
+    'usersService',
     'securityService'], function () {
 
     angular.bootstrap(document.getElementById('edssnApp'), ['edssnApp'], {

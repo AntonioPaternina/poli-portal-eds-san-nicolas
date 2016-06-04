@@ -1,70 +1,70 @@
 <div class="edssn-login-container">
     <div class="signup-container">
-        <common-error-messages error-messages="vm.errorMessages" 
+        <common-error-messages error-messages="vm.errorMessages"
                                extra-styles="access-screen">
         </common-error-messages>
-        <form name="form" 
-              ng-submit="signup()" 
-              class="" 
+        <form name="form"
+              ng-submit="signup()"
+              class=""
               novalidate>
             <fieldset class="">
                 <legend>¿Eres un usuario nuevo?</legend>
-                <div class="form-field">                    
-                    <input type="text" 
+                <div class="form-field">
+                    <input type="text"
                            name="username"
                            ng-model="vm.username"
-                           ng-focus="onFocus('username')" 
-                           ng-blur="onBlur('username')"                                    
-                           ng-minlength="6" 
-                           class="" 
-                           placeholder="usuario" 
+                           ng-focus="onFocus('username')"
+                           ng-blur="onBlur('username')"
+                           ng-minlength="6"
+                           class=""
+                           placeholder="usuario"
                            required>
 
-                    <div class="edssn-error-messages" 
-                         ng-show="isErrorMessageListVisible('username')" 
+                    <div class="edssn-error-messages"
+                         ng-show="isErrorMessageListVisible('username')"
                          ng-messages="form.username.$error"
                          ng-cloak>
                         <div ng-message="required">el usuario es requerido</div>
                         <div ng-message="minlength">debe tener mínimo 6 caracteres</div>
                     </div>
-                </div>              
+                </div>
                 <div class="form-field">
-                    <input type="password" 
-                           name="password" 
-                           ng-model="vm.password" 
-                           ng-focus="onFocus('password')" 
+                    <input type="password"
+                           name="password"
+                           ng-model="vm.password"
+                           ng-focus="onFocus('password')"
                            ng-blur="onBlur('password')"
-                           ng-minlength="6" 
+                           ng-minlength="6"
                            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
-                           class="" 
+                           class=""
                            placeholder="contraseña"
                            required>
 
-                    <div class="edssn-error-messages" 
-                         ng-show="isErrorMessageListVisible('password')" 
+                    <div class="edssn-error-messages"
+                         ng-show="isErrorMessageListVisible('password')"
                          ng-messages="form.password.$error"
                          ng-cloak>
                         <div ng-message="required">La contraseña es requerida</div>
                         <div ng-message="minlength">debe tener mínimo 6 caracteres</div>
                         <div ng-message="pattern">debe tener al menos un número y una mayúscula</div>
                     </div>
-                </div>                
+                </div>
                 <div class="form-field">
-                    <input type="password" 
+                    <input type="password"
                            name="confirmPassword"
-                           ng-focus="onFocus('confirmPassword')" 
+                           ng-focus="onFocus('confirmPassword')"
                            ng-blur="onBlur('confirmPassword')"
-                           ng-model="vm.confirmPassword" 
+                           ng-model="vm.confirmPassword"
                            ng-minlength="6"
                            check-passwords-match
-                           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" 
+                           pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
                            class=""
-                           placeholder="vuelve a escribir la contraseña" 
+                           placeholder="vuelve a escribir la contraseña"
                            required>
 
-                    <div class="edssn-error-messages" 
+                    <div class="edssn-error-messages"
                          ng-show="isErrorMessageListVisible('confirmPassword')"
-                         ng-messages="form.confirmPassword.$error" 
+                         ng-messages="form.confirmPassword.$error"
                          ng-cloak>
                         <div ng-message="required">La contraseña es requerida</div>
                         <div ng-message="minlength">debe tener mínimo 6 caracteres</div>
@@ -73,37 +73,37 @@
                     </div>
                 </div>
                 <div class="form-field">
-                    <input type="text" 
-                           name="nationalId" 
-                           ng-model="vm.nationalId" 
-                           ng-focus="onFocus('nationalId')" 
+                    <input type="text"
+                           name="nationalId"
+                           ng-model="vm.nationalId"
+                           ng-focus="onFocus('nationalId')"
                            ng-blur="onBlur('nationalId')"
-                           ng-minlength="6" 
-                           class="" 
+                           ng-minlength="6"
+                           class=""
                            placeholder="número de identificación"
                            required>
 
-                    <div class="edssn-error-messages" 
-                         ng-show="isErrorMessageListVisible('nationalId')" 
+                    <div class="edssn-error-messages"
+                         ng-show="isErrorMessageListVisible('nationalId')"
                          ng-messages="form.nationalId.$error"
                          ng-cloak>
                         <div ng-message="required">El número de identificación es requerido</div>
-                        <div ng-message="minlength">debe tener mínimo 6 caracteres</div>                                
+                        <div ng-message="minlength">debe tener mínimo 6 caracteres</div>
                     </div>
                 </div>
                 <div class="form-field">
-                    <input type="text" 
-                           name="fullName" 
-                           ng-model="vm.fullName" 
-                           ng-focus="onFocus('fullName')" 
+                    <input type="text"
+                           name="fullName"
+                           ng-model="vm.fullName"
+                           ng-focus="onFocus('fullName')"
                            ng-blur="onBlur('fullName')"
-                           ng-minlength="2"                                    
-                           class="" 
+                           ng-minlength="2"
+                           class=""
                            placeholder="nombre completo"
                            required>
 
-                    <div class="edssn-error-messages" 
-                         ng-show="isErrorMessageListVisible('fullName')" 
+                    <div class="edssn-error-messages"
+                         ng-show="isErrorMessageListVisible('fullName')"
                          ng-messages="form.fullName.$error"
                          ng-cloak>
                         <div ng-message="required">El nombre completo es requerido</div>
@@ -111,17 +111,17 @@
                     </div>
                 </div>
                 <div class="form-field">
-                    <input type="email" 
+                    <input type="email"
                            name="email"
                            ng-model="vm.email"
-                           ng-focus="onFocus('email')" 
-                           ng-blur="onBlur('email')"                  
-                           class="" 
-                           placeholder="e-mail" 
+                           ng-focus="onFocus('email')"
+                           ng-blur="onBlur('email')"
+                           class=""
+                           placeholder="e-mail"
                            required>
 
-                    <div class="edssn-error-messages" 
-                         ng-show="isErrorMessageListVisible('email')" 
+                    <div class="edssn-error-messages"
+                         ng-show="isErrorMessageListVisible('email')"
                          ng-messages="form.email.$error"
                          ng-cloak>
                         <div ng-message="required">El e-mail es requerido</div>
@@ -129,55 +129,55 @@
                     </div>
                 </div>
                 <div class="form-field">
-                    <input type="text" 
-                           name="address" 
-                           ng-model="vm.address" 
-                           ng-focus="onFocus('address')" 
+                    <input type="text"
+                           name="address"
+                           ng-model="vm.address"
+                           ng-focus="onFocus('address')"
                            ng-blur="onBlur('address')"
-                           ng-minlength="6"                                    
-                           class="" 
+                           ng-minlength="6"
+                           class=""
                            placeholder="dirección">
-                    <div class="edssn-error-messages" 
-                         ng-show="isErrorMessageListVisible('address')" 
+                    <div class="edssn-error-messages"
+                         ng-show="isErrorMessageListVisible('address')"
                          ng-messages="form.address.$error"
-                         ng-cloak>                                
+                         ng-cloak>
                         <div ng-message="minlength">debe tener mínimo 6 caracteres</div>
                     </div>
                 </div>
                 <div class="form-field">
-                    <input type="text" 
-                           name="contactNumber" 
-                           ng-model="vm.contactNumber" 
-                           ng-focus="onFocus('contactNumber')" 
+                    <input type="text"
+                           name="contactNumber"
+                           ng-model="vm.contactNumber"
+                           ng-focus="onFocus('contactNumber')"
                            ng-blur="onBlur('contactNumber')"
-                           ng-minlength="7"                                    
-                           class="" 
+                           ng-minlength="7"
+                           class=""
                            placeholder="teléfono">
-                    <div class="edssn-error-messages" 
-                         ng-show="isErrorMessageListVisible('contactNumber')" 
+                    <div class="edssn-error-messages"
+                         ng-show="isErrorMessageListVisible('contactNumber')"
                          ng-messages="form.contactNumber.$error"
-                         ng-cloak>                                
+                         ng-cloak>
                         <div ng-message="minlength">debe tener mínimo 7 caracteres</div>
                     </div>
                 </div>
                 <div class="form-field">
-                    <input type="text" 
+                    <input type="text"
                            name="birthdate"
-                           class="form-control" 
-                           uib-datepicker-popup="{{dateFormat}}" 
-                           ng-model="vm.birthdate" 
-                           is-open="birthdatePopup.opened" 
-                           datepicker-options="dateOptions" 
-                           close-text="{{datePickerCloseText}}" 
+                           class="form-control"
+                           uib-datepicker-popup="{{dateFormat}}"
+                           ng-model="vm.birthdate"
+                           is-open="birthdatePopup.opened"
+                           datepicker-options="dateOptions"
+                           close-text="{{datePickerCloseText}}"
                            clear-text="{{datePickerClearText}}"
                            current-text="{{datePickerCurrentText}}"
-                           alt-input-formats="altInputFormats" 
-                           placeholder="Cumpleaños (dd/mm/aaaa)" 
-                           ng-click="openBirthdatePopup()" />
-                    <div class="edssn-error-messages" 
-                         ng-show="isErrorMessageListVisible('birthdate')" 
+                           alt-input-formats="altInputFormats"
+                           placeholder="Cumpleaños (dd/mm/aaaa)"
+                           ng-click="openBirthdatePopup()"/>
+                    <div class="edssn-error-messages"
+                         ng-show="isErrorMessageListVisible('birthdate')"
                          ng-messages="form.birthdate.$error"
-                         ng-cloak>                                
+                         ng-cloak>
                         <!-- TODO add validations for date -->
                     </div>
                 </div>
@@ -185,16 +185,16 @@
                 <div class="btn-group form-field">
                     <p>Sexo</p>
                     <label ng-repeat="gender in genre"
-                           class="btn btn-primary" 
-                           ng-model="vm.gender" 
+                           class="btn btn-primary"
+                           ng-model="vm.gender"
                            uib-btn-radio="'{{gender.value}}'">
                         {{gender.label}}
                     </label>
                 </div>
-                <div class="edssn-error-messages" 
-                     ng-show="isErrorMessageListVisible('gender')" 
+                <div class="edssn-error-messages"
+                     ng-show="isErrorMessageListVisible('gender')"
                      ng-messages="form.gender.$error"
-                     ng-cloak>                                
+                     ng-cloak>
                     <!-- TODO add validations for gender -->
                 </div>
 
@@ -202,47 +202,48 @@
                 <div>
                     <h1 class="edssn-signup-vehicles-title">Añade tus vehículos</h1>
                     <div class="form-field">
-                        <input id="tmp_plate" 
-                               type="text" 
+                        <input id="tmp_plate"
+                               type="text"
                                ng-model="tmp_plate"
                                placeholder="placa"/>
                     </div>
                     <div class="form-field">
-                        <input id="tmp_brand" 
-                               type="text" 
-                               ng-model="tmp_brand" 
-                               placeholder="marca" />
+                        <input id="tmp_brand"
+                               type="text"
+                               ng-model="tmp_brand"
+                               placeholder="marca"/>
                     </div>
                     <div class="form-field">
 
-                        <input id="tmp_model" 
-                               type="text" 
-                               ng-model="tmp_model" 
-                               placeholder="modelo" />
+                        <input id="tmp_model"
+                               type="text"
+                               ng-model="tmp_model"
+                               placeholder="modelo"/>
                     </div>
                     <div class="form-field">
                         <label for="tmp_type">Tipo de Vehículo</label>
-                        <select id="tmp_type" 
-                                ng-model="tmp_type" 
+                        <select id="tmp_type"
+                                ng-model="tmp_type"
                                 placeholder="tipo">
-                            <option ng-repeat="tipo in tipos" 
-                                    value="{{tipo.value}}">{{tipo.label}}</option>
+                            <option ng-repeat="tipo in tipos"
+                                    value="{{tipo.value}}">{{tipo.label}}
+                            </option>
                         </select>
                     </div>
-                    <button type="button" 
+                    <button type="button"
                             ng-click="addRow()">
                         Añadir Vehículo
                     </button>
                 </div>
-                <div id="grid1" ui-grid="gridOpts" class="edssn-signup-vehicles-grid"></div>
+                <div ui-grid="gridOpts" class="edssn-signup-vehicles-grid"></div>
 
             </fieldset>
 
-            <button type="submit" 
+            <button type="submit"
                     class="">
                 Crear Usuario
             </button>
-            <a class="new-user-link" 
+            <a class="new-user-link"
                href="/#/login">
                 ¿ya tienes un usuario?
             </a>

@@ -202,7 +202,15 @@
 }
 .edssn-admin-users {
     width: 100%;
+}
+.edssn-admin-users h1 {
     text-align: center;
+}
+.edssn-admin-users-actions {
+    width: 145px;
+}
+.edssn-admin-users-grid {
+
 }
 
 /*
@@ -237,7 +245,7 @@
         height: 50%;
     }
     .edssn-admin-users {
-        width: 50%;
+        width: 80%;
         margin: 0 auto;
     }
     .edssn-splash-head {

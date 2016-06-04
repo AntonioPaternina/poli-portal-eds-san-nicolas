@@ -1,6 +1,9 @@
 <div class="edssn-admin-users-container">
     <div class="edssn-admin-users">
         <h1>Administración de Usuarios</h1>
-
+        <div>
+            <button class="btn btn-primary" ng-click="redimirPuntos()" ng-disabled="!selectedItem">Redimir Puntos</button>
+        </div>
+        <div ui-grid="gridOpts" ui-grid-selection></div>
     </div>
 </div>
