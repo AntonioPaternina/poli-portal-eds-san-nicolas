@@ -25,7 +25,7 @@ public class UserBean extends BaseBean {
     @JsonProperty(access = Access.READ_ONLY)
     private Set<RoleBean> userRoles = new HashSet<>();
     private Set<VehicleBean> vehicles;
-    @JsonIgnore
+    @JsonProperty(access = Access.READ_ONLY)
     private Set<AwardPointBean> awardPoints;
     @JsonIgnore
     private Set<AwardRequestBean> awardRequests;

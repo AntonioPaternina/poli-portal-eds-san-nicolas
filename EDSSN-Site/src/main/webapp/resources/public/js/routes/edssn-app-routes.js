@@ -24,6 +24,11 @@ angular.module('edssnApp')
                 controller: 'CustomerController',
                 controllerAs: 'ctrl'
             })
+            .when('/redeem-points', {
+                templateUrl: '/resources/partials/redeem-points.html',
+                controller: 'RedeemAwardPointsController',
+                controllerAs: 'ctrl'
+            })
             .otherwise({
                 redirectTo: '/'
             });

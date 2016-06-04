@@ -1,0 +1,29 @@
+<div class="edssn-redeem-points-container">
+    <div class="edssn-redeem-points">
+        <h1>Redimir Puntos de Recompensa</h1>
+        <h2>{{customer.username}} ({{customer.fullName}})</h2>
+
+        <h3>Elige una campaña:</h3>
+        <label ng-repeat="awardPoint in customer.awardPoints">
+            <input type="radio"
+                   name="campaign"
+                   ng-model="ctrl.selectedCampaignId"
+                   value="{{awardPoint.marketingCampaign.id}}"
+                   ng-click="onCampaignSelected(awardPoint.marketingCampaign.id)"
+                   />
+            {{awardPoint.marketingCampaign.name}} (No. puntos: {{awardPoint.numberOfPoints}})
+        </label>
+
+        <h3 ng-if="ctrl.selectedCampaignId">Puntos disponibles: {{availablePointsForSelectedCampaign}}</h3>
+        <div id="redeem-points-award-selection">
+            <div class="redeem-points-award"
+                 ng-repeat="award in awards">
+                <p>{{award.name}} ({{award.costInPoints}} puntos})</p>
+                <button class="btn btn-primary"
+                        ng-click="submitRedeemRequest(award.id)">Enviar
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>

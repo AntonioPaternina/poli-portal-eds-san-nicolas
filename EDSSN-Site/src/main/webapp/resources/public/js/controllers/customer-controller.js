@@ -1,5 +1,5 @@
 angular.module('edssnApp')
-    .controller('CustomerController', ['$scope', 'Customer', function ($scope, Customer) {
+    .controller('CustomerController', ['$scope', '$location', 'Customer', 'RedeemPointsCustomer', function ($scope, $location, Customer, RedeemPointsCustomer) {
         var columnDefs = [{
             name: 'Usuario',
             field: 'username',
@@ -32,15 +32,17 @@ angular.module('edssnApp')
             noUnselect: true
         };
 
-        $scope.gridOpts.onRegisterApi = function(gridApi){
+        $scope.gridOpts.onRegisterApi = function (gridApi) {
             $scope.gridApi = gridApi;
-            gridApi.selection.on.rowSelectionChanged($scope,function(row){
+            gridApi.selection.on.rowSelectionChanged($scope, function (row) {
                 $scope.selectedItem = row.entity;
             });
         };
 
-        $scope.redimirPuntos = function() {
-            window.alert('Redimir puntos para usuario: ' + $scope.selectedItem.username);
+        $scope.redimirPuntos = function () {
+            console.log('Redimir puntos para usuario: ' + $scope.selectedItem.username);
+            RedeemPointsCustomer.customer = $scope.selectedItem;
+            $location.url('/redeem-points');
         }
 
     }]);

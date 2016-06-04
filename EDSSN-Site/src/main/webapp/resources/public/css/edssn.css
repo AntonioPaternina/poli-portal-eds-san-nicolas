@@ -4,21 +4,26 @@
 .edssn-center {
     text-align: center;
 }
+
 .edssn-big-button {
     width: 200px;
     height: 50px;
     font-size: 1.5em;
 }
+
 .edssn-error-messages {
     color: #e9322d;
     font-size: 0.75em;
 }
+
 .form-field {
     height: 4em;
 }
+
 .last-form-field {
     height: 2.6em;
 }
+
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
 }
@@ -34,19 +39,23 @@
     padding-bottom: 0.7em;
     padding-left: 1em;
 }
+
 .form-messages.errors {
     color: #e9322d;
     background-color: #fbe8e5;
 }
+
 .form-messages.errors.access-screen {
     background-color: white;
 }
+
 .messages-group {
     display: inline-block;
     vertical-align: top;
     padding-top: 0.3em;
 }
-.access-screen  {
+
+.access-screen {
     max-width: 270px;
     margin-left: auto;
     margin-right: auto;
@@ -54,6 +63,7 @@
     padding-top: 0.5em;
     padding-bottom: 0.5em;
 }
+
 .error-icon, .info-icon {
     margin-left: 0.8em;
     display: inline-block;
@@ -66,9 +76,11 @@
 .edssn-product-column {
     padding: 1em;
 }
+
 .edssn-content-subhead {
     color: #1f8dd6;
 }
+
 .edssn-content-subhead i {
     margin-right: 7px;
 }
@@ -82,9 +94,11 @@
     font-size: 1.2em;
     text-align: center;
 }
+
 .edssn-main-menu a {
     color: #AECFE5;
 }
+
 .edssn-main-menu li a:hover,
 .edssn-main-menu li a:focus {
     background: none;
@@ -97,6 +111,7 @@
     width: 500px;
     height: 250px;
 }
+
 .edssn-signup-vehicles-title {
     font-size: 1.5em;
 }
@@ -109,7 +124,7 @@
     top: 20%;
     width: 100%;
     min-height: 12%;
-    z-index: 2;   
+    z-index: 2;
 }
 
 /*
@@ -125,15 +140,20 @@
     left: 0;
     position: fixed !important;
 }
+
 .edssn-splash {
     width: 80%;
     height: 50%;
     margin: auto;
     position: absolute;
-    top: 40px; left: 0; bottom: 0; right: 0;
+    top: 40px;
+    left: 0;
+    bottom: 0;
+    right: 0;
     text-align: center;
     text-transform: uppercase;
 }
+
 .edssn-splash-head {
     font-size: 20px;
     color: white;
@@ -143,6 +163,7 @@
     border-radius: 5px;
     line-height: 1em;
 }
+
 .edssn-splash-subhead {
     color: white;
     letter-spacing: 0.05em;
@@ -161,6 +182,7 @@
     z-index: 2;
     background: white;
 }
+
 .edssn-content-head {
     font-weight: 400;
     text-transform: uppercase;
@@ -176,8 +198,9 @@
     top: 165px;
     width: 100%;
     min-height: 12%;
-    z-index: 2;   
+    z-index: 2;
 }
+
 .edssn-login-container fieldset {
     margin-bottom: 1em;
 }
@@ -200,17 +223,38 @@
     top: 80px;
     width: 100%;
 }
+
 .edssn-admin-users {
     width: 100%;
 }
+
 .edssn-admin-users h1 {
     text-align: center;
 }
+
 .edssn-admin-users-actions {
     width: 145px;
 }
+
 .edssn-admin-users-grid {
 
+}
+
+/*
+ * Redeem Points
+ */
+.edssn-redeem-points-container {
+    position: absolute;
+    top: 80px;
+    width: 100%;
+}
+
+.edssn-redeem-points {
+    width: 100%;
+}
+
+.edssn-redeem-points h1 {
+    text-align: center;
 }
 
 /*
@@ -221,6 +265,7 @@
         max-width: 14em;
         margin: 0 auto;
     }
+
     .signup-container {
         max-width: 16em;
         margin: 0 auto;
@@ -234,26 +279,38 @@
     body {
         font-size: 16px;
     }
+
     .content {
         padding: 1em;
     }
+
     .edssn-main-menu ul {
         float: right;
     }
+
     .edssn-splash {
         width: 50%;
         height: 50%;
     }
+
     .edssn-admin-users {
         width: 80%;
         margin: 0 auto;
     }
+
+    .edssn-redeem-points {
+        width: 80%;
+        margin: 0 auto;
+    }
+
     .edssn-splash-head {
         font-size: 250%;
     }
+
     .edssn-l-box-lrg {
         border: none;
     }
+
     .container {
         max-width: 48em;
         margin: 0 auto;
@@ -270,4 +327,6 @@
 }
 
 /** For angular-ui boostrap (http://angular-ui.github.io/bootstrap/) */
-.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+.nav, .pagination, .carousel, .panel-title a {
+    cursor: pointer;
+}
