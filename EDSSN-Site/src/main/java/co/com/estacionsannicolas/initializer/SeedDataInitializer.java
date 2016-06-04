@@ -5,6 +5,7 @@ import co.com.estacionsannicolas.entities.RoleEntity;
 import co.com.estacionsannicolas.enums.DefaultMarketingCampaigns;
 import co.com.estacionsannicolas.enums.GenderEnum;
 import co.com.estacionsannicolas.enums.RoleTypeEnum;
+import co.com.estacionsannicolas.enums.VehicleTypeEnum;
 import co.com.estacionsannicolas.repositories.RoleRepository;
 import co.com.estacionsannicolas.service.AwardService;
 import co.com.estacionsannicolas.service.MarketingCampaignService;
@@ -12,14 +13,10 @@ import co.com.estacionsannicolas.service.PromotionCodeService;
 import co.com.estacionsannicolas.service.UserService;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import org.apache.commons.lang.math.RandomUtils;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +46,23 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
 
     @Autowired
     private PromotionCodeService promotionCodeService;
+    public static final GenderEnum[] GENDERS = GenderEnum.values();
+    public static final String[] COMMON_FEMALE_NAMES = new String[]{"Martina", "Sofia", "Florencia", "Valentina",
+            "Isidora", "Antonella",
+            "Antonia",
+            "Emilia", "Catalina", "Fernanda", "Constanza", "Javiera", "Belen", "Victoria", "Gabriela",
+            "Pascal"};
+    public static final String[] COMMON_MALE_NAMES = new String[]{"Benjamin", "Vicente", "Martin", "Matias", "Joaquin",
+            "Agustin", "Cristobal",
+            "Maximiliano", "Sebastian", "Tomas", "Diego", "Jose", "Nicolás", "Juan", "Gabriel", "Ignacio",
+            "Francisco"};
+    public static final String[] COMMON_LAST_NAMES = new String[]{"Garcia", "Lopez", "Perez", "Gonzales", "Sanchez",
+            "Martinez", "Rodriguez",
+            "Fernandez", "Gomez", "Ruiz", "Diaz", "Alvarez", "Moreno", "Muñoz", "Suarez", "Ramirez", "Vazquez"};
+    public static final String[] COMMON_BRANDS = new String[]{"BMW", "Mercedes", "Lamborghini", "Audi", "Ferrari",
+            "Porsche", "Ford", "Toyota",
+            "Volkswagen", "Honda", "Chevrolet", "Dodge", "Jaguar", "Nissan", "Mazda"};
+    public static final VehicleTypeEnum[] VEHICLE_TYPES = VehicleTypeEnum.values();
 
     @Override
     @Transactional
@@ -120,29 +134,83 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
     }
 
     private void createDefaultCustomers() {
-        for (int i = 0; i < 30; i++) {
-            GenderEnum[] genders = GenderEnum.values();
-
-            UserBean customer = new UserBean();
-            customer.setUsername("customer" + RandomStringUtils.randomAlphanumeric(5));
-            customer.setPassword("Admin01.");
-            customer.setAcive(true);
-            customer.setEmail(RandomStringUtils.randomAlphabetic(6) + "@gmail.com");
-            customer.setFullName("Test Customer " + RandomStringUtils.randomAlphanumeric(5));
-            customer.setNationalId(RandomStringUtils.randomNumeric(8));
-            customer.setGender(genders[RandomUtils.nextInt(2)]);
-
-            Set<VehicleBean> vehicleBeanSet = new HashSet<>();
-            VehicleBean vehicleBean = new VehicleBean();
-            vehicleBean.setBrand("Marca");
-            vehicleBean.setLicensePlate(RandomStringUtils.randomAlphanumeric(6));
-            vehicleBean.setModel(RandomStringUtils.randomNumeric(3));
-            vehicleBean.setUser(customer);
-            vehicleBeanSet.add(vehicleBean);
-            customer.setVehicles(vehicleBeanSet);
-
-            userService.create(customer, RoleTypeEnum.CUSTOMER);
+        for (int i = 0; i < 50; i++) {
+            createRandomCustomer();
         }
+    }
+
+    private void createRandomCustomer() {
+        GenderEnum gender = GENDERS[RandomUtils.nextInt(2)];
+        StringBuilder fullName = new StringBuilder();
+        StringBuilder username = new StringBuilder();
+        generateRandomNameAndUsernameBasedOnGender(gender, fullName, username);
+
+        UserBean customer = new UserBean();
+        customer.setUsername(username.toString());
+        customer.setPassword("Admin01.");
+        customer.setAcive(true);
+        customer.setEmail(username.append("@gmail.com").toString());
+        customer.setFullName(fullName.toString());
+        customer.setNationalId(RandomStringUtils.randomNumeric(10));
+        customer.setGender(gender);
+        customer.setAddress(RandomStringUtils.randomAlphanumeric(20));
+        customer.setBirthdate(getRandomBirthDate());
+
+        createRandomVehicleForCustomer(customer);
+
+        userService.create(customer, RoleTypeEnum.CUSTOMER);
+    }
+
+    private void createRandomVehicleForCustomer(UserBean customer) {
+        Set<VehicleBean> vehicleBeanSet = new HashSet<>();
+        VehicleBean vehicleBean = new VehicleBean();
+        vehicleBean.setBrand(COMMON_BRANDS[RandomUtils.nextInt(COMMON_BRANDS.length)]);
+        vehicleBean.setLicensePlate(RandomStringUtils.randomAlphanumeric(6));
+        vehicleBean.setModel(RandomStringUtils.randomNumeric(3));
+        vehicleBean.setUser(customer);
+        vehicleBean.setVehicleType(VEHICLE_TYPES[RandomUtils.nextInt(VEHICLE_TYPES.length)]);
+        vehicleBeanSet.add(vehicleBean);
+        customer.setVehicles(vehicleBeanSet);
+    }
+
+    private Date getRandomBirthDate() {
+        long seventyYearsInMillis = 70L * 365L * 24L * 60L * 60L * 1000L;
+        Random random = new Random();
+        long randomYearOffsetInMillis = (long) (random.nextDouble() * seventyYearsInMillis);
+        return new Date(System.currentTimeMillis() - randomYearOffsetInMillis);
+    }
+
+    private void generateRandomNameAndUsernameBasedOnGender(GenderEnum gender, StringBuilder fullName, StringBuilder username) {
+        String firstName;
+        if (GenderEnum.FEMALE.equals(gender)) {
+            firstName = getCommonFemaleName();
+            fullName.append(firstName).append(" ")
+                    .append(getCommonFemaleName()).append(" ")
+                    .append(getCommonLastName()).append(" ")
+                    .append(getCommonLastName());
+            username.append(firstName.toLowerCase())
+                    .append(RandomStringUtils.randomNumeric(6));
+        } else if (GenderEnum.MALE.equals(gender)) {
+            firstName = getCommonMaleName();
+            fullName.append(firstName).append(" ")
+                    .append(getCommonMaleName()).append(" ")
+                    .append(getCommonLastName()).append(" ")
+                    .append(getCommonLastName());
+            username.append(firstName.toLowerCase())
+                    .append(RandomStringUtils.randomNumeric(6));
+        }
+    }
+
+    private String getCommonMaleName() {
+        return COMMON_MALE_NAMES[RandomUtils.nextInt(COMMON_MALE_NAMES.length)];
+    }
+
+    private String getCommonLastName() {
+        return COMMON_LAST_NAMES[RandomUtils.nextInt(COMMON_LAST_NAMES.length)];
+    }
+
+    private String getCommonFemaleName() {
+        return COMMON_FEMALE_NAMES[RandomUtils.nextInt(COMMON_FEMALE_NAMES.length)];
     }
 
     private void initializeUserRoles() {

@@ -19,8 +19,8 @@ angular.module('edssnApp')
                 controller: 'AccountController',
                 controllerAs: 'ctrl'
             })
-            .when('/users', {
-                templateUrl: '/resources/partials/users.html',
+            .when('/customers', {
+                templateUrl: '/resources/partials/customers.html',
                 controller: 'CustomerController',
                 controllerAs: 'ctrl'
             })
