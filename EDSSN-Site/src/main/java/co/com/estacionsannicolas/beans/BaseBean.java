@@ -1,11 +1,9 @@
 package co.com.estacionsannicolas.beans;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import java.util.Objects;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+import java.util.Objects;
+
 public class BaseBean {
 
     private Long id;

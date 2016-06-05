@@ -1,7 +1,10 @@
 package co.com.estacionsannicolas.beans;
 
 import co.com.estacionsannicolas.enums.VehicleTypeEnum;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = VehicleBean.class)
 public class VehicleBean extends BaseBean {
 
     private String licensePlate;

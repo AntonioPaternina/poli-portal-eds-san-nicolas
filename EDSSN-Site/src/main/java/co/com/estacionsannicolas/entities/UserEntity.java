@@ -1,26 +1,14 @@
 package co.com.estacionsannicolas.entities;
 
 import co.com.estacionsannicolas.enums.GenderEnum;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import javax.persistence.CascadeType;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "USERS")
@@ -72,7 +60,7 @@ public class UserEntity extends BaseEntity implements Serializable {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<AwardPointEntity> awardPoints;
     @OneToMany(mappedBy = "user")
-    private Set<AwardRequestEntity> awardRequests;
+    private Set<AwardRedeemRequestEntity> awardRequests;
 
     public void addAwardPoint(AwardPointEntity awardPoint) {
         if (awardPoints == null) {
@@ -187,11 +175,11 @@ public class UserEntity extends BaseEntity implements Serializable {
         this.awardPoints = awardPoints;
     }
 
-    public Set<AwardRequestEntity> getAwardRequests() {
+    public Set<AwardRedeemRequestEntity> getAwardRequests() {
         return awardRequests;
     }
 
-    public void setAwardRequests(Set<AwardRequestEntity> awardRequests) {
+    public void setAwardRequests(Set<AwardRedeemRequestEntity> awardRequests) {
         this.awardRequests = awardRequests;
     }
 

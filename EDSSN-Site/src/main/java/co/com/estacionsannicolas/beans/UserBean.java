@@ -1,14 +1,18 @@
 package co.com.estacionsannicolas.beans;
 
 import co.com.estacionsannicolas.enums.GenderEnum;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = UserBean.class)
 public class UserBean extends BaseBean {
 
     private String nationalId;
@@ -28,7 +32,7 @@ public class UserBean extends BaseBean {
     @JsonProperty(access = Access.READ_ONLY)
     private Set<AwardPointBean> awardPoints;
     @JsonIgnore
-    private Set<AwardRequestBean> awardRequests;
+    private Set<AwardRedeemRequestBean> awardRequests;
 
     public void addAwardPoint(AwardPointBean awardPoint) {
         if (awardPoints == null) {
@@ -143,11 +147,11 @@ public class UserBean extends BaseBean {
         this.awardPoints = awardPoints;
     }
 
-    public Set<AwardRequestBean> getAwardRequests() {
+    public Set<AwardRedeemRequestBean> getAwardRequests() {
         return awardRequests;
     }
 
-    public void setAwardRequests(Set<AwardRequestBean> awardRequests) {
+    public void setAwardRequests(Set<AwardRedeemRequestBean> awardRequests) {
         this.awardRequests = awardRequests;
     }
 

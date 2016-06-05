@@ -1,19 +1,14 @@
 package co.com.estacionsannicolas.entities;
 
 import co.com.estacionsannicolas.enums.RequestStatusEnum;
+
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "AWARD_REQUEST")
-public class AwardRequestEntity extends BaseEntity implements Serializable {
+@Table(name = "AWARD_REDEEM_REQUEST")
+public class AwardRedeemRequestEntity extends BaseEntity implements Serializable {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date requestDate;
@@ -23,6 +18,8 @@ public class AwardRequestEntity extends BaseEntity implements Serializable {
     private AwardEntity award;
     @ManyToOne
     private UserEntity user;
+    @ManyToOne
+    private MarketingCampaignEntity marketingCampaign;
 
     public Date getRequestDate() {
         return requestDate;
@@ -56,4 +53,11 @@ public class AwardRequestEntity extends BaseEntity implements Serializable {
         this.user = user;
     }
 
+    public MarketingCampaignEntity getMarketingCampaign() {
+        return marketingCampaign;
+    }
+
+    public void setMarketingCampaign(MarketingCampaignEntity marketingCampaign) {
+        this.marketingCampaign = marketingCampaign;
+    }
 }

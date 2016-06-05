@@ -1,8 +1,12 @@
 package co.com.estacionsannicolas.beans;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.util.List;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = AwardBean.class)
 public class AwardBean extends ProductBean {
 
     private Long costInPoints;
@@ -11,7 +15,7 @@ public class AwardBean extends ProductBean {
     private List<MarketingCampaignBean> marketingCampaigns;
 
     @JsonIgnore
-    private List<AwardRequestBean> awardRequests;
+    private List<AwardRedeemRequestBean> awardRequests;
 
     public Long getCostInPoints() {
         return costInPoints;
@@ -29,11 +33,11 @@ public class AwardBean extends ProductBean {
         this.marketingCampaigns = marketingCampaigns;
     }
 
-    public List<AwardRequestBean> getAwardRequests() {
+    public List<AwardRedeemRequestBean> getAwardRequests() {
         return awardRequests;
     }
 
-    public void setAwardRequests(List<AwardRequestBean> awardRequests) {
+    public void setAwardRequests(List<AwardRedeemRequestBean> awardRequests) {
         this.awardRequests = awardRequests;
     }
 

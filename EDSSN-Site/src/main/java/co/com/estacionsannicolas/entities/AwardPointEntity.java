@@ -1,9 +1,9 @@
 package co.com.estacionsannicolas.entities;
 
-import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "AWARD_POINT")
@@ -14,6 +14,10 @@ public class AwardPointEntity extends BaseEntity implements Serializable {
     private MarketingCampaignEntity marketingCampaign;
     @ManyToOne
     private UserEntity user;
+
+    public void decreaseNumberOfPoints(Long pointsToDecrease) {
+        setNumberOfPoints(getNumberOfPoints() - pointsToDecrease);
+    }
 
     public Long getNumberOfPoints() {
         return numberOfPoints;

@@ -1,9 +1,13 @@
 package co.com.estacionsannicolas.beans;
 
 import co.com.estacionsannicolas.enums.RequestStatusEnum;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.util.Date;
 
-public class AwardRequestBean extends BaseBean {
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = AwardRedeemRequestBean.class)
+public class AwardRedeemRequestBean extends BaseBean {
 
     private Date requestDate;
 
@@ -12,6 +16,8 @@ public class AwardRequestBean extends BaseBean {
     private AwardBean award;
 
     private UserBean user;
+
+    private MarketingCampaignBean marketingCampaign;
 
     public Date getRequestDate() {
         return requestDate;
@@ -45,4 +51,11 @@ public class AwardRequestBean extends BaseBean {
         this.user = user;
     }
 
+    public MarketingCampaignBean getMarketingCampaign() {
+        return marketingCampaign;
+    }
+
+    public void setMarketingCampaign(MarketingCampaignBean marketingCampaign) {
+        this.marketingCampaign = marketingCampaign;
+    }
 }

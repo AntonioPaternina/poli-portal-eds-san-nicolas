@@ -1,7 +1,11 @@
 package co.com.estacionsannicolas.beans;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.math.BigDecimal;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = ProductBean.class)
 public class ProductBean extends BaseBean {
 
     private String name;

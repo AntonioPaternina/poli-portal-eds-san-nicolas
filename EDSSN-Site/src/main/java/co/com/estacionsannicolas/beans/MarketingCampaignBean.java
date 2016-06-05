@@ -1,9 +1,13 @@
 package co.com.estacionsannicolas.beans;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import java.util.Date;
 import java.util.List;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = MarketingCampaignBean.class)
 public class MarketingCampaignBean extends BaseBean {
 
     private String name;

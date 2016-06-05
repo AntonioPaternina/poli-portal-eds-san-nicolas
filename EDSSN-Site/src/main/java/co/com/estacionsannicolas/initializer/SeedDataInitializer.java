@@ -7,11 +7,10 @@ import co.com.estacionsannicolas.enums.GenderEnum;
 import co.com.estacionsannicolas.enums.RoleTypeEnum;
 import co.com.estacionsannicolas.enums.VehicleTypeEnum;
 import co.com.estacionsannicolas.repositories.RoleRepository;
-import co.com.estacionsannicolas.service.*;
-
-import java.math.BigDecimal;
-import java.util.*;
-
+import co.com.estacionsannicolas.service.AwardService;
+import co.com.estacionsannicolas.service.MarketingCampaignService;
+import co.com.estacionsannicolas.service.PromotionCodeService;
+import co.com.estacionsannicolas.service.UserService;
 import org.apache.commons.lang.math.RandomUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
@@ -22,28 +21,13 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
+import java.util.*;
+
 @Component
 public class SeedDataInitializer implements ApplicationListener<ContextRefreshedEvent> {
 
     public static final int NUMBER_OF_CODES_TO_CREATE = 1000;
-    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    private static final boolean INSERT_TEST_DATA = true;
-
-    @Autowired
-    private RoleRepository roleRepository;
-
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private MarketingCampaignService marketingCampaignService;
-
-    @Autowired
-    private AwardService awardService;
-
-    @Autowired
-    private PromotionCodeService promotionCodeService;
     public static final GenderEnum[] GENDERS = GenderEnum.values();
     public static final String[] COMMON_FEMALE_NAMES = new String[]{"Martina", "Sofia", "Florencia", "Valentina",
             "Isidora", "Antonella",
@@ -61,6 +45,18 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
             "Porsche", "Ford", "Toyota",
             "Volkswagen", "Honda", "Chevrolet", "Dodge", "Jaguar", "Nissan", "Mazda"};
     public static final VehicleTypeEnum[] VEHICLE_TYPES = VehicleTypeEnum.values();
+    private static final boolean INSERT_TEST_DATA = true;
+    protected final Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private MarketingCampaignService marketingCampaignService;
+    @Autowired
+    private AwardService awardService;
+    @Autowired
+    private PromotionCodeService promotionCodeService;
     private List<PromotionCodeBean> testPromotionCodes;
 
     @Override
@@ -78,7 +74,7 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
         MarketingCampaignBean tanquearSiPaga = marketingCampaignService.findByName(DefaultMarketingCampaigns.TANQUEAR_SI_PAGA.getName());
         if (tanquearSiPaga != null && promotionCodeService.getCountByCampaign(tanquearSiPaga) == 0) {
             PromotionCodeBatchRequestBean batchRequestInfo = new PromotionCodeBatchRequestBean();
-            batchRequestInfo.setAwardPointsPercode(100);
+            batchRequestInfo.setAwardPointsPercode(1000);
             batchRequestInfo.setCodeLength(12);
             batchRequestInfo.setMarketingCampaign(tanquearSiPaga);
             batchRequestInfo.setNumberOfCodesToCreate(NUMBER_OF_CODES_TO_CREATE);

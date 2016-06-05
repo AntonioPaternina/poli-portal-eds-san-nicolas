@@ -1,11 +1,7 @@
 package co.com.estacionsannicolas.entities;
 
+import javax.persistence.*;
 import java.util.List;
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
 @Entity
 @DiscriminatorValue("A")
@@ -15,7 +11,7 @@ public class AwardEntity extends ProductEntity {
     @ManyToMany
     private List<MarketingCampaignEntity> marketingCampaigns;
     @OneToMany(mappedBy = "award", fetch = FetchType.LAZY)
-    private List<AwardRequestEntity> awardRequests;
+    private List<AwardRedeemRequestEntity> awardRequests;
 
     public Long getCostInPoints() {
         return costInPoints;
@@ -33,11 +29,11 @@ public class AwardEntity extends ProductEntity {
         this.marketingCampaigns = marketingCampaigns;
     }
 
-    public List<AwardRequestEntity> getAwardRequests() {
+    public List<AwardRedeemRequestEntity> getAwardRequests() {
         return awardRequests;
     }
 
-    public void setAwardRequests(List<AwardRequestEntity> awardRequests) {
+    public void setAwardRequests(List<AwardRedeemRequestEntity> awardRequests) {
         this.awardRequests = awardRequests;
     }
 

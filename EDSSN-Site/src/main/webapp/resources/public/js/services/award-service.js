@@ -10,4 +10,7 @@ angular.module('edssnApp')
                 isArray: true
             }
         });
+    }])
+    .factory('AwardRedeemRequest', ['$resource', function ($resource) {
+        return $resource('/award-redeem-request/:id', {id: '@id'});
     }]);
