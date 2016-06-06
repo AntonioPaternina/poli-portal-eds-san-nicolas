@@ -29,6 +29,21 @@ angular.module('edssnApp')
                 controller: 'RedeemAwardPointsController',
                 controllerAs: 'ctrl'
             })
+            .when('/award-list', {
+                templateUrl: '/resources/partials/award-list.html',
+                controller: 'AwardController',
+                controllerAs: 'ctrl'
+            })
+            .when('/award-detail', {
+                templateUrl: '/resources/partials/award-detail.html',
+                controller: 'AwardController',
+                controllerAs: 'ctrl'
+            })
+            .when('/award-create', {
+                templateUrl: '/resources/partials/award-create.html',
+                controller: 'AwardCreateController',
+                controllerAs: 'ctrl'
+            })
             .otherwise({
                 redirectTo: '/'
             });

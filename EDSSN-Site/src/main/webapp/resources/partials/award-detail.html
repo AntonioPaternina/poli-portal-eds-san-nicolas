@@ -1,0 +1,52 @@
+<div class="edssn-admin-awards-container">
+    <div class="edssn-admin-awards container">
+        <h1>Detalle del Premio</h1>
+        <div class="row">
+            <label class="col-xs-6">Nombre</label>
+            <input type="text"
+                   class="col-xs-6"
+                   value="{{crudAwardSelectedRecord.name}}"
+                   disabled/>
+        </div>
+        <div class="row">
+            <label class="col-xs-6">Descripción</label>
+            <input type="text"
+                   class="col-xs-6"
+                   value="{{crudAwardSelectedRecord.description}}"
+                   disabled/>
+        </div>
+        <div class="row">
+            <label class="col-xs-6">Referencia</label>
+            <input type="text"
+                   class="col-xs-6"
+                   value="{{crudAwardSelectedRecord.reference}}"
+                   disabled/>
+        </div>
+        <div class="row">
+            <label class="col-xs-6">Imagen</label>
+            <input type="text"
+                   class="col-xs-6"
+                   value="{{crudAwardSelectedRecord.imageLocation}}"
+                   disabled/>
+        </div>
+        <div class="row">
+            <label class="col-xs-6">Precio</label>
+            <input type="text"
+                   class="col-xs-6"
+                   value="{{crudAwardSelectedRecord.price | currency}}"
+                   disabled/>
+        </div>
+        <div class="row">
+            <label class="col-xs-6">Costo en puntos</label>
+            <input type="text"
+                   class="col-xs-6"
+                   value="{{crudAwardSelectedRecord.costInPoints}}"
+                   disabled/>
+        </div>
+        <div>
+            <h2>Campañas asociadas</h2>
+            <p ng-repeat="campaign in crudAwardSelectedRecord.marketingCampaigns">{{campaign.name}}</p>
+        </div>
+    </div>
+
+</div>

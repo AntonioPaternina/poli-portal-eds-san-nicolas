@@ -16,6 +16,12 @@
             ng-cloak>
             <a href="/#/customers" >Administrar Clientes</a>
         </li>
+        <li ng-show="loggedInUser"
+            allowed="ADMIN"
+            ng-if="loggedInUser"
+            ng-cloak>
+            <a href="/#/award-list">Administrar Premios</a>
+        </li>
         <li ng-show="loggedInUser" 
             ng-cloak>
             <a href="#/account" >{{loggedInUser.fullName}} ({{loggedInUser.username}})</a>

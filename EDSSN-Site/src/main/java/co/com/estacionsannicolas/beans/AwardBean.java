@@ -11,7 +11,6 @@ public class AwardBean extends ProductBean {
 
     private Long costInPoints;
 
-    @JsonIgnore
     private List<MarketingCampaignBean> marketingCampaigns;
 
     @JsonIgnore

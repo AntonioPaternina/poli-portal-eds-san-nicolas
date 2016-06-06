@@ -1,0 +1,13 @@
+<div class="edssn-admin-awards-container">
+    <div class="edssn-admin-awards">
+        <h1>Administración de Premios</h1>
+        <div>
+            <button class="btn btn-primary" ng-click="addNewCampaign()">Añadir</button>
+            <button class="btn btn-info" ng-click="showDetails()" ng-disabled="!crudAwardSelectedRecord">Ver Detalle
+            </button>
+            <button class="btn btn-warning" ng-click="edit()" ng-disabled="!crudAwardSelectedRecord">Editar</button>
+            <button class="btn btn-danger" ng-click="delete()" ng-disabled="!crudAwardSelectedRecord">Eliminar</button>
+        </div>
+        <div ui-grid="gridOpts" ui-grid-selection></div>
+    </div>
+</div>

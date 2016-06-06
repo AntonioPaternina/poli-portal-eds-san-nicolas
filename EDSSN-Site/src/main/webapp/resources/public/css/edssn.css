@@ -258,6 +258,23 @@
 }
 
 /*
+ * Award manager
+ */
+.edssn-admin-awards-container {
+    position: absolute;
+    top: 80px;
+    width: 100%;
+}
+
+.edssn-admin-awards {
+    width: 100%;
+}
+
+.edssn-admin-awards h1 {
+    text-align: center;
+}
+
+/*
  * Media Queries for Phones and up
  */
 @media screen and (min-width: 14em) {

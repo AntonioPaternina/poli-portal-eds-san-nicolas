@@ -9,4 +9,6 @@ public interface AwardService {
     AwardBean save(AwardBean awardToSave);
 
     List<AwardBean> getAwardsForMarketingCampaign(Long marketingCampaignId);
+
+    List<AwardBean> getAll();
 }

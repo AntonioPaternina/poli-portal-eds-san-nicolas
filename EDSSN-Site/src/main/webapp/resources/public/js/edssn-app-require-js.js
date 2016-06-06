@@ -16,12 +16,14 @@ require.config({
         customerService: '/resources/public/js/services/customer-service',
         securityService: '/resources/public/js/services/security-service',
         awardService: '/resources/public/js/services/award-service',
+        campaignService: '/resources/public/js/services/campaign-service',
         edssnAppRoutes: '/resources/public/js/routes/edssn-app-routes',
         mainController: '/resources/public/js/controllers/main-controller',
         signupController: '/resources/public/js/controllers/signup-controller',
         loginController: '/resources/public/js/controllers/login-controller',
         customerController: '/resources/public/js/controllers/customer-controller',
         accountController: '/resources/public/js/controllers/account-controller',
+        awardController: '/resources/public/js/controllers/award-controller',
         redeemAwardPointsController: '/resources/public/js/controllers/redeem-award-points-controller'
     },
     shim: {
@@ -70,6 +72,9 @@ require.config({
         securityService: {
             deps: ['angular', 'edssnApp']
         },
+        campaignService: {
+            deps: ['angular', 'edssnApp']
+        },
         awardService: {
             deps: ['angular', 'edssnApp']
         },
@@ -91,6 +96,9 @@ require.config({
         accountController: {
             deps: ['angular', 'edssnApp']
         },
+        awardController: {
+            deps: ['angular', 'edssnApp']
+        },
         redeemAwardPointsController: {
             deps: ['angular', 'edssnApp']
         }
@@ -106,10 +114,12 @@ require(['edssnApp',
     'customerController',
     'accountController',
     'redeemAwardPointsController',
+    'awardController',
     'userService',
     'customerService',
     'securityService',
-    'awardService'], function () {
+    'awardService',
+    'campaignService'], function () {
 
     angular.bootstrap(document.getElementById('edssnApp'), ['edssnApp'], {
         // TODO this is set to false because of an unknown error, must be fixed

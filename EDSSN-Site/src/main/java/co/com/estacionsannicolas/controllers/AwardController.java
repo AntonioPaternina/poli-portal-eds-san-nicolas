@@ -5,10 +5,7 @@ import co.com.estacionsannicolas.entities.RoleEntity;
 import co.com.estacionsannicolas.service.AwardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,8 +16,20 @@ public class AwardController extends BaseController {
     private AwardService awardService;
 
     @Secured(RoleEntity.ADMIN)
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = RequestMethod.GET, params = {"marketingCampaignId"})
     public List<AwardBean> getAwardsForMarketingCampaign(@RequestParam long marketingCampaignId) {
         return awardService.getAwardsForMarketingCampaign(marketingCampaignId);
+    }
+
+    @Secured(RoleEntity.ADMIN)
+    @RequestMapping(method = RequestMethod.GET)
+    public List<AwardBean> getAll() {
+        return awardService.getAll();
+    }
+
+    @Secured(RoleEntity.ADMIN)
+    @RequestMapping(method = RequestMethod.POST)
+    public AwardBean save(@RequestBody AwardBean awardBean) {
+        return awardService.save(awardBean);
     }
 }
