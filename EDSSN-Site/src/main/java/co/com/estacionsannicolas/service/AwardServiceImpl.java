@@ -38,4 +38,9 @@ public class AwardServiceImpl extends BaseService implements AwardService {
         return map(awardRepository.findAll(), AwardBean.class);
     }
 
+    @Override
+    public void delete(Long awardId) {
+        awardRepository.delete(awardId);
+    }
+
 }

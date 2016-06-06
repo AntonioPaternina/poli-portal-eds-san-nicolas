@@ -44,6 +44,11 @@ angular.module('edssnApp')
                 controller: 'AwardCreateController',
                 controllerAs: 'ctrl'
             })
+            .when('/award-edit', {
+                templateUrl: '/resources/partials/award-edit.html',
+                controller: 'AwardEditController',
+                controllerAs: 'ctrl'
+            })
             .otherwise({
                 redirectTo: '/'
             });

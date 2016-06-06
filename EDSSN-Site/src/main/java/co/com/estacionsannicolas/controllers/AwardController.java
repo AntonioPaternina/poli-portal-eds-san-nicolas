@@ -32,4 +32,16 @@ public class AwardController extends BaseController {
     public AwardBean save(@RequestBody AwardBean awardBean) {
         return awardService.save(awardBean);
     }
+
+    @Secured(RoleEntity.ADMIN)
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    public AwardBean update(@RequestBody AwardBean awardBean) {
+        return awardService.save(awardBean);
+    }
+
+    @Secured(RoleEntity.ADMIN)
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable long id) {
+        awardService.delete(id);
+    }
 }

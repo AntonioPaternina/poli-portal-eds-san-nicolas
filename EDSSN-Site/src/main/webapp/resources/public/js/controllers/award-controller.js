@@ -34,12 +34,24 @@ angular.module('edssnApp')
                 $location.url('/award-detail');
             };
 
-            $scope.addNewCampaign = function () {
+            $scope.addNewAward = function () {
                 $location.url('/award-create');
             };
 
+            $scope.editAward = function () {
+                $location.url('/award-edit');
+            };
+
+            $scope.deleteAward = function () {
+                var awardToDelete = new Award($rootScope.crudAwardSelectedRecord);
+                awardToDelete.$delete(function () {
+                    $scope.awards = Award.query();
+                    $scope.gridOpts.data = $scope.awards;
+                });
+            };
+
         }])
-    .controller('AwardCreateController', ['$scope', 'Campaign', 'Award', function ($scope, Campaign, Award) {
+    .controller('AwardCreateController', ['$scope', '$location', 'Campaign', 'Award', function ($scope, $location, Campaign, Award) {
         var ctrl = this;
         $scope.newAward = {};
         $scope.campaigns = Campaign.query();
@@ -57,6 +69,42 @@ angular.module('edssnApp')
             $scope.newAward.marketingCampaigns = $scope.selection;
 
             var award = new Award($scope.newAward);
-            award.$save();
+            award.$save(function () {
+                $location.url('/award-list');
+            });
         };
+    }])
+    .controller('AwardEditController', ['$scope', '$rootScope', '$location', 'Campaign', 'Award', function ($scope, $rootScope, $location, Campaign, Award) {
+        var ctrl = this;
+        $scope.selectedAward = $rootScope.crudAwardSelectedRecord;
+
+        $scope.campaigns = Campaign.query(function () {
+            ctrl.preLoadCampaigns();
+        });
+        $scope.selection = [];
+        ctrl.preLoadCampaigns = function () {
+            var currentCampaigns = $scope.selectedAward.marketingCampaigns;
+            for (var i = 0; i < currentCampaigns.length; i++) {
+                for (var j = 0; j < $scope.campaigns.length; j++) {
+                    if ($scope.campaigns[j].id === currentCampaigns[i].id) {
+                        $scope.campaigns[j].selected = true;
+                    }
+                }
+            }
+        };
+        $scope.$watch('campaigns | filter:{selected:true}', function (nv) {
+            $scope.selection = nv.map(function (campaign) {
+                return {id: campaign.id};
+            });
+        }, true);
+
+        $scope.save = function () {
+            $scope.selectedAward.marketingCampaigns = $scope.selection;
+
+            var award = new Award($scope.selectedAward);
+            award.$update(function () {
+                $location.url('/award-list');
+            });
+        };
+
     }]);

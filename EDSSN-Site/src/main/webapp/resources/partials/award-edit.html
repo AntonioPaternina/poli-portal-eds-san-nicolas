@@ -1,0 +1,58 @@
+<div class="edssn-admin-awards-container">
+    <div class="edssn-admin-awards container">
+        <h1>Crear Premio</h1>
+        <div class="row">
+            <label class="col-xs-6">Nombre</label>
+            <input type="text"
+                   class="col-xs-6"
+                   ng-model="selectedAward.name"/>
+        </div>
+        <div class="row">
+            <label class="col-xs-6">Descripción</label>
+            <input type="text"
+                   class="col-xs-6"
+                   ng-model="selectedAward.description"
+            />
+        </div>
+        <div class="row">
+            <label class="col-xs-6">Referencia</label>
+            <input type="text"
+                   class="col-xs-6"
+                   ng-model="selectedAward.reference"
+            />
+        </div>
+        <div class="row">
+            <label class="col-xs-6">Imagen</label>
+            <input type="text"
+                   class="col-xs-6"
+                   ng-model="selectedAward.imageLocation"
+            />
+        </div>
+        <div class="row">
+            <label class="col-xs-6">Precio</label>
+            <input type="text"
+                   class="col-xs-6"
+                   ng-model="selectedAward.price"
+            />
+        </div>
+        <div class="row">
+            <label class="col-xs-6">Costo en puntos</label>
+            <input type="text"
+                   class="col-xs-6"
+                   ng-model="selectedAward.costInPoints"
+            />
+        </div>
+        <div>
+            <h2>Campañas asociadas</h2>
+            <label ng-repeat="campaign in campaigns">
+                <input type="checkbox"
+                       name="campaigns"
+                       value="{{campaign.name}}"
+                       ng-model="campaign.selected"
+                > {{campaign.name}}
+            </label>
+        </div>
+        <button class="btn btn-primary" ng-click="save()">Enviar</button>
+    </div>
+
+</div>

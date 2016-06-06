@@ -11,4 +11,6 @@ public interface AwardService {
     List<AwardBean> getAwardsForMarketingCampaign(Long marketingCampaignId);
 
     List<AwardBean> getAll();
+
+    void delete(Long awardId);
 }

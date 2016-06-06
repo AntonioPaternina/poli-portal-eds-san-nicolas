@@ -100,9 +100,9 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
         for (int i = 1; i < 5; i++) {
             AwardBean testAward = new AwardBean();
             testAward.setCostInPoints(1000L);
-            testAward.setDescription("This is a test award " + i);
-            testAward.setName("Test award" + i);
-            testAward.setImageLocation("path_to_image_" + i);
+            testAward.setDescription("Premio de prueba " + i);
+            testAward.setName("Premio de prueba" + i);
+            testAward.setImageLocation("ruta_imagen" + i);
             testAward.setMarketingCampaigns(campaigns);
             testAward.setReference("00" + i);
             testAward.setPrice(BigDecimal.ONE);
