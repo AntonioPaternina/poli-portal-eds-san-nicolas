@@ -122,8 +122,8 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
         admin.setUsername("admin");
         admin.setPassword("Admin01.");
         admin.setAcive(true);
-        admin.setEmail("edssn_test1@gmail.com");
-        admin.setFullName("Antonio Paternina");
+        admin.setEmail("edssn_admin@gmail.com");
+        admin.setFullName("Administrador");
         admin.setNationalId("123456789");
         userService.create(admin, RoleTypeEnum.ADMIN);
     }

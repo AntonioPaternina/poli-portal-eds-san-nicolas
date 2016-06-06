@@ -4,6 +4,18 @@ angular.module('edssnApp')
             .when('/', {
                 templateUrl: '/resources/public/partials/landing-page-content.html'
             })
+            /* available to all visitors */
+            .when('/products', {
+                templateUrl: '/resources/public/partials/products.html'
+            })
+            .when('/awards', {
+                templateUrl: '/resources/public/partials/awards.html',
+                controller: 'AwardController',
+                controllerAs: 'ctrl'
+            })
+            .when('/about-us', {
+                templateUrl: '/resources/public/partials/about-us.html'
+            })
             .when('/login', {
                 templateUrl: '/resources/public/partials/login.html',
                 controller: 'LoginController',
@@ -14,11 +26,15 @@ angular.module('edssnApp')
                 controller: 'SignupController',
                 controllerAs: 'ctrl'
             })
+
+            /* available to logged in users only */
             .when('/account', {
                 templateUrl: '/resources/public/partials/account.html',
                 controller: 'AccountController',
                 controllerAs: 'ctrl'
             })
+
+            /* avaiblable to admin users only */
             .when('/customers', {
                 templateUrl: '/resources/partials/customers.html',
                 controller: 'CustomerController',
@@ -49,6 +65,8 @@ angular.module('edssnApp')
                 controller: 'AwardEditController',
                 controllerAs: 'ctrl'
             })
+
+
             .otherwise({
                 redirectTo: '/'
             });

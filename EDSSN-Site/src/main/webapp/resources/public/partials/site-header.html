@@ -1,32 +1,45 @@
 <nav class="edssn-main-menu navbar navbar-inverse navbar-fixed-top">
     <ul class="nav navbar-nav">
-        <li class=""><a href="/#/">Inicio</a></li>        
-        <li ng-hide="loggedInUser" 
+        <!-- available to all visitors -->
+        <li class="edssn-menu-link"><a href="/#/">Inicio</a></li>
+        <li class="edssn-menu-link"><a href="/#/products">Productos</a></li>
+        <li class="edssn-menu-link"><a href="/#/awards">Premios</a></li>
+        <li class="edssn-menu-link"><a href="/#/about-us">Acerca de nosotros</a></li>
+
+        <!-- only available to anonymous users -->
+        <li class="edssn-menu-link"
+            ng-hide="loggedInUser"
             ng-cloak>
-            <a href="/#/signup" >Regístrate</a>
+            <a href="/#/signup">Regístrate</a>
         </li>
-        <li ng-hide="loggedInUser" 
+        <li class="edssn-menu-link"
+            ng-hide="loggedInUser"
             ng-cloak>
-            <a href="/#/login" >Iniciar Sesión</a>
+            <a href="/#/login">Iniciar Sesión</a>
         </li>
 
-        <li ng-show="loggedInUser" 
-            allowed="ADMIN" 
+        <!-- only available to logged in users -->
+        <li class="edssn-menu-link"
+            ng-show="loggedInUser"
+            allowed="ADMIN"
             ng-if="loggedInUser"
             ng-cloak>
-            <a href="/#/customers" >Administrar Clientes</a>
+            <a href="/#/customers">Administrar Clientes</a>
         </li>
-        <li ng-show="loggedInUser"
+        <li class="edssn-menu-link"
+            ng-show="loggedInUser"
             allowed="ADMIN"
             ng-if="loggedInUser"
             ng-cloak>
             <a href="/#/award-list">Administrar Premios</a>
         </li>
-        <li ng-show="loggedInUser" 
+        <li class="edssn-menu-link"
+            ng-show="loggedInUser"
             ng-cloak>
-            <a href="#/account" >{{loggedInUser.fullName}} ({{loggedInUser.username}})</a>
+            <a href="#/account">Mi Cuenta ({{loggedInUser.username}})</a>
         </li>
-        <li ng-show="loggedInUser" 
+        <li class="edssn-menu-link"
+            ng-show="loggedInUser"
             ng-cloak>
             <a href class="" ng-click="logout()">Cerrar Sesión</a>
         </li>

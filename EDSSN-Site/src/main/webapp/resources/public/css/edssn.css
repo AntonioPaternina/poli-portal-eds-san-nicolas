@@ -28,6 +28,20 @@
     display: none !important;
 }
 
+.edssn-default-container {
+    position: absolute;
+    top: 80px;
+    width: 100%;
+}
+
+.edssn-default-content {
+    width: 100%;
+}
+
+.edssn-default-content h1 {
+    text-align: center;
+}
+
 /*
  * Error Messages
  */
@@ -90,13 +104,17 @@
  */
 .edssn-main-menu {
     padding: 0.6em;
-    background: #2c3f51;
+    background: #c1343a;
     font-size: 1.2em;
     text-align: center;
 }
 
 .edssn-main-menu a {
     color: #AECFE5;
+}
+
+.edssn-menu-link a {
+    color: white !important;
 }
 
 .edssn-main-menu li a:hover,
@@ -131,7 +149,7 @@
  * Splash Section Styles
  */
 .edssn-splash-screen-container {
-    background: #AECFE5;
+    background: #3a61a0;
     z-index: 1;
     overflow: hidden;
     width: 100%;
@@ -275,6 +293,27 @@
 }
 
 /*
+ * About us
+ */
+.edssn-about-us {
+    width: 100%;
+}
+
+.edssn-about-us h1 {
+    text-align: center;
+}
+
+.edssn-about-us img {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.edssn-about-us p {
+    text-align: center;
+    margin: 0 auto;
+}
+
+/*
  * Media Queries for Phones and up
  */
 @media screen and (min-width: 14em) {
@@ -308,6 +347,11 @@
     .edssn-splash {
         width: 50%;
         height: 50%;
+    }
+
+    .edssn-default-content {
+        width: 80%;
+        margin: 0 auto;
     }
 
     .edssn-admin-users {
