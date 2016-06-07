@@ -1,5 +1,11 @@
 <div class="edssn-default-container">
     <div class="edssn-default-content">
-
+        <h1>Premios</h1>
+        <h2>Estos son los premios que puedes ganar con nosotros</h2>
+        <div ng-repeat="award in awards">
+            <h3>{{award.name}}</h3>
+            <p>{{award.description}}</p>
+            <p>Necesitas tener {{award.costInPoints}} puntos para redimir este premio.</p>
+        </div>
     </div>
 </div>

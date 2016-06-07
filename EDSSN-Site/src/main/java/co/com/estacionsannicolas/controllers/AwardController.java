@@ -21,7 +21,6 @@ public class AwardController extends BaseController {
         return awardService.getAwardsForMarketingCampaign(marketingCampaignId);
     }
 
-    @Secured(RoleEntity.ADMIN)
     @RequestMapping(method = RequestMethod.GET)
     public List<AwardBean> getAll() {
         return awardService.getAll();

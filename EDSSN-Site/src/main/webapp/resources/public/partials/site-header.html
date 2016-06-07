@@ -1,5 +1,5 @@
 <nav class="edssn-main-menu navbar navbar-inverse navbar-fixed-top">
-    <ul class="nav navbar-nav">
+    <ul class="nav navbar-nav" ng-cloak>
         <!-- available to all visitors -->
         <li class="edssn-menu-link"><a href="/#/">Inicio</a></li>
         <li class="edssn-menu-link"><a href="/#/products">Productos</a></li>
@@ -35,8 +35,17 @@
         </li>
         <li class="edssn-menu-link"
             ng-show="loggedInUser"
+            allowed="CUSTOMER"
+            ng-if="loggedInUser"
             ng-cloak>
-            <a href="#/account">Mi Cuenta ({{loggedInUser.username}})</a>
+            <a href="/#/account">Mi Cuenta ({{loggedInUser.username}})</a>
+        </li>
+        <li class="edssn-menu-link"
+            ng-show="loggedInUser"
+            allowed="ADMIN"
+            ng-if="loggedInUser"
+            ng-cloak>
+            <a href="/#/">Mi Cuenta ({{loggedInUser.username}})</a>
         </li>
         <li class="edssn-menu-link"
             ng-show="loggedInUser"
