@@ -12,9 +12,9 @@ require.config({
         csrfInterceptor: '/resources/bower_components/spring-security-csrf-token-interceptor/dist/spring-security-csrf-token-interceptor.min',
         edssnApp: '/resources/public/js/edssn-app',
         directives: '/resources/public/js/directives/directives',
+        authService: '/resources/public/js/services/auth-service',
         userService: '/resources/public/js/services/user-service',
         customerService: '/resources/public/js/services/customer-service',
-        securityService: '/resources/public/js/services/security-service',
         awardService: '/resources/public/js/services/award-service',
         campaignService: '/resources/public/js/services/campaign-service',
         edssnAppRoutes: '/resources/public/js/routes/edssn-app-routes',
@@ -24,7 +24,8 @@ require.config({
         customerController: '/resources/public/js/controllers/customer-controller',
         accountController: '/resources/public/js/controllers/account-controller',
         awardController: '/resources/public/js/controllers/award-controller',
-        redeemAwardPointsController: '/resources/public/js/controllers/redeem-award-points-controller'
+        redeemAwardPointsController: '/resources/public/js/controllers/redeem-award-points-controller',
+        constants: '/resources/public/js/constants/constants'
     },
     shim: {
         angular: {
@@ -63,13 +64,13 @@ require.config({
         directives: {
             deps: ['angular', 'edssnApp']
         },
+        authService: {
+            deps: ['angular', 'edssnApp']
+        },
         userService: {
             deps: ['angular', 'edssnApp']
         },
         customerService: {
-            deps: ['angular', 'edssnApp']
-        },
-        securityService: {
             deps: ['angular', 'edssnApp']
         },
         campaignService: {
@@ -101,6 +102,9 @@ require.config({
         },
         redeemAwardPointsController: {
             deps: ['angular', 'edssnApp']
+        },
+        constants: {
+            deps: ['angular', 'edssnApp']
         }
     }
 });
@@ -115,11 +119,12 @@ require(['edssnApp',
     'accountController',
     'redeemAwardPointsController',
     'awardController',
+    'authService',
     'userService',
     'customerService',
-    'securityService',
     'awardService',
-    'campaignService'], function () {
+    'campaignService',
+    'constants'], function () {
 
     angular.bootstrap(document.getElementById('edssnApp'), ['edssnApp'], {
         // TODO this is set to false because of an unknown error, must be fixed

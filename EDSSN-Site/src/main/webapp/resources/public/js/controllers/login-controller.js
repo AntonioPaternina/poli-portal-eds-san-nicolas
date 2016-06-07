@@ -1,14 +1,23 @@
 angular.module('edssnApp')
-        .controller('LoginController', ['$http', '$scope', '$controller', function ($http, $scope, $controller) {
+    .controller('LoginController', ['$http', '$scope', '$rootScope', '$controller', '$location',
+        'AUTH_EVENTS', 'AuthService',
+        function ($http, $scope, $rootScope, $controller, $location, AUTH_EVENTS, AuthService) {
 
-                angular.extend(this, $controller('MainController', {$scope: $scope}));
-
-                this.onLogin = function () {
-                    $scope.vm.isFormSent = true;
-                    if ($scope.form.$invalid) {
-                        return;
-                    }
-                    $scope.login($scope.vm.username, $scope.vm.password);
-                };
-            }]);
+            $scope.onLogin = function () {
+                $scope.vm.isFormSent = true;
+                if ($scope.form.$invalid) {
+                    return;
+                }
+                AuthService.login($scope.vm.username, $scope.vm.password).then(function (user) {
+                    $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
+                    $scope.setCurrentUser(user);
+                    $location.url('/');
+                }, function () {
+                    $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+                    $scope.vm.errorMessages = [];
+                    $scope.vm.errorMessages
+                        .push({description: 'Usuario y/o contraseña inválidos'});
+                });
+            };
+        }]);
         

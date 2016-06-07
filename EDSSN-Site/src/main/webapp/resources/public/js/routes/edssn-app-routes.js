@@ -1,5 +1,5 @@
 angular.module('edssnApp')
-    .config(['$routeProvider', function ($routeProvider) {
+    .config(['$routeProvider', 'USER_ROLES', function ($routeProvider, USER_ROLES) {
         $routeProvider
             .when('/', {
                 templateUrl: '/resources/public/partials/landing-page-content.html'
@@ -27,43 +27,64 @@ angular.module('edssnApp')
                 controllerAs: 'ctrl'
             })
 
-            /* available to logged in users only */
+            /* available to customers only */
             .when('/account', {
                 templateUrl: '/resources/public/partials/account.html',
                 controller: 'AccountController',
-                controllerAs: 'ctrl'
+                controllerAs: 'ctrl',
+                data: {
+                    authorizedRoles: [USER_ROLES.customer]
+                }
             })
 
             /* avaiblable to admin users only */
             .when('/customers', {
                 templateUrl: '/resources/partials/customers.html',
                 controller: 'CustomerController',
-                controllerAs: 'ctrl'
+                controllerAs: 'ctrl',
+                data: {
+                    authorizedRoles: [USER_ROLES.admin]
+                }
             })
             .when('/redeem-points', {
                 templateUrl: '/resources/partials/redeem-points.html',
                 controller: 'RedeemAwardPointsController',
-                controllerAs: 'ctrl'
+                controllerAs: 'ctrl',
+                data: {
+                    authorizedRoles: [USER_ROLES.admin]
+                }
             })
             .when('/award-list', {
                 templateUrl: '/resources/partials/award-list.html',
                 controller: 'AwardController',
-                controllerAs: 'ctrl'
+                controllerAs: 'ctrl',
+                data: {
+                    authorizedRoles: [USER_ROLES.admin]
+                }
             })
             .when('/award-detail', {
                 templateUrl: '/resources/partials/award-detail.html',
                 controller: 'AwardController',
-                controllerAs: 'ctrl'
+                controllerAs: 'ctrl',
+                data: {
+                    authorizedRoles: [USER_ROLES.admin]
+                }
             })
             .when('/award-create', {
                 templateUrl: '/resources/partials/award-create.html',
                 controller: 'AwardCreateController',
-                controllerAs: 'ctrl'
+                controllerAs: 'ctrl',
+                data: {
+                    authorizedRoles: [USER_ROLES.admin]
+                }
             })
             .when('/award-edit', {
                 templateUrl: '/resources/partials/award-edit.html',
                 controller: 'AwardEditController',
-                controllerAs: 'ctrl'
+                controllerAs: 'ctrl',
+                data: {
+                    authorizedRoles: [USER_ROLES.admin]
+                }
             })
 
 

@@ -8,47 +8,39 @@
 
         <!-- only available to anonymous users -->
         <li class="edssn-menu-link"
-            ng-hide="loggedInUser"
+            ng-hide="currentUser"
             ng-cloak>
             <a href="/#/signup">Regístrate</a>
         </li>
         <li class="edssn-menu-link"
-            ng-hide="loggedInUser"
+            ng-hide="currentUser"
             ng-cloak>
             <a href="/#/login">Iniciar Sesión</a>
         </li>
 
         <!-- only available to logged in users -->
         <li class="edssn-menu-link"
-            ng-show="loggedInUser"
-            allowed="ADMIN"
-            ng-if="loggedInUser"
+            ng-if="isAuthorized(userRoles.admin)"
             ng-cloak>
             <a href="/#/customers">Administrar Clientes</a>
         </li>
         <li class="edssn-menu-link"
-            ng-show="loggedInUser"
-            allowed="ADMIN"
-            ng-if="loggedInUser"
+            ng-if="isAuthorized(userRoles.admin)"
             ng-cloak>
             <a href="/#/award-list">Administrar Premios</a>
         </li>
         <li class="edssn-menu-link"
-            ng-show="loggedInUser"
-            allowed="CUSTOMER"
-            ng-if="loggedInUser"
+            ng-if="isAuthorized(userRoles.customer)"
             ng-cloak>
-            <a href="/#/account">Mi Cuenta ({{loggedInUser.username}})</a>
+            <a href="/#/account">Mi Cuenta ({{currentUser.username}})</a>
         </li>
         <li class="edssn-menu-link"
-            ng-show="loggedInUser"
-            allowed="ADMIN"
-            ng-if="loggedInUser"
+            ng-if="isAuthorized(userRoles.admin)"
             ng-cloak>
-            <a href="/#/">Mi Cuenta ({{loggedInUser.username}})</a>
+            <a href="/#/">Mi Cuenta ({{currentUser.username}})</a>
         </li>
         <li class="edssn-menu-link"
-            ng-show="loggedInUser"
+            ng-if="currentUser"
             ng-cloak>
             <a href class="" ng-click="logout()">Cerrar Sesión</a>
         </li>

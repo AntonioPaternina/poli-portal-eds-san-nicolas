@@ -1,28 +1,39 @@
 angular.module('edssnApp')
-    .controller('MainController', ['$scope', '$http',
-        '$httpParamSerializerJQLike', '$location', '$rootScope', 'UserService',
-        function ($scope, $http, $httpParamSerializerJQLike, $location,
-                  $rootScope, UserService) {
+    .controller('MainController', ['$scope', '$http', '$rootScope', '$location', 'UserService', 'AuthService', 'USER_ROLES', 'AUTH_EVENTS', 'Session',
+        function ($scope, $http, $rootScope, $location, UserService, AuthService, USER_ROLES, AUTH_EVENTS, Session) {
+            $scope.currentUser = null;
+            $scope.userRoles = USER_ROLES;
+            $scope.isAuthorized = AuthService.isAuthorized;
+            $scope.setCurrentUser = function (user) {
+                $scope.currentUser = user;
+            };
+
+            $scope.getUser = function getUser() {
+                UserService.getUser().then(function (user) {
+                    $scope.currentUser = user;
+                    Session.create(user);
+                }, function (errorMessage) {
+                    // TODO handle this error
+                });
+            };
+            if (!$scope.currentUser) {
+                $scope.getUser();
+            }
+            $scope.logout = function () {
+                UserService.logout();
+            };
+            var redirectToLoginPage = function () {
+                $location.url('/login');
+            };
+            $scope.$on(AUTH_EVENTS.notAuthenticated, redirectToLoginPage);
+            $scope.$on(AUTH_EVENTS.sessionTimeout, redirectToLoginPage);
+
             $scope.vm = {
                 isFormSent: false,
                 errorMessages: []
             };
             var focusedField;
 
-            $scope.getUser = function getUser() {
-                UserService.getUser().then(function (user) {
-                    $rootScope.loggedInUser = user;
-                }, function (errorMessage) {
-                    // TODO handle this error
-                });
-            };
-            if (!$rootScope.loggedInUser) {
-                $scope.getUser();
-            }
-
-            $scope.logout = function () {
-                UserService.logout();
-            };
 
             $scope.vm.appReady = true;
 
@@ -35,29 +46,6 @@ angular.module('edssnApp')
             };
             $scope.isErrorMessageListVisible = function (fieldName) {
                 return focusedField === fieldName || this.vm.isFormSent;
-            };
-            $scope.login = function (username, password) {
-                $http({
-                    method: 'POST',
-                    url: '/login',
-                    data: $httpParamSerializerJQLike({
-                        username: username,
-                        password: password
-                    }),
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded",
-                        "X-Login-Ajax-call": 'true'
-                    }
-                }).then(function (response) {
-                    if (response.data === 'ok') {
-                        $location.url('/#');
-                        $scope.getUser();
-                    } else {
-                        $scope.vm.errorMessages = [];
-                        $scope.vm.errorMessages
-                            .push({description: 'Usuario y/o contraseña inválidos'});
-                    }
-                });
             };
             $scope.dateFormat = 'dd/MM/yyyy';
             $scope.altInputFormats = ['d!/M!/yyyy'];

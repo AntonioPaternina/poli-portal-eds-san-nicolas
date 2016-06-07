@@ -68,6 +68,8 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .httpBasic()
                 .and()
+                .exceptionHandling().authenticationEntryPoint(new OverrideSendUnauthorized401AuthenticationEntryPoint())
+                .and()
                 .logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/#/")
