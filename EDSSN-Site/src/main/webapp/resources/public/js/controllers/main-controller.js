@@ -23,6 +23,7 @@ angular.module('edssnApp')
                 UserService.logout();
             };
             var redirectToLoginPage = function () {
+                $scope.currentUser = null;
                 $location.url('/login');
             };
             $scope.$on(AUTH_EVENTS.notAuthenticated, redirectToLoginPage);
