@@ -3,13 +3,14 @@ angular.module('edssnApp')
         function ($http, $httpParamSerializerJQLike, Session, UserService) {
             var authService = {};
 
-            authService.login = function (username, password) {
+            authService.login = function (username, password, rememberMe) {
                 return $http({
                     method: 'POST',
                     url: '/login',
                     data: $httpParamSerializerJQLike({
                         username: username,
-                        password: password
+                        password: password,
+                        "remember-me": rememberMe
                     }),
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded",

@@ -68,6 +68,8 @@ public class SpringSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .httpBasic()
                 .and()
+                .rememberMe().rememberMeParameter("remember-me").tokenRepository(tokenRepository)
+                .and()
                 .exceptionHandling().authenticationEntryPoint(new OverrideSendUnauthorized401AuthenticationEntryPoint())
                 .and()
                 .logout()

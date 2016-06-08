@@ -8,7 +8,7 @@ angular.module('edssnApp')
                 if ($scope.form.$invalid) {
                     return;
                 }
-                AuthService.login($scope.vm.username, $scope.vm.password).then(function (user) {
+                AuthService.login($scope.vm.username, $scope.vm.password, $scope.vm.rememberMe).then(function (user) {
                     $rootScope.$broadcast(AUTH_EVENTS.loginSuccess);
                     $scope.setCurrentUser(user);
                     $location.url('/');

@@ -8,53 +8,56 @@
               class=""
               novalidate>
             <fieldset class="">
-                <legend>Iniciar Sesión</legend>               
+                <legend>Iniciar Sesión</legend>
                 <div class="form-field">
-                    <input type="text" 
-                           name="username" 
+                    <input type="text"
+                           name="username"
                            ng-model="vm.username"
-                           ng-focus="onFocus('username')"  
-                           ng-blur="onBlur('username')" 
+                           ng-focus="onFocus('username')"
+                           ng-blur="onBlur('username')"
                            ng-minlength="3"
                            required
-                           class="form-control" 
+                           class="form-control"
                            placeholder="usuario">
 
-                    <div ng-show="isErrorMessageListVisible('username')" 
-                         ng-messages="form.username.$error" 
+                    <div ng-show="isErrorMessageListVisible('username')"
+                         ng-messages="form.username.$error"
                          ng-cloak
                          class="edssn-error-messages">
                         <div ng-message="required">requerido</div>
                         <div ng-message="minlength">debe ser de 6 o más caracteres</div>
                     </div>
                 </div>
-                <div class="last-form-field">
-                    <input type="password" 
+                <div class="form-field">
+                    <input type="password"
                            name="password"
                            ng-model="vm.password"
-                           ng-focus="onFocus('password')"  
-                           ng-blur="onBlur('password')"                                    
-                           ng-minlength="3"                                    
-                           class="form-control" 
-                           placeholder="contraseña" 
+                           ng-focus="onFocus('password')"
+                           ng-blur="onBlur('password')"
+                           ng-minlength="3"
+                           class="form-control"
+                           placeholder="contraseña"
                            required>
 
-                    <div class="edssn-error-messages" 
-                         ng-show="isErrorMessageListVisible('password')" 
-                         ng-messages="form.password.$error" 
+                    <div class="edssn-error-messages"
+                         ng-show="isErrorMessageListVisible('password')"
+                         ng-messages="form.password.$error"
                          ng-cloak>
                         <div ng-message="required">requerido</div>
                         <div ng-message="minlength">debe ser de 6 o más caracteres</div>
                         <div ng-message="pattern">debe tener por lo menos un número y una mayúscula</div>
                     </div>
                 </div>
+                <label>
+                    Recordarme en este sitio <input type="checkbox" ng-model="vm.rememberMe">
+                </label>
             </fieldset>
 
-            <button type="submit" 
+            <button type="submit"
                     class="btn btn-lg btn-primary btn-block">
                 Iniciar Sesión
             </button>
-            <a class="new-user-link" 
+            <a class="new-user-link"
                href="/#/signup">
                 Regístrate
             </a>
