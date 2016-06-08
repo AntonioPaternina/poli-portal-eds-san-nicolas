@@ -16,7 +16,7 @@
                            ng-focus="onFocus('username')"
                            ng-blur="onBlur('username')"
                            ng-minlength="6"
-                           class=""
+                           pattern="^[a-zA-Z0-9_]*$"
                            placeholder="usuario"
                            required>
 
@@ -26,6 +26,7 @@
                          ng-cloak>
                         <div ng-message="required">el usuario es requerido</div>
                         <div ng-message="minlength">debe tener mínimo 6 caracteres</div>
+                        <div ng-message="pattern">sólo se admiten letras, números y _</div>
                     </div>
                 </div>
                 <div class="form-field">

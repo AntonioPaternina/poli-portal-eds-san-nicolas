@@ -9,6 +9,7 @@ require.config({
         angularBootstrap: '/resources/bower_components/angular-bootstrap/ui-bootstrap-tpls',
         angulari18n: '/resources/bower_components/angular-i18n/angular-locale_es-co',
         angularGrid: '/resources/bower_components/angular-ui-grid/ui-grid',
+        angularValidate: '/resources/bower_components/angular-ui-validate/dist/validate',
         csrfInterceptor: '/resources/bower_components/spring-security-csrf-token-interceptor/dist/spring-security-csrf-token-interceptor.min',
         edssnApp: '/resources/public/js/edssn-app',
         directives: '/resources/public/js/directives/directives',
@@ -55,11 +56,15 @@ require.config({
         angularGrid: {
             deps: ['angular']
         },
+        angularValidate: {
+            deps: ['angular']
+        },
         angulari18n: {
             deps: ['angular']
         },
         edssnApp: {
-            deps: ['angular', 'angularMessages', 'angularRoute', 'csrfInterceptor', 'angularBootstrap', 'angulari18n', 'angularGrid', 'angularResource']
+            deps: ['angular', 'angularMessages', 'angularRoute', 'csrfInterceptor', 'angularBootstrap', 'angulari18n',
+                'angularGrid', 'angularValidate', 'angularResource']
         },
         directives: {
             deps: ['angular', 'edssnApp']
