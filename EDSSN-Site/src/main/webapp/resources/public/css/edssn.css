@@ -13,7 +13,6 @@
 
 .edssn-error-messages {
     color: #e9322d;
-    font-size: 0.75em;
 }
 
 .form-field {
@@ -107,6 +106,10 @@
 /*
  * Header
  */
+body {
+    padding-top: 150px;
+}
+
 .edssn-main-menu {
     padding: 0.6em;
     background: #c1343a;
@@ -130,6 +133,11 @@
 /*
  * Sign up
  */
+.signup-container button {
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+
 .edssn-signup-vehicles-grid {
     width: 500px;
     height: 250px;
@@ -332,11 +340,6 @@
 @media screen and (min-width: 14em) {
     .login-container {
         max-width: 14em;
-        margin: 0 auto;
-    }
-
-    .signup-container {
-        max-width: 16em;
         margin: 0 auto;
     }
 }
