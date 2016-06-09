@@ -1,7 +1,4 @@
 <div class="edssn-login-container">
-    <common-error-messages error-messages="vm.errorMessages"
-                           extra-styles="access-screen">
-    </common-error-messages>
     <div class="login-container">
         <form ng-submit="onLogin()"
               name="form"
@@ -15,7 +12,6 @@
                            ng-model="vm.username"
                            ng-focus="onFocus('username')"
                            ng-blur="onBlur('username')"
-                           ng-minlength="3"
                            required
                            class="form-control"
                            placeholder="usuario">
@@ -25,7 +21,6 @@
                          ng-cloak
                          class="edssn-error-messages">
                         <div ng-message="required">requerido</div>
-                        <div ng-message="minlength">debe ser de 6 o más caracteres</div>
                     </div>
                 </div>
                 <div class="form-field">
@@ -34,7 +29,6 @@
                            ng-model="vm.password"
                            ng-focus="onFocus('password')"
                            ng-blur="onBlur('password')"
-                           ng-minlength="3"
                            class="form-control"
                            placeholder="contraseña"
                            required>
@@ -44,8 +38,6 @@
                          ng-messages="form.password.$error"
                          ng-cloak>
                         <div ng-message="required">requerido</div>
-                        <div ng-message="minlength">debe ser de 6 o más caracteres</div>
-                        <div ng-message="pattern">debe tener por lo menos un número y una mayúscula</div>
                     </div>
                 </div>
                 <label>

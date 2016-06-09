@@ -1,7 +1,9 @@
 package co.com.estacionsannicolas.controllers;
 
+import co.com.estacionsannicolas.beans.ErrorBean;
 import co.com.estacionsannicolas.beans.UserBean;
 import co.com.estacionsannicolas.service.UserService;
+import co.com.estacionsannicolas.service.exceptions.EdssnServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,19 +15,17 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 public class BaseController {
 
     protected final Logger logger = LoggerFactory.getLogger(this.getClass());
-
-    @Autowired
-    private AuthenticationTrustResolver authenticationTrustResolver;
-
-    @Autowired
-    private UserService userService;
-
     @Autowired
     protected MessageSource messageSource;
+    @Autowired
+    private AuthenticationTrustResolver authenticationTrustResolver;
+    @Autowired
+    private UserService userService;
 
     protected boolean isUserAnonymous() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -49,8 +49,16 @@ public class BaseController {
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<String> errorHandler(Exception e) {
+    @ResponseBody
+    public ResponseEntity<ErrorBean> genericErrorHandler(Exception e) {
         logger.error(e.getMessage(), e);
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(new ErrorBean(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Error General"), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(EdssnServiceException.class)
+    @ResponseBody
+    public ResponseEntity<ErrorBean> serviceErrorHandler(EdssnServiceException e) {
+        logger.error(e.getMessage(), e);
+        return new ResponseEntity<>(new ErrorBean(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

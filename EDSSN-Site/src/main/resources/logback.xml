@@ -8,7 +8,7 @@
         </encoder>
     </appender>
 
-    <logger name="org.springframework" level="DEBUG"/>
+    <logger name="org.springframework" level="WARN"/>
     <logger name="org.dozer" level="WARN"/>
     <logger name="org.hibernate" level="WARN"/>
 

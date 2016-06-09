@@ -1,25 +1,22 @@
 package co.com.estacionsannicolas.service;
 
-import co.com.estacionsannicolas.beans.AwardPointBean;
-import co.com.estacionsannicolas.beans.MarketingCampaignBean;
-import co.com.estacionsannicolas.beans.PromotionCodeBatchRequestBean;
-import co.com.estacionsannicolas.beans.PromotionCodeBean;
-import co.com.estacionsannicolas.beans.UserBean;
+import co.com.estacionsannicolas.beans.*;
 import co.com.estacionsannicolas.entities.MarketingCampaignEntity;
 import co.com.estacionsannicolas.entities.PromotionCodeEntity;
-import co.com.estacionsannicolas.service.exceptions.InexistentPromotionCodeException;
 import co.com.estacionsannicolas.repositories.PromotionCodeRepository;
+import co.com.estacionsannicolas.service.exceptions.InexistentPromotionCodeException;
 import co.com.estacionsannicolas.service.exceptions.PromotionCodeAlreadyUsedException;
 import co.com.estacionsannicolas.util.DozerHelper;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import javax.validation.ConstraintViolationException;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.validation.ConstraintViolationException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 @Service
 @Transactional
@@ -34,50 +31,37 @@ public class PromotionCodeServiceImpl extends BaseService implements PromotionCo
     @Autowired
     private UserService userService;
 
+    private static String generateRandomString(PromotionCodeBatchRequestBean batchRequestInformation) {
+        return StringUtils.upperCase(RandomStringUtils.random(batchRequestInformation.getCodeLength(), PROMOTION_CODE_ALLOWED_CHARACTERS));
+    }
+
     @Override
     public PromotionCodeBean save(PromotionCodeBean promotionCodeToSave) {
         PromotionCodeBean savedPromotionCode = null;
-        try {
-            PromotionCodeEntity promotionCodeEntity = mapper.map(promotionCodeToSave, PromotionCodeEntity.class);
-            promotionCodeEntity = promotionCodeRepository.saveAndFlush(promotionCodeEntity);
-            savedPromotionCode = mapper.map(promotionCodeEntity, PromotionCodeBean.class);
-        } catch (Exception e) {
-            logger.error("Error while saving promotion code {}", promotionCodeToSave, e);
-        }
+        PromotionCodeEntity promotionCodeEntity = mapper.map(promotionCodeToSave, PromotionCodeEntity.class);
+        promotionCodeEntity = promotionCodeRepository.saveAndFlush(promotionCodeEntity);
+        savedPromotionCode = mapper.map(promotionCodeEntity, PromotionCodeBean.class);
         return savedPromotionCode;
     }
 
     @Override
     public List<PromotionCodeBean> getAll() {
         List<PromotionCodeBean> promotionCodeBeanList = null;
-        try {
-            List<PromotionCodeEntity> promotionCodeEntityList = promotionCodeRepository.findAll();
-            promotionCodeBeanList = DozerHelper.map(mapper, promotionCodeEntityList, PromotionCodeBean.class);
-        } catch (Exception e) {
-            logger.error("Error while retrieving promotion codes", e);
-        }
+        List<PromotionCodeEntity> promotionCodeEntityList = promotionCodeRepository.findAll();
+        promotionCodeBeanList = DozerHelper.map(mapper, promotionCodeEntityList, PromotionCodeBean.class);
         return promotionCodeBeanList;
     }
 
     @Override
     public void delete(PromotionCodeBean promotionCode) {
-        try {
-            promotionCodeRepository.delete(promotionCode.getId());
-        } catch (Exception e) {
-            logger.error("Error while deleting promotion code {}", promotionCode, e);
-        }
+        promotionCodeRepository.delete(promotionCode.getId());
     }
 
     @Override
     public List<PromotionCodeBean> generateRandomCodes(PromotionCodeBatchRequestBean batchRequestInformation) {
         List<PromotionCodeBean> promotionCodeBeanList = null;
-        try {
-            List<PromotionCodeEntity> newPromotionCodes = createAndSaveNewRandomPromotionCodes(batchRequestInformation);
-            promotionCodeBeanList = DozerHelper.map(mapper, newPromotionCodes, PromotionCodeBean.class);
-        } catch (Exception e) {
-            logger.error("Error while generating random promotion codes for request {}", batchRequestInformation, e);
-        }
-
+        List<PromotionCodeEntity> newPromotionCodes = createAndSaveNewRandomPromotionCodes(batchRequestInformation);
+        promotionCodeBeanList = DozerHelper.map(mapper, newPromotionCodes, PromotionCodeBean.class);
         return promotionCodeBeanList;
     }
 
@@ -117,28 +101,13 @@ public class PromotionCodeServiceImpl extends BaseService implements PromotionCo
         return newPromotionCode;
     }
 
-    private static String generateRandomString(PromotionCodeBatchRequestBean batchRequestInformation) {
-        return StringUtils.upperCase(RandomStringUtils.random(batchRequestInformation.getCodeLength(), PROMOTION_CODE_ALLOWED_CHARACTERS));
-    }
-
     @Override
     public void usePromotionCode(UserBean user, String code) throws InexistentPromotionCodeException, PromotionCodeAlreadyUsedException {
-        try {
-            PromotionCodeBean promotionCode = getByCode(code);
-            validate(promotionCode);
-            updateUserAwardPoints(user, promotionCode);
-            save(promotionCode);
-            logger.info("Assigned promotion code {} to user {}", code, user.getUsername());
-        } catch (InexistentPromotionCodeException e) {
-            logger.error("No promotion code was found for code {}", code);
-            throw e;
-        } catch (PromotionCodeAlreadyUsedException e) {
-            logger.error("The promotion code {} has already been used", code);
-            throw e;
-        } catch (Exception e) {
-            logger.error("Error while using promotion code {} for user {}", code, user, e);
-            throw e;
-        }
+        PromotionCodeBean promotionCode = getByCode(code);
+        validate(promotionCode);
+        updateUserAwardPoints(user, promotionCode);
+        save(promotionCode);
+        logger.info("Assigned promotion code {} to user {}", code, user.getUsername());
     }
 
     private void validate(PromotionCodeBean promotionCode) throws PromotionCodeAlreadyUsedException, InexistentPromotionCodeException {
@@ -171,13 +140,9 @@ public class PromotionCodeServiceImpl extends BaseService implements PromotionCo
     @Override
     public PromotionCodeBean getByCode(String code) {
         PromotionCodeBean promotionCode = null;
-        try {
-            PromotionCodeEntity promotionCodeEntity = promotionCodeRepository.findByCode(code);
-            if (promotionCodeEntity != null) {
-                promotionCode = mapper.map(promotionCodeEntity, PromotionCodeBean.class);
-            }
-        } catch (Exception e) {
-            logger.error("Error while finding a promotion code for code {}", code, e);
+        PromotionCodeEntity promotionCodeEntity = promotionCodeRepository.findByCode(code);
+        if (promotionCodeEntity != null) {
+            promotionCode = mapper.map(promotionCodeEntity, PromotionCodeBean.class);
         }
         return promotionCode;
     }

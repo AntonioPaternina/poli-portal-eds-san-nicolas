@@ -1,6 +1,8 @@
 angular.module('edssnApp')
     .controller('RedeemAwardPointsController', ['$scope', '$http', 'RedeemPointsCustomer', 'Award',
         'AwardRedeemRequest', function ($scope, $http, RedeemPointsCustomer, Award, AwardRedeemRequest) {
+            $scope.resetVM();
+            
             var ctrl = this;
             $scope.customer = RedeemPointsCustomer.customer;
             $scope.awards = [];

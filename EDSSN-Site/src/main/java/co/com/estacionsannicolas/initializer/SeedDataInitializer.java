@@ -11,6 +11,8 @@ import co.com.estacionsannicolas.service.AwardService;
 import co.com.estacionsannicolas.service.MarketingCampaignService;
 import co.com.estacionsannicolas.service.PromotionCodeService;
 import co.com.estacionsannicolas.service.UserService;
+import co.com.estacionsannicolas.service.exceptions.EdssnServiceException;
+import co.com.estacionsannicolas.service.exceptions.UsernameIsNotUniqueException;
 import org.apache.commons.lang.math.RandomUtils;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
@@ -66,7 +68,11 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
         createTanquearSiPagaCampaign();
         if (INSERT_TEST_DATA) {
             createDefaultPromotionCodesForTanquearSiPaga();
-            createDefaultUsers();
+            try {
+                createDefaultUsers();
+            } catch (EdssnServiceException e) {
+                logger.error("error during initialization", e);
+            }
         }
     }
 
@@ -110,14 +116,14 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
         }
     }
 
-    private void createDefaultUsers() {
+    private void createDefaultUsers() throws UsernameIsNotUniqueException {
         if (userService.findByUsername("admin") == null) {
             createDefaultAdmin();
             createDefaultCustomers();
         }
     }
 
-    private void createDefaultAdmin() {
+    private void createDefaultAdmin() throws UsernameIsNotUniqueException {
         UserBean admin = new UserBean();
         admin.setUsername("admin");
         admin.setPassword("Admin01.");
@@ -128,13 +134,13 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
         userService.create(admin, RoleTypeEnum.ADMIN);
     }
 
-    private void createDefaultCustomers() {
+    private void createDefaultCustomers() throws UsernameIsNotUniqueException {
         for (int i = 0; i < 50; i++) {
             createRandomCustomer();
         }
     }
 
-    private void createRandomCustomer() {
+    private void createRandomCustomer() throws UsernameIsNotUniqueException {
         GenderEnum gender = GENDERS[RandomUtils.nextInt(2)];
         StringBuilder fullName = new StringBuilder();
         StringBuilder username = new StringBuilder();

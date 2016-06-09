@@ -1,6 +1,8 @@
 angular.module('edssnApp')
     .controller('SignupController', ['$http', '$scope', '$rootScope', '$location', 'Customer', 'AuthService', 'AUTH_EVENTS',
         function ($http, $scope, $rootScope, $location, Customer, AuthService, AUTH_EVENTS) {
+            $scope.resetVM();
+
             $scope.birthdatePopup = {
                 opened: false
             };

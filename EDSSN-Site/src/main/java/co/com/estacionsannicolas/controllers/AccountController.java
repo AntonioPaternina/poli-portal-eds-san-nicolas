@@ -3,12 +3,13 @@ package co.com.estacionsannicolas.controllers;
 import co.com.estacionsannicolas.beans.AwardPointBean;
 import co.com.estacionsannicolas.service.AccountService;
 import co.com.estacionsannicolas.service.PromotionCodeService;
-import co.com.estacionsannicolas.service.exceptions.ServiceException;
-import java.util.List;
+import co.com.estacionsannicolas.service.exceptions.EdssnServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/account")
@@ -26,11 +27,7 @@ public class AccountController extends BaseController {
     }
 
     @RequestMapping(value = "/assign-promotion-code", method = RequestMethod.POST)
-    public void assignPromotionCodeToCurrentUser(String code) throws ServiceException {
-        try {
-            promotionCodeService.usePromotionCode(getCurrentUser(), code);
-        } catch (Exception e) {
-            logger.error("Error assigning promotion code {}", code);
-        }
+    public void assignPromotionCodeToCurrentUser(String code) throws EdssnServiceException {
+        promotionCodeService.usePromotionCode(getCurrentUser(), code);
     }
 }

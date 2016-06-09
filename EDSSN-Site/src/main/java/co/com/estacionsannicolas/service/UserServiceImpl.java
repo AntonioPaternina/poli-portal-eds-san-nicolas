@@ -1,23 +1,23 @@
 package co.com.estacionsannicolas.service;
 
 import co.com.estacionsannicolas.beans.MarketingCampaignBean;
-import co.com.estacionsannicolas.beans.UserBean;
 import co.com.estacionsannicolas.beans.RoleBean;
+import co.com.estacionsannicolas.beans.UserBean;
 import co.com.estacionsannicolas.entities.AwardPointEntity;
 import co.com.estacionsannicolas.entities.MarketingCampaignEntity;
 import co.com.estacionsannicolas.entities.RoleEntity;
 import co.com.estacionsannicolas.entities.UserEntity;
 import co.com.estacionsannicolas.enums.DefaultMarketingCampaigns;
 import co.com.estacionsannicolas.enums.RoleTypeEnum;
-
-import java.util.List;
-
+import co.com.estacionsannicolas.repositories.UserRepository;
+import co.com.estacionsannicolas.service.exceptions.UsernameIsNotUniqueException;
+import co.com.estacionsannicolas.util.DozerHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import co.com.estacionsannicolas.util.DozerHelper;
-import co.com.estacionsannicolas.repositories.UserRepository;
+
+import java.util.List;
 
 @Service("userService")
 @Transactional
@@ -44,35 +44,37 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     public UserBean findByUsername(String username) {
         UserBean userBean = null;
-        try {
-            UserEntity userEntity = userEntityRepository.findByUsername(username);
-            if (userEntity != null) {
-                userBean = mapper.map(userEntity, UserBean.class);
-            }
-        } catch (Exception e) {
-            logger.error("Error finding user with username: " + username);
+
+        UserEntity userEntity = userEntityRepository.findByUsername(username);
+        if (userEntity != null) {
+            userBean = mapper.map(userEntity, UserBean.class);
         }
+
         return userBean;
     }
 
     @Override
-    public UserBean create(UserBean userBean, RoleTypeEnum roleType) {
+    public UserBean create(UserBean userBean, RoleTypeEnum roleType) throws UsernameIsNotUniqueException {
+        processValidations(userBean);
+
         UserBean createdUser = null;
-        try {
-            setUserRole(roleType, userBean);
-            userBean.setPassword(passwordEncoder.encode(userBean.getPassword()));
-            userBean.setAcive(true);
+        setUserRole(roleType, userBean);
+        userBean.setPassword(passwordEncoder.encode(userBean.getPassword()));
+        userBean.setAcive(true);
 
-            UserEntity userEntity = mapper.map(userBean, UserEntity.class);
+        UserEntity userEntity = mapper.map(userBean, UserEntity.class);
 
-            setUserForVehicles(userEntity);
-            initializeAwardPointsForTanquearSiPaga(userEntity, roleType);
+        setUserForVehicles(userEntity);
+        initializeAwardPointsForTanquearSiPaga(userEntity, roleType);
 
-            createdUser = mapper.map(userEntityRepository.saveAndFlush(userEntity), UserBean.class);
-        } catch (Exception e) {
-            logger.error("Error creating user", e);
-        }
+        createdUser = mapper.map(userEntityRepository.saveAndFlush(userEntity), UserBean.class);
         return createdUser;
+    }
+
+    private void processValidations(UserBean userBean) throws UsernameIsNotUniqueException {
+        if (!isUsernameUnique(userBean.getId(), userBean.getUsername())) {
+            throw new UsernameIsNotUniqueException();
+        }
     }
 
     private void setUserForVehicles(UserEntity userEntity) {
@@ -103,13 +105,11 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     public UserBean update(UserBean userBean) {
         UserBean savedUser = null;
-        try {
-            UserEntity userToSave = mapper.map(userBean, UserEntity.class);
-            userToSave = userEntityRepository.saveAndFlush(userToSave);
-            savedUser = mapper.map(userToSave, UserBean.class);
-        } catch (Exception e) {
-            logger.error("Error saving user {}", userBean, e);
-        }
+
+        UserEntity userToSave = mapper.map(userBean, UserEntity.class);
+        userToSave = userEntityRepository.saveAndFlush(userToSave);
+        savedUser = mapper.map(userToSave, UserBean.class);
+
         return savedUser;
     }
 
@@ -127,18 +127,15 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     public List<UserBean> findAllCustomers() {
         List<UserBean> customers = null;
-        try {
-            RoleEntity customerRole = mapper.map(roleService.findByType(RoleTypeEnum.CUSTOMER), RoleEntity.class);
-            customers = DozerHelper.map(mapper, userEntityRepository.findByUserRoles(customerRole), UserBean.class);
-        } catch (Exception e) {
-            logger.error("Error retrieving customers", e);
-        }
+        RoleEntity customerRole = mapper.map(roleService.findByType(RoleTypeEnum.CUSTOMER), RoleEntity.class);
+        customers = DozerHelper.map(mapper, userEntityRepository.findByUserRoles(customerRole), UserBean.class);
+
         return customers;
     }
 
     @Override
-    public boolean isUsernameUnique(Long idUsuario, String ssoId) {
-        UserBean usuarioPersistido = findByUsername(ssoId);
+    public boolean isUsernameUnique(Long idUsuario, String username) {
+        UserBean usuarioPersistido = findByUsername(username);
         return (usuarioPersistido == null || ((idUsuario != null) && (usuarioPersistido.getId().compareTo(idUsuario) == 0)));
     }
 

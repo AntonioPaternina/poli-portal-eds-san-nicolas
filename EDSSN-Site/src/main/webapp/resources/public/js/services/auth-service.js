@@ -1,6 +1,6 @@
 angular.module('edssnApp')
-    .factory('AuthService', ['$http', '$httpParamSerializerJQLike', 'Session', 'UserService',
-        function ($http, $httpParamSerializerJQLike, Session, UserService) {
+    .factory('AuthService', ['$http', '$q', '$httpParamSerializerJQLike', 'Session', 'UserService',
+        function ($http, $q, $httpParamSerializerJQLike, Session, UserService) {
             var authService = {};
 
             authService.login = function (username, password, rememberMe) {
@@ -16,11 +16,17 @@ angular.module('edssnApp')
                         "Content-Type": "application/x-www-form-urlencoded",
                         "X-Login-Ajax-call": 'true'
                     }
-                }).then(function () {
-                    return UserService.getUser().then(function (user) {
-                        Session.create(user);
-                        return user;
-                    });
+                }).then(function (response) {
+                    var deferred = $q.defer();
+                    if (response && response.data === "ok") {
+                        UserService.getUser().then(function (user) {
+                            Session.create(user);
+                            deferred.resolve(user);
+                        });
+                    } else {
+                        deferred.reject('authentication failed');
+                    }
+                    return deferred.promise;
                 });
             };
 
@@ -57,20 +63,4 @@ angular.module('edssnApp')
             this.userId = null;
             this.userRoles = null;
         };
-    })
-    .factory('AuthInterceptor', ['$rootScope', '$q', 'AUTH_EVENTS', 'Session'
-        , function ($rootScope, $q, AUTH_EVENTS, Session) {
-            return {
-                responseError: function (response) {
-                    $rootScope.$broadcast({
-                        401: AUTH_EVENTS.notAuthenticated,
-                        403: AUTH_EVENTS.notAuthorized,
-                        419: AUTH_EVENTS.sessionTimeout,
-                        440: AUTH_EVENTS.sessionTimeout
-                    }[response.status], response);
-
-                    Session.destroy();
-                    return $q.reject(response);
-                }
-            };
-        }]);
+    });

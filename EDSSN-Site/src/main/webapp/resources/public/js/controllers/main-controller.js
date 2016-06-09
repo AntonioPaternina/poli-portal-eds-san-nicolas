@@ -34,9 +34,13 @@ angular.module('edssnApp')
                 errorMessages: []
             };
             var focusedField;
-
-
-            $scope.vm.appReady = true;
+            $scope.resetVM = function () {
+                $scope.vm = {
+                    isFormSent: false,
+                    errorMessages: []
+                };
+                focusedField = undefined;
+            };
 
 
             $scope.onFocus = function (fieldName) {
@@ -67,5 +71,12 @@ angular.module('edssnApp')
                 enableSelectAll: false,
                 noUnselect: true,
                 gridMenuShowHideColumns: false
+            };
+
+            $rootScope.addError = function (errorMessage) {
+                $scope.vm.errorMessages = [];
+                $scope.vm.errorMessages
+                    .push({description: errorMessage});
+
             };
         }]);

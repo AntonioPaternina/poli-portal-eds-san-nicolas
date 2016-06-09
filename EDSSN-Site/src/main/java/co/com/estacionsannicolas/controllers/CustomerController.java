@@ -4,12 +4,12 @@ import co.com.estacionsannicolas.beans.UserBean;
 import co.com.estacionsannicolas.entities.RoleEntity;
 import co.com.estacionsannicolas.enums.RoleTypeEnum;
 import co.com.estacionsannicolas.service.UserService;
-
-import java.util.List;
-
+import co.com.estacionsannicolas.service.exceptions.UsernameIsNotUniqueException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/customers")
@@ -25,7 +25,7 @@ public class CustomerController extends BaseController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void create(@RequestBody UserBean user) {
+    public void create(@RequestBody UserBean user) throws UsernameIsNotUniqueException {
         userService.create(user, RoleTypeEnum.CUSTOMER);
     }
 

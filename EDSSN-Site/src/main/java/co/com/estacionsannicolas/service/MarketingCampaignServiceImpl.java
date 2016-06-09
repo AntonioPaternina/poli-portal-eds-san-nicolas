@@ -31,13 +31,10 @@ public class MarketingCampaignServiceImpl extends BaseService implements Marketi
     @Override
     public MarketingCampaignBean findByName(String campaignName) {
         MarketingCampaignBean campaignBean = null;
-        try {
-            MarketingCampaignEntity campaignEntity = marketingCampaignRepository.findByName(campaignName);
-            if (campaignEntity != null) {
-                campaignBean = mapper.map(campaignEntity, MarketingCampaignBean.class);
-            }
-        } catch (Exception e) {
-            logger.error("Error finding capaign with name: " + campaignName, e);
+
+        MarketingCampaignEntity campaignEntity = marketingCampaignRepository.findByName(campaignName);
+        if (campaignEntity != null) {
+            campaignBean = mapper.map(campaignEntity, MarketingCampaignBean.class);
         }
 
         return campaignBean;

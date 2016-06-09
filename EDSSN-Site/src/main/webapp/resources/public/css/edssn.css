@@ -28,8 +28,6 @@
 }
 
 .edssn-default-container {
-    position: absolute;
-    top: 80px;
     width: 100%;
 }
 
@@ -54,12 +52,9 @@
 }
 
 .form-messages.errors {
+    width: 300px;
     color: #e9322d;
     background-color: #fbe8e5;
-}
-
-.form-messages.errors.access-screen {
-    background-color: white;
 }
 
 .messages-group {
@@ -69,9 +64,6 @@
 }
 
 .access-screen {
-    max-width: 270px;
-    margin-left: auto;
-    margin-right: auto;
     font-size: 0.88em;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
@@ -151,8 +143,6 @@ body {
  * Account
  */
 .edssn-account-container {
-    position: absolute;
-    top: 20%;
     width: 100%;
     min-height: 12%;
     z-index: 2;
@@ -225,8 +215,6 @@ body {
  * Login
  */
 .edssn-login-container {
-    position: absolute;
-    top: 165px;
     width: 100%;
     min-height: 12%;
     z-index: 2;
@@ -250,8 +238,6 @@ body {
  * Admin Users
  */
 .edssn-admin-users-container {
-    position: absolute;
-    top: 80px;
     width: 100%;
 }
 
@@ -275,8 +261,6 @@ body {
  * Redeem Points
  */
 .edssn-redeem-points-container {
-    position: absolute;
-    top: 80px;
     width: 100%;
 }
 
@@ -292,8 +276,6 @@ body {
  * Award manager
  */
 .edssn-admin-awards-container {
-    position: absolute;
-    top: 80px;
     width: 100%;
 }
 

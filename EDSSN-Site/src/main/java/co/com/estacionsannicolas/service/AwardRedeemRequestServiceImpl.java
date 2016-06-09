@@ -31,24 +31,20 @@ public class AwardRedeemRequestServiceImpl extends BaseService implements AwardR
     private AwardRedeemRequestRepository awardRedeemRequestRepository;
 
     @Override
-    public AwardRedeemRequestBean create(AwardRedeemRequestBean awardRedeemRequest) {
+    public AwardRedeemRequestBean create(AwardRedeemRequestBean awardRedeemRequest) throws NotEnoughPointsToRedeemAwardException {
         AwardRedeemRequestBean savedRequest = null;
 
-        try {
-            AwardEntity award = awardRepository.findOne(awardRedeemRequest.getAward().getId());
-            UserEntity user = userRepository.findOne(awardRedeemRequest.getUser().getId());
-            MarketingCampaignEntity marketingCampaign =
-                    marketingCampaignRepository.findOne(awardRedeemRequest.getMarketingCampaign().getId());
-            AwardPointEntity userAwardPoints = awardPointRepository.findByUserAndMarketingCampaign(user, marketingCampaign);
+        AwardEntity award = awardRepository.findOne(awardRedeemRequest.getAward().getId());
+        UserEntity user = userRepository.findOne(awardRedeemRequest.getUser().getId());
+        MarketingCampaignEntity marketingCampaign =
+                marketingCampaignRepository.findOne(awardRedeemRequest.getMarketingCampaign().getId());
+        AwardPointEntity userAwardPoints = awardPointRepository.findByUserAndMarketingCampaign(user, marketingCampaign);
 
-            processValidations(award, user, marketingCampaign, userAwardPoints);
+        processValidations(award, user, marketingCampaign, userAwardPoints);
 
-            decreateUserPoints(award, userAwardPoints);
+        decreateUserPoints(award, userAwardPoints);
 
-            savedRequest = mapper.map(createAndSaveRequest(award, user, marketingCampaign), AwardRedeemRequestBean.class);
-        } catch (Exception e) {
-            logger.error("Error while saving the request for the award", e);
-        }
+        savedRequest = mapper.map(createAndSaveRequest(award, user, marketingCampaign), AwardRedeemRequestBean.class);
         return savedRequest;
     }
 
