@@ -54,7 +54,6 @@ angular.module('edssnApp', ['ngRoute',
                             440: AUTH_EVENTS.sessionTimeout
                         }[response.status], response);
 
-                        Session.destroy();
                         return $q.reject(response);
                     }
                 };

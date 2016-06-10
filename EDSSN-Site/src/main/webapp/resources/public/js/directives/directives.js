@@ -17,16 +17,10 @@ angular.module('edssnApp')
             templateUrl: '/resources/public/partials/splash-header.html'
         };
     })
-    .directive('commonErrorMessages', function () {
+    .directive('commonMessages', function () {
         return {
             restrict: 'E',
-            link: function (scope, element, attrs) {
-                scope.extraStyles = attrs.extraStyles;
-            },
-            scope: {
-                errorMessages: '=errorMessages'
-            },
-            templateUrl: '/resources/public/partials/error-messages.html'
+            templateUrl: '/resources/public/partials/common-messages.html'
         };
     })
     .directive('checkPasswordsMatch', function () {

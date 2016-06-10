@@ -1,8 +1,6 @@
 angular.module('edssnApp')
     .controller('CustomerController', ['$scope', '$location', 'Customer', 'RedeemPointsCustomer',
         function ($scope, $location, Customer, RedeemPointsCustomer) {
-            $scope.resetVM();
-
             var columnDefs = [{
                 name: 'Usuario',
                 field: 'username',

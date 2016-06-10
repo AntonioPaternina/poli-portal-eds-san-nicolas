@@ -1,8 +1,6 @@
 angular.module('edssnApp')
     .controller('AwardController', ['$scope', '$rootScope', '$controller', '$location', 'Award',
         function ($scope, $rootScope, $controller, $location, Award) {
-            $scope.resetVM();
-
             var columnDefs = [{
                 name: 'Referencia',
                 field: 'reference'

@@ -1,27 +1,38 @@
-<div class="edssn-login-container">
-    <table class="table">
+<div class="edssn-account-container">
+    <h1 class="text-center">Hola {{currentUser.username}} estos son los puntos que tienes acumulados</h1>
+    <table class="table ">
         <thead>
-            <tr>
-                <th>Nombre de la Campaña</th>
-                <th>Número de Puntos</th>
-            </tr>
+        <tr>
+            <th>Nombre de la Campaña</th>
+            <th>Número de Puntos</th>
+        </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="awardPoint in awardPoints">
-                <td>{{awardPoint.marketingCampaign.name}}</td>
-                <td>{{awardPoint.numberOfPoints}}</td>
-            </tr>
+        <tr ng-repeat="awardPoint in awardPoints">
+            <td>{{awardPoint.marketingCampaign.name}}</td>
+            <td>{{awardPoint.numberOfPoints}}</td>
+        </tr>
         </tbody>
     </table>
-    <div>
-        <h1>Registra tu cupón!</h1>
-        <form>
-            <input type="text"
-                   ng-model="vm.coupon" />
+    <div class="text-center">
+        <h2>Registra tu cupón!</h2>
+        <form class="form-horizontal">
+            <fieldset>
+                <div class="form-group">
+                    <label class="col-md-offset-3 col-md-2 control-label"
+                    >Ingresa el código de tu cupón</label>
+                    <div class="col-md-2">
+                        <input type="text"
+                               class="form-control input-md"
+                               ng-model="vm.coupon"/>
+                    </div>
+                </div>
+            </fieldset>
             <button type="button"
-                    ng-click="assignCoupon()" >
+                    class="btn btn-primary"
+                    ng-click="assignCoupon()">
                 Enviar
             </button>
         </form>
-    </div>  
+    </div>
 </div>

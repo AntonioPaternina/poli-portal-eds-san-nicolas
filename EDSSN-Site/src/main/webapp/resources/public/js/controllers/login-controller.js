@@ -2,8 +2,6 @@ angular.module('edssnApp')
     .controller('LoginController', ['$http', '$scope', '$rootScope', '$controller', '$location',
         'AUTH_EVENTS', 'AuthService',
         function ($http, $scope, $rootScope, $controller, $location, AUTH_EVENTS, AuthService) {
-            $scope.resetVM();
-
             $scope.onLogin = function () {
                 $scope.vm.isFormSent = true;
                 if ($scope.form.$invalid) {

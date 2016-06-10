@@ -1,0 +1,24 @@
+<div class="text-center center-block form-messages errors" ng-show="vm.errorMessages.length > 0" ng-cloak>
+    <div class="text-center">
+        <img alt="Error Image" class="edssn-error-icon" src="/resources/img/error.png"/>
+    </div>
+    <div class="messages-group">
+        <div ng-repeat="error in vm.errorMessages">{{error.description}}</div>
+    </div>
+</div>
+<div class="text-center center-block form-messages" ng-show="vm.successMessages.length > 0" ng-cloak>
+    <div class="text-center">
+        <img alt="Info Image" class="edssn-success-icon" src="/resources/img/success.png"/>
+    </div>
+    <div class="messages-group">
+        <div ng-repeat="success in vm.successMessages">{{success.description}}</div>
+    </div>
+</div>
+<div class="text-center center-block form-messages" ng-show="vm.infoMessages.length > 0" ng-cloak>
+    <div class="text-center">
+        <img alt="Success Image" class="edssn-info-icon" src="/resources/img/info.png"/>
+    </div>
+    <div class="messages-group">
+        <div ng-repeat="info in vm.infoMessages">{{info.description}}</div>
+    </div>
+</div>

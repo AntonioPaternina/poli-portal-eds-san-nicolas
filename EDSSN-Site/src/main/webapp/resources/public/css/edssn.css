@@ -58,7 +58,6 @@
 }
 
 .messages-group {
-    display: inline-block;
     vertical-align: top;
     padding-top: 0.3em;
 }
@@ -69,9 +68,7 @@
     padding-bottom: 0.5em;
 }
 
-.error-icon, .info-icon {
-    margin-left: 0.8em;
-    display: inline-block;
+.edssn-error-icon, .edssn-info-icon, .edssn-success-icon {
     height: 25px;
 }
 
@@ -142,10 +139,9 @@ body {
 /*
  * Account
  */
-.edssn-account-container {
-    width: 100%;
-    min-height: 12%;
-    z-index: 2;
+.edssn-account-container table {
+    margin: 0 auto;
+    width: 400px;
 }
 
 /*

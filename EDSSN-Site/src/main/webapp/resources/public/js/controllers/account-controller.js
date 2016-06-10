@@ -1,7 +1,5 @@
 angular.module('edssnApp')
     .controller('AccountController', ['$scope', 'UserService', function ($scope, UserService) {
-        $scope.resetVM();
-
         $scope.awardPoints = [];
 
         $scope.getAwardPoints = function () {
@@ -13,7 +11,10 @@ angular.module('edssnApp')
 
         $scope.assignCoupon = function () {
             UserService.assignCoupon($scope.vm.coupon).then(function () {
+                $scope.resetVM();
+                $scope.vm.coupon = '';
                 $scope.getAwardPoints();
+                $scope.addSuccessMessage('El cupón ha sido registrado con éxito!');
             });
         };
     }]);

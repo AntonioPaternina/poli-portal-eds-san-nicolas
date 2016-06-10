@@ -23,6 +23,7 @@ angular.module('edssnApp')
                 UserService.logout();
             };
             var redirectToLoginPage = function () {
+                Session.destroy();
                 $scope.currentUser = null;
                 $location.url('/login');
             };
@@ -31,16 +32,21 @@ angular.module('edssnApp')
 
             $scope.vm = {
                 isFormSent: false,
-                errorMessages: []
+                errorMessages: [],
+                infoMessages: [],
+                successMessages: []
             };
             var focusedField;
             $scope.resetVM = function () {
                 $scope.vm = {
                     isFormSent: false,
-                    errorMessages: []
+                    errorMessages: [],
+                    infoMessages: [],
+                    successMessages: []
                 };
                 focusedField = undefined;
             };
+            $scope.$on('$routeChangeStart', $scope.resetVM);
 
 
             $scope.onFocus = function (fieldName) {
@@ -74,9 +80,17 @@ angular.module('edssnApp')
             };
 
             $rootScope.addError = function (errorMessage) {
-                $scope.vm.errorMessages = [];
+                $scope.resetVM();
                 $scope.vm.errorMessages
                     .push({description: errorMessage});
 
+            };
+            $rootScope.addInfoMessage = function (infoMessage) {
+                $scope.resetVM();
+                $scope.vm.infoMessages.push({description: infoMessage});
+            };
+            $rootScope.addSuccessMessage = function (successMessage) {
+                $scope.resetVM();
+                $scope.vm.successMessages.push({description: successMessage});
             };
         }]);

@@ -103,7 +103,8 @@ public class PromotionCodeServiceImpl extends BaseService implements PromotionCo
 
     @Override
     public void usePromotionCode(UserBean user, String code) throws InexistentPromotionCodeException, PromotionCodeAlreadyUsedException {
-        PromotionCodeBean promotionCode = getByCode(code);
+        logger.info("attempting to assign code {}", code);
+        PromotionCodeBean promotionCode = getByCode(StringUtils.upperCase(StringUtils.trim(code)));
         validate(promotionCode);
         updateUserAwardPoints(user, promotionCode);
         save(promotionCode);
@@ -115,6 +116,7 @@ public class PromotionCodeServiceImpl extends BaseService implements PromotionCo
             throw new InexistentPromotionCodeException();
         }
         if (promotionCode.getUsed() != null && promotionCode.getUsed()) {
+            logger.error("the promotion code {} has already been used", promotionCode.getCode());
             throw new PromotionCodeAlreadyUsedException();
         }
     }
