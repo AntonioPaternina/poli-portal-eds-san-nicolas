@@ -7,6 +7,8 @@ import co.com.estacionsannicolas.repositories.PromotionCodeRepository;
 import co.com.estacionsannicolas.repositories.specifications.PromotionCodeSpecification;
 import co.com.estacionsannicolas.service.exceptions.InexistentPromotionCodeException;
 import co.com.estacionsannicolas.service.exceptions.PromotionCodeAlreadyUsedException;
+import co.com.estacionsannicolas.service.exceptions.RequiredParameterException;
+import co.com.estacionsannicolas.service.exceptions.TooManyPromotionCodesToCreateException;
 import co.com.estacionsannicolas.util.DozerHelper;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -18,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -42,9 +45,16 @@ public class PromotionCodeServiceImpl extends BaseService implements PromotionCo
     public PromotionCodeBean save(PromotionCodeBean promotionCodeToSave) {
         PromotionCodeBean savedPromotionCode = null;
         PromotionCodeEntity promotionCodeEntity = mapper.map(promotionCodeToSave, PromotionCodeEntity.class);
+        assignCreationDate(promotionCodeEntity);
         promotionCodeEntity = promotionCodeRepository.saveAndFlush(promotionCodeEntity);
         savedPromotionCode = mapper.map(promotionCodeEntity, PromotionCodeBean.class);
         return savedPromotionCode;
+    }
+
+    private void assignCreationDate(PromotionCodeEntity promotionCodeEntity) {
+        if (promotionCodeEntity.getId() == null || promotionCodeEntity.getId() == 0 || promotionCodeEntity.getCreationDate() == null) {
+            promotionCodeEntity.setCreationDate(new Date());
+        }
     }
 
     @Override
@@ -65,11 +75,22 @@ public class PromotionCodeServiceImpl extends BaseService implements PromotionCo
     }
 
     @Override
-    public List<PromotionCodeBean> generateRandomCodes(PromotionCodeBatchRequestBean batchRequestInformation) {
+    public List<PromotionCodeBean> generateRandomCodes(PromotionCodeBatchRequestBean batchRequestInformation) throws RequiredParameterException, TooManyPromotionCodesToCreateException {
+        validateRequest(batchRequestInformation);
         List<PromotionCodeBean> promotionCodeBeanList = null;
         List<PromotionCodeEntity> newPromotionCodes = createAndSaveNewRandomPromotionCodes(batchRequestInformation);
         promotionCodeBeanList = DozerHelper.map(mapper, newPromotionCodes, PromotionCodeBean.class);
         return promotionCodeBeanList;
+    }
+
+    private void validateRequest(PromotionCodeBatchRequestBean batchRequestInformation) throws RequiredParameterException, TooManyPromotionCodesToCreateException {
+        if (batchRequestInformation.getAwardPointsPercode() == 0 || batchRequestInformation.getCodeLength() == 0
+                || batchRequestInformation.getMarketingCampaign().getId() == 0 || batchRequestInformation.getNumberOfCodesToCreate() == 0) {
+            throw new RequiredParameterException();
+        }
+        if (batchRequestInformation.getNumberOfCodesToCreate() > 1000) {
+            throw new TooManyPromotionCodesToCreateException();
+        }
     }
 
     private List<PromotionCodeEntity> createAndSaveNewRandomPromotionCodes(PromotionCodeBatchRequestBean batchRequestInformation) {
@@ -105,6 +126,7 @@ public class PromotionCodeServiceImpl extends BaseService implements PromotionCo
         newPromotionCode.setMarketingCampaign(marketingCampaignEntity);
         newPromotionCode.setPoints(batchRequestInformation.getAwardPointsPercode());
         newPromotionCode.setCode(codeString);
+        newPromotionCode.setCreationDate(new Date());
         return newPromotionCode;
     }
 

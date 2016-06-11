@@ -1,10 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="">
+    <div class="container">
+        <h1 class="text-center">Creación Masiva de Cupones</h1>
+        <p>Por favor ingrese la información base para la creación de los nuevos cupones</p>
 
-</body>
-</html>
+        <div class="row">
+            <label class="col-xs-6">Número de cupones a crear</label>
+            <input type="text"
+                   class="col-xs-6"
+                   ng-model="promotionCodeBatchRequest.numberOfCodesToCreate"/>
+        </div>
+        <div class="row">
+            <label class="col-xs-6">Número de puntos para cada cupón</label>
+            <input type="text"
+                   class="col-xs-6"
+                   ng-model="promotionCodeBatchRequest.awardPointsPercode"
+            />
+        </div>
+        <div class="row">
+            <label class="col-xs-6">Longitud del cupón</label>
+            <input type="text"
+                   class="col-xs-6"
+                   ng-model="promotionCodeBatchRequest.codeLength"
+            />
+        </div>
+        <div>
+            <h2>Campañas asociadas</h2>
+            <label ng-repeat="campaign in campaigns">
+                <input type="radio"
+                       name="campaigns"
+                       value="{{campaign.id}}"
+                       ng-model="promotionCodeBatchRequest.selectedCampaignId"
+                       required
+                > {{campaign.name}}
+            </label>
+        </div>
+        <button class="btn btn-primary" ng-click="save()">Enviar</button>
+    </div>
+
+</div>

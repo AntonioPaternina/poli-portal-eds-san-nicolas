@@ -13,6 +13,10 @@ angular.module('edssnApp')
             },
             update: {
                 method: 'PUT'
+            },
+            batchCreate: {
+                url: '/promotion-codes/batchCreate',
+                method: 'POST'
             }
         });
     }])

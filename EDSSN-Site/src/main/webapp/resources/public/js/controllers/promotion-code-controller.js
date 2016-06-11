@@ -14,6 +14,12 @@ angular.module('edssnApp')
             }, {
                 name: 'Campaña',
                 field: 'marketingCampaign.name'
+            }, {
+                name: 'Fecha de Creación',
+                field: 'creationDate',
+                cellTemplate: '<div>{{COL_FIELD | date:"yyyy-MM-dd HH:mm:ss Z"}}</div>',
+                type: 'date',
+                enableFiltering: false
             }
             ];
 
@@ -40,6 +46,11 @@ angular.module('edssnApp')
                 });
                 return deferred.promise;
             };
+            var getPageDefault = function () {
+                if (getPage) {
+                    getPage(paginationOptions.pageNumber, paginationOptions.pageSize, paginationOptions.sort, paginationOptions.specification);
+                }
+            };
 
             $scope.selectedItem = null;
             $scope.gridOpts.columnDefs = columnDefs;
@@ -56,9 +67,7 @@ angular.module('edssnApp')
                     } else {
                         paginationOptions.sort = $scope.getSort(sortColumns);
                     }
-                    if (getPage) {
-                        getPage(paginationOptions.pageNumber, paginationOptions.pageSize, paginationOptions.sort, paginationOptions.specification);
-                    }
+                    getPageDefault();
                 });
 
                 gridApi.core.on.filterChanged($scope, function () {
@@ -95,9 +104,7 @@ angular.module('edssnApp')
                     } else {
                         paginationOptions.specification = null;
                     }
-                    if (getPage) {
-                        getPage(paginationOptions.pageNumber, paginationOptions.pageSize, paginationOptions.sort, paginationOptions.specification);
-                    }
+                    getPageDefault();
                 });
 
                 gridApi.selection.on.rowSelectionChanged($scope, function (row) {
@@ -112,9 +119,7 @@ angular.module('edssnApp')
                         paginationOptions.pageNumber = 1;
                     }
                     paginationOptions.pageSize = pageSize;
-                    if (getPage) {
-                        getPage(paginationOptions.pageNumber, paginationOptions.pageSize, paginationOptions.sort, paginationOptions.specification);
-                    }
+                    getPageDefault();
                 });
             };
             $scope.gridOpts.exporterAllDataFn = function () {
@@ -130,33 +135,31 @@ angular.module('edssnApp')
             $scope.deletePromotionCode = function () {
                 var promotionCodeToDelete = new PromotionCode(SelectedPromotionCode.item);
                 promotionCodeToDelete.$delete(function () {
-                    $scope.promotionCodes = PromotionCode.query();
-                    $scope.gridOpts.data = $scope.promotionCodes;
-                    $scope.addSuccessMessage('El código promocional ha sido eliminado exitosamente');
+                    getPageDefault();
+                    $scope.addSuccessMessage('El cupón ha sido eliminado correctamente');
                 });
             };
             if (getPage) {
                 getPage(paginationOptions.pageNumber, paginationOptions.pageSize, paginationOptions.sort);
             }
         }])
-    .controller('PromotionCodeCreateController', ['$scope', '$location', 'PromotionCode',
-        function ($scope, $location, PromotionCode) {
-            $scope.newPromotionCode = {};
+    .controller('PromotionCodeCreateController', ['$scope', '$location', 'PromotionCode', 'Campaign',
+        function ($scope, $location, PromotionCode, Campaign) {
+            $scope.promotionCodeBatchRequest = {};
+
+            $scope.campaigns = Campaign.query();
+            $scope.selection = [];
 
             $scope.save = function () {
-                var award = new PromotionCode($scope.newPromotionCode);
-                award.$save(function () {
-                    $location.url('/promotion-code-list');
-                });
-            };
-        }])
-    .controller('AwardEditController', ['$scope', '$location', 'PromotionCode', 'SelectedPromotionCode',
-        function ($scope, $location, PromotionCode, SelectedPromotionCode) {
-            $scope.selectedPromotionCode = SelectedPromotionCode.item;
-            $scope.save = function () {
-                var promotionCode = new Award($scope.selectedPromotionCode);
-                promotionCode.$update(function () {
-                    $location.url('/promotion-code-list');
+                PromotionCode.batchCreate({
+                    numberOfCodesToCreate: $scope.promotionCodeBatchRequest.numberOfCodesToCreate,
+                    awardPointsPercode: $scope.promotionCodeBatchRequest.awardPointsPercode,
+                    codeLength: $scope.promotionCodeBatchRequest.codeLength,
+                    marketingCampaign: {
+                        id: $scope.promotionCodeBatchRequest.selectedCampaignId
+                    }
+                }, function () {
+                    $scope.addSuccessMessage('Los códigos se han generado correctamente');
                 });
             };
         }]);

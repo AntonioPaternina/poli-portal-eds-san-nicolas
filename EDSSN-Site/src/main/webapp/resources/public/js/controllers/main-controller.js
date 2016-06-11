@@ -117,5 +117,17 @@ angular.module('edssnApp')
 
             $scope.isNumber = function (n) {
                 return !isNaN(parseFloat(n)) && isFinite(n);
-            }
+            };
+
+            $scope.parseMoment = function (dateString) {
+                var moment = require('moment');
+                return moment(dateString);
+            };
+            $scope.parseDate = function (dateString) {
+                return $scope.parseMoment(dateString).toDate();
+            };
+            $scope.isDate = function (dateString) {
+                var parsedMoment = $scope.parseMoment(dateString);
+                return parsedMoment.isValid();
+            };
         }]);

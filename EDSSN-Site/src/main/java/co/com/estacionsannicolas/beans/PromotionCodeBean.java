@@ -3,6 +3,8 @@ package co.com.estacionsannicolas.beans;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import java.util.Date;
+
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = PromotionCodeBean.class)
 public class PromotionCodeBean extends BaseBean {
 
@@ -11,6 +13,8 @@ public class PromotionCodeBean extends BaseBean {
     private Boolean used;
 
     private Long points;
+
+    private Date creationDate;
 
     private MarketingCampaignBean marketingCampaign;
 
@@ -46,4 +50,11 @@ public class PromotionCodeBean extends BaseBean {
         this.marketingCampaign = marketingCampaign;
     }
 
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
 }

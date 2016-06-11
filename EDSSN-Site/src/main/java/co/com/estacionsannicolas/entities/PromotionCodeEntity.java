@@ -5,6 +5,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "PROMOTION_CODE", uniqueConstraints = {
@@ -16,6 +17,8 @@ public class PromotionCodeEntity extends BaseEntity implements Serializable {
     private Boolean used = false;
 
     private Long points;
+
+    private Date creationDate;
 
     @ManyToOne
     private MarketingCampaignEntity marketingCampaign;
@@ -52,4 +55,11 @@ public class PromotionCodeEntity extends BaseEntity implements Serializable {
         this.points = points;
     }
 
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
 }

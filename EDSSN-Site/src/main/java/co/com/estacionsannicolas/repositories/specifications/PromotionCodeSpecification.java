@@ -36,6 +36,9 @@ public class PromotionCodeSpecification implements Specification<PromotionCodeEn
             if (criteria.getMarketingCampaign() != null && criteria.getMarketingCampaign().getName() != null) {
                 predicates.add(cb.like(root.get("marketingCampaign").get("name"), "%" + StringUtils.upperCase(criteria.getMarketingCampaign().getName()) + "%"));
             }
+            if (criteria.getCreationDate() != null) {
+                predicates.add(cb.equal(root.get("creationDate"), criteria.getCreationDate()));
+            }
         }
 
         return cb.and(predicates.toArray(new Predicate[predicates.size()]));

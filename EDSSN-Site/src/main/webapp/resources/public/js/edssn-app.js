@@ -28,7 +28,7 @@ angular.module('edssnApp', ['ngRoute',
         });
     }])
     .config(['$provide', '$httpProvider', function ($provide, $httpProvider) {
-        $provide.factory('CsrfTokenInterceptor', [function () {
+        $provide.factory('CsrfTokenInterceptor', ['$q', function ($q) {
             var factory = this;
             this.updateCsrfToken = function (response) {
                 if (response.headers('X-CSRF-TOKEN')) {
@@ -41,7 +41,8 @@ angular.module('edssnApp', ['ngRoute',
                     return factory.updateCsrfToken(response);
                 },
                 responseError: function (response) {
-                    return factory.updateCsrfToken(response);
+                    factory.updateCsrfToken(response);
+                    return $q.reject(response);
                 }
             }
         }]);

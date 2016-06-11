@@ -1,10 +1,13 @@
 package co.com.estacionsannicolas.controllers;
 
 import co.com.estacionsannicolas.beans.PageBean;
+import co.com.estacionsannicolas.beans.PromotionCodeBatchRequestBean;
 import co.com.estacionsannicolas.beans.PromotionCodeBean;
 import co.com.estacionsannicolas.entities.RoleEntity;
 import co.com.estacionsannicolas.repositories.specifications.PromotionCodeSpecification;
 import co.com.estacionsannicolas.service.PromotionCodeService;
+import co.com.estacionsannicolas.service.exceptions.RequiredParameterException;
+import co.com.estacionsannicolas.service.exceptions.TooManyPromotionCodesToCreateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.annotation.Secured;
@@ -49,6 +52,12 @@ public class PromotionCodeController extends BaseController {
     @RequestMapping(value = "/count", method = RequestMethod.GET)
     public long count() {
         return promotionCodeService.getCount();
+    }
+
+    @Secured(RoleEntity.ADMIN)
+    @RequestMapping(value = "/batchCreate", method = RequestMethod.POST)
+    public void batchCreate(@RequestBody PromotionCodeBatchRequestBean batchRequestBean) throws TooManyPromotionCodesToCreateException, RequiredParameterException {
+        promotionCodeService.generateRandomCodes(batchRequestBean);
     }
 
 }

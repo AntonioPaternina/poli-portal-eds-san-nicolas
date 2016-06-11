@@ -12,6 +12,8 @@ import co.com.estacionsannicolas.service.MarketingCampaignService;
 import co.com.estacionsannicolas.service.PromotionCodeService;
 import co.com.estacionsannicolas.service.UserService;
 import co.com.estacionsannicolas.service.exceptions.EdssnServiceException;
+import co.com.estacionsannicolas.service.exceptions.RequiredParameterException;
+import co.com.estacionsannicolas.service.exceptions.TooManyPromotionCodesToCreateException;
 import co.com.estacionsannicolas.service.exceptions.UsernameIsNotUniqueException;
 import org.apache.commons.lang.math.RandomUtils;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -67,8 +69,8 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
         initializeUserRoles();
         createTanquearSiPagaCampaign();
         if (INSERT_TEST_DATA) {
-            createDefaultPromotionCodesForTanquearSiPaga();
             try {
+                createDefaultPromotionCodesForTanquearSiPaga();
                 createDefaultUsers();
             } catch (EdssnServiceException e) {
                 logger.error("error during initialization", e);
@@ -76,7 +78,7 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
         }
     }
 
-    private void createDefaultPromotionCodesForTanquearSiPaga() {
+    private void createDefaultPromotionCodesForTanquearSiPaga() throws TooManyPromotionCodesToCreateException, RequiredParameterException {
         MarketingCampaignBean tanquearSiPaga = marketingCampaignService.findByName(DefaultMarketingCampaigns.TANQUEAR_SI_PAGA.getName());
         if (tanquearSiPaga != null && promotionCodeService.getCountByCampaign(tanquearSiPaga) == 0) {
             PromotionCodeBatchRequestBean batchRequestInfo = new PromotionCodeBatchRequestBean();
