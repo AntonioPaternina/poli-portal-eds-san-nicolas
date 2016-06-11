@@ -1,11 +1,10 @@
 package co.com.estacionsannicolas.entities;
 
-import java.util.Objects;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import org.apache.commons.lang.builder.ToStringBuilder;
+import java.util.Objects;
 
 @MappedSuperclass
 public class BaseEntity {
@@ -24,7 +23,7 @@ public class BaseEntity {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+        return String.valueOf(id);
     }
 
     @Override

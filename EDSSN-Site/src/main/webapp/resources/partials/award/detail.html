@@ -2,7 +2,7 @@
     <div class="edssn-admin-awards container">
         <h1>Detalle del Premio</h1>
         <img class="center-block" src="{{crudAwardSelectedRecord.imageLocation}}"
-             ng-show="crudAwardSelectedRecord.imageLocation" alt="Logo premio"/>
+             ng-if="crudAwardSelectedRecord.imageLocation" alt="Logo premio"/>
         <div class="row">
             <label class="col-xs-6">Nombre</label>
             <input type="text"

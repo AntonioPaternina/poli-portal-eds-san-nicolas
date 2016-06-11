@@ -1,7 +1,5 @@
 package co.com.estacionsannicolas.beans;
 
-import org.apache.commons.lang.builder.ToStringBuilder;
-
 import java.util.Objects;
 
 public class BaseBean {
@@ -18,7 +16,7 @@ public class BaseBean {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+        return String.valueOf(id);
     }
 
     @Override

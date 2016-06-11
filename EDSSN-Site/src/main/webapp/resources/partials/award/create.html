@@ -2,7 +2,7 @@
     <div class="edssn-admin-awards container">
         <h1>Crear Premio</h1>
         <div class="row">
-            <label class="col-xs-6">Nombre</label>
+            <label class="col-xs-6">Nombre (*)</label>
             <input type="text"
                    class="col-xs-6"
                    ng-model="newAward.name"/>
@@ -15,7 +15,7 @@
             />
         </div>
         <div class="row">
-            <label class="col-xs-6">Referencia</label>
+            <label class="col-xs-6">Referencia (*)</label>
             <input type="text"
                    class="col-xs-6"
                    ng-model="newAward.reference"
@@ -36,14 +36,14 @@
             />
         </div>
         <div class="row">
-            <label class="col-xs-6">Costo en puntos</label>
+            <label class="col-xs-6">Costo en puntos (*)</label>
             <input type="text"
                    class="col-xs-6"
                    ng-model="newAward.costInPoints"
             />
         </div>
         <div>
-            <h2>Campañas asociadas</h2>
+            <h2>Campañas asociadas (*)</h2>
             <label ng-repeat="campaign in campaigns">
                 <input type="checkbox"
                        name="campaigns"

@@ -1,12 +1,8 @@
 package co.com.estacionsannicolas.entities;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import javax.persistence.DiscriminatorColumn;
-import javax.persistence.Entity;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.Table;
 
 @Entity
 @Table(name = "PRODUCT")
@@ -16,6 +12,7 @@ public class ProductEntity extends BaseEntity implements Serializable {
 
     private String name;
     private String description;
+    @Column(unique = true)
     private String reference;
     private String imageLocation;
     private BigDecimal price;

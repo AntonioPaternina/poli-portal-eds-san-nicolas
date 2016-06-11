@@ -66,15 +66,15 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
     @Override
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
-        initializeUserRoles();
-        createTanquearSiPagaCampaign();
-        if (INSERT_TEST_DATA) {
-            try {
+        try {
+            initializeUserRoles();
+            createTanquearSiPagaCampaign();
+            if (INSERT_TEST_DATA) {
                 createDefaultPromotionCodesForTanquearSiPaga();
                 createDefaultUsers();
-            } catch (EdssnServiceException e) {
-                logger.error("error during initialization", e);
             }
+        } catch (EdssnServiceException e) {
+            logger.error("error during initialization", e);
         }
     }
 
@@ -91,7 +91,7 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
         }
     }
 
-    private void createTanquearSiPagaCampaign() {
+    private void createTanquearSiPagaCampaign() throws RequiredParameterException {
         if (marketingCampaignService.findByName(DefaultMarketingCampaigns.TANQUEAR_SI_PAGA.getName()) == null) {
             MarketingCampaignBean tanquearSiPagaCampaign = new MarketingCampaignBean();
             tanquearSiPagaCampaign.setName(DefaultMarketingCampaigns.TANQUEAR_SI_PAGA.getName());
@@ -101,7 +101,7 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
         }
     }
 
-    private void createTestAwards(MarketingCampaignBean tanquearSiPagaCampaign) {
+    private void createTestAwards(MarketingCampaignBean tanquearSiPagaCampaign) throws RequiredParameterException {
         List<MarketingCampaignBean> campaigns = new ArrayList<>();
         campaigns.add(tanquearSiPagaCampaign);
 
@@ -121,7 +121,7 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
         llavero.setCostInPoints(2000L);
         llavero.setImageLocation("https://s3-sa-east-1.amazonaws.com/edssn-image-bucket/AwardImages/gobadges-kc002-cooper-mini-llavero-negro-con-punto-rojo--D_NQ_NP_440321-MCO20737448253_052016-O.webp");
         llavero.setMarketingCampaigns(campaigns);
-        llavero.setReference("001");
+        llavero.setReference("002");
         llavero.setPrice(new BigDecimal("100000"));
         awardService.save(llavero);
 
@@ -131,7 +131,7 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
         testAward.setCostInPoints(300L);
         testAward.setImageLocation("https://s3-sa-east-1.amazonaws.com/edssn-image-bucket/AwardImages/manos-libres-carro.webp");
         testAward.setMarketingCampaigns(campaigns);
-        testAward.setReference("001");
+        testAward.setReference("003");
         testAward.setPrice(new BigDecimal("60000"));
         awardService.save(testAward);
     }

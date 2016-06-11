@@ -3,6 +3,7 @@ package co.com.estacionsannicolas.controllers;
 import co.com.estacionsannicolas.beans.AwardBean;
 import co.com.estacionsannicolas.entities.RoleEntity;
 import co.com.estacionsannicolas.service.AwardService;
+import co.com.estacionsannicolas.service.exceptions.RequiredParameterException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
@@ -28,13 +29,13 @@ public class AwardController extends BaseController {
 
     @Secured(RoleEntity.ADMIN)
     @RequestMapping(method = RequestMethod.POST)
-    public AwardBean save(@RequestBody AwardBean awardBean) {
+    public AwardBean save(@RequestBody AwardBean awardBean) throws RequiredParameterException {
         return awardService.save(awardBean);
     }
 
     @Secured(RoleEntity.ADMIN)
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public AwardBean update(@RequestBody AwardBean awardBean) {
+    public AwardBean update(@RequestBody AwardBean awardBean) throws RequiredParameterException {
         return awardService.save(awardBean);
     }
 
