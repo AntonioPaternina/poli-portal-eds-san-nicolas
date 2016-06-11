@@ -23,5 +23,8 @@
     "requirejs": "2.2.0",
     "bootstrap": "3.3.6",
     "moment": "2.13.0"
+  },
+  "resolutions": {
+    "angular": "1.5.6"
   }
 }
