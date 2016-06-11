@@ -39,7 +39,7 @@ angular.module('edssnApp')
 
             /* avaiblable to admin users only */
             .when('/customers', {
-                templateUrl: '/resources/partials/customers.html',
+                templateUrl: '/resources/partials/customer/list.html',
                 controller: 'CustomerController',
                 controllerAs: 'ctrl',
                 data: {
@@ -55,7 +55,7 @@ angular.module('edssnApp')
                 }
             })
             .when('/award-list', {
-                templateUrl: '/resources/partials/award-list.html',
+                templateUrl: '/resources/partials/award/list.html',
                 controller: 'AwardController',
                 controllerAs: 'ctrl',
                 data: {
@@ -63,7 +63,7 @@ angular.module('edssnApp')
                 }
             })
             .when('/award-detail', {
-                templateUrl: '/resources/partials/award-detail.html',
+                templateUrl: '/resources/partials/award/detail.html',
                 controller: 'AwardController',
                 controllerAs: 'ctrl',
                 data: {
@@ -71,7 +71,7 @@ angular.module('edssnApp')
                 }
             })
             .when('/award-create', {
-                templateUrl: '/resources/partials/award-create.html',
+                templateUrl: '/resources/partials/award/create.html',
                 controller: 'AwardCreateController',
                 controllerAs: 'ctrl',
                 data: {
@@ -79,8 +79,40 @@ angular.module('edssnApp')
                 }
             })
             .when('/award-edit', {
-                templateUrl: '/resources/partials/award-edit.html',
+                templateUrl: '/resources/partials/award/edit.html',
                 controller: 'AwardEditController',
+                controllerAs: 'ctrl',
+                data: {
+                    authorizedRoles: [USER_ROLES.admin]
+                }
+            })
+            .when('/promotion-code-list', {
+                templateUrl: '/resources/partials/promotion-code/list.html',
+                controller: 'PromotionCodeListController',
+                controllerAs: 'ctrl',
+                data: {
+                    authorizedRoles: [USER_ROLES.admin]
+                }
+            })
+            .when('/promotion-code-detail', {
+                templateUrl: '/resources/partials/promotion-code/detail.html',
+                controller: 'PromotionCodeDetailController',
+                controllerAs: 'ctrl',
+                data: {
+                    authorizedRoles: [USER_ROLES.admin]
+                }
+            })
+            .when('/promotion-code-create', {
+                templateUrl: '/resources/partials/promotion-code/create.html',
+                controller: 'PromotionCodeCreateController',
+                controllerAs: 'ctrl',
+                data: {
+                    authorizedRoles: [USER_ROLES.admin]
+                }
+            })
+            .when('/promotion-code-edit', {
+                templateUrl: '/resources/partials/promotion-code/edit.html',
+                controller: 'PromotionCodeEditController',
                 controllerAs: 'ctrl',
                 data: {
                     authorizedRoles: [USER_ROLES.admin]

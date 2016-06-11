@@ -4,6 +4,8 @@ angular.module('edssnApp', ['ngRoute',
     'ui.bootstrap',
     'ui.grid',
     'ui.grid.selection',
+    'ui.grid.pagination',
+    'ui.grid.exporter',
     'ui.validate'])
     .run(['$rootScope', 'AUTH_EVENTS', 'AuthService', '$location', function ($rootScope, AUTH_EVENTS, AuthService, $location) {
         $rootScope.$on('$routeChangeStart', function (event, next) {

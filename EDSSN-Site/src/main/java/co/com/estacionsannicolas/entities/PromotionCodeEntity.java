@@ -1,19 +1,19 @@
 package co.com.estacionsannicolas.entities;
 
-import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "PROMOTION_CODE", uniqueConstraints = {
-    @UniqueConstraint(columnNames = "code")})
+        @UniqueConstraint(columnNames = "code")})
 public class PromotionCodeEntity extends BaseEntity implements Serializable {
 
     private String code;
 
-    private Boolean used;
+    private Boolean used = false;
 
     private Long points;
 

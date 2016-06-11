@@ -1,6 +1,6 @@
 angular.module('edssnApp')
-    .controller('MainController', ['$scope', '$http', '$rootScope', '$location', 'UserService', 'AuthService', 'USER_ROLES', 'AUTH_EVENTS', 'Session',
-        function ($scope, $http, $rootScope, $location, UserService, AuthService, USER_ROLES, AUTH_EVENTS, Session) {
+    .controller('MainController', ['$scope', '$http', '$rootScope', '$location', 'UserService', 'AuthService', 'USER_ROLES', 'AUTH_EVENTS', 'Session', 'uiGridConstants',
+        function ($scope, $http, $rootScope, $location, UserService, AuthService, USER_ROLES, AUTH_EVENTS, Session, uiGridConstants) {
             $scope.currentUser = null;
             $scope.userRoles = USER_ROLES;
             $scope.isAuthorized = AuthService.isAuthorized;
@@ -76,8 +76,29 @@ angular.module('edssnApp')
                 multiSelect: false,
                 enableSelectAll: false,
                 noUnselect: true,
-                gridMenuShowHideColumns: false
+                gridMenuShowHideColumns: false,
+                paginationPageSizes: [25, 50, 75],
+                paginationPageSize: 25,
+                exporterMenuPdf: false
             };
+            $scope.getSort = function (uiGridSortColumns) {
+                var sortColumn = uiGridSortColumns[0];
+
+                var sortDirection;
+                switch (sortColumn.sort.direction) {
+                    case uiGridConstants.ASC:
+                        sortDirection = 'asc';
+                        break;
+                    case uiGridConstants.DESC:
+                        sortDirection = 'desc';
+                        break;
+                    default:
+                        break;
+                }
+
+                return sortColumn.field + ',' + sortDirection;
+            };
+
 
             $rootScope.addError = function (errorMessage) {
                 $scope.resetVM();
@@ -93,4 +114,8 @@ angular.module('edssnApp')
                 $scope.resetVM();
                 $scope.vm.successMessages.push({description: successMessage});
             };
+
+            $scope.isNumber = function (n) {
+                return !isNaN(parseFloat(n)) && isFinite(n);
+            }
         }]);

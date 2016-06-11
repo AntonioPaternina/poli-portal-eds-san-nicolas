@@ -9,4 +9,6 @@ public interface PersistentLoginRepository extends JpaRepository<PersistentLogin
 
     PersistentLoginEntity findByUsername(String username);
 
+    PersistentLoginEntity findBySeries(String series);
+
 }

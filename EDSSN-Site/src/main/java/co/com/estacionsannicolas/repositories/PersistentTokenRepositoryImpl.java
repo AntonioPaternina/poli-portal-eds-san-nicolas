@@ -1,8 +1,6 @@
 package co.com.estacionsannicolas.repositories;
 
 import co.com.estacionsannicolas.entities.PersistentLoginEntity;
-import java.util.Date;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +8,8 @@ import org.springframework.security.web.authentication.rememberme.PersistentReme
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
 
 @Repository
 @Transactional
@@ -37,7 +37,7 @@ public class PersistentTokenRepositoryImpl
         LOGGER.info("Buscando token para: {}", seriesId);
         PersistentRememberMeToken persistentRememberMeToken = null;
         try {
-            PersistentLoginEntity persistentLogin = loginRepositorio.findOne(seriesId);
+            PersistentLoginEntity persistentLogin = loginRepositorio.findBySeries(seriesId);
             if (persistentLogin != null) {
                 persistentRememberMeToken = new PersistentRememberMeToken(persistentLogin.getUsername(), persistentLogin.getSeries(),
                         persistentLogin.getToken(), persistentLogin.getLastUsed());
@@ -69,7 +69,7 @@ public class PersistentTokenRepositoryImpl
     public void updateToken(String seriesId, String tokenValue, Date lastUsed) {
         LOGGER.info("Actualizando token para el id: {}", seriesId);
         try {
-            PersistentLoginEntity persistentLogin = loginRepositorio.findOne(seriesId);
+            PersistentLoginEntity persistentLogin = loginRepositorio.findBySeries(seriesId);
             persistentLogin.setToken(tokenValue);
             persistentLogin.setLastUsed(lastUsed);
             loginRepositorio.saveAndFlush(persistentLogin);

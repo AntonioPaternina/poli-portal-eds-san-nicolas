@@ -17,6 +17,7 @@ require.config({
         customerService: '/resources/public/js/services/customer-service',
         awardService: '/resources/public/js/services/award-service',
         campaignService: '/resources/public/js/services/campaign-service',
+        promotionCodeService: '/resources/public/js/services/promotion-code-service',
         edssnAppRoutes: '/resources/public/js/routes/edssn-app-routes',
         mainController: '/resources/public/js/controllers/main-controller',
         signupController: '/resources/public/js/controllers/signup-controller',
@@ -24,6 +25,7 @@ require.config({
         customerController: '/resources/public/js/controllers/customer-controller',
         accountController: '/resources/public/js/controllers/account-controller',
         awardController: '/resources/public/js/controllers/award-controller',
+        promotionCodeController: '/resources/public/js/controllers/promotion-code-controller',
         redeemAwardPointsController: '/resources/public/js/controllers/redeem-award-points-controller',
         constants: '/resources/public/js/constants/constants'
     },
@@ -77,6 +79,9 @@ require.config({
         campaignService: {
             deps: ['angular', 'edssnApp']
         },
+        promotionCodeService: {
+            deps: ['angular', 'edssnApp']
+        },
         awardService: {
             deps: ['angular', 'edssnApp']
         },
@@ -101,6 +106,9 @@ require.config({
         awardController: {
             deps: ['angular', 'edssnApp']
         },
+        promotionCodeController: {
+            deps: ['angular', 'edssnApp']
+        },
         redeemAwardPointsController: {
             deps: ['angular', 'edssnApp']
         },
@@ -119,12 +127,14 @@ require(['edssnApp',
     'customerController',
     'accountController',
     'redeemAwardPointsController',
+    'promotionCodeController',
     'awardController',
     'authService',
     'userService',
     'customerService',
     'awardService',
     'campaignService',
+    'promotionCodeService',
     'constants'], function () {
 
     angular.bootstrap(document.getElementById('edssnApp'), ['edssnApp'], {

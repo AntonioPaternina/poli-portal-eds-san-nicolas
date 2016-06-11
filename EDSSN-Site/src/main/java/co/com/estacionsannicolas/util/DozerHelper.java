@@ -1,8 +1,11 @@
 package co.com.estacionsannicolas.util;
 
+import co.com.estacionsannicolas.beans.PageBean;
+import org.dozer.Mapper;
+import org.springframework.data.domain.Page;
+
 import java.util.ArrayList;
 import java.util.List;
-import org.dozer.Mapper;
 
 public class DozerHelper {
 
@@ -23,4 +26,16 @@ public class DozerHelper {
 
         return dest;
     }
+
+    public static <T, U> PageBean<U> map(final Mapper mapper, final Page<T> source, final Class<U> destType) {
+        List<U> mappedList = map(mapper, source.getContent(), destType);
+
+        PageBean<U> page = new PageBean<>();
+        page.setTotalItems(source.getTotalElements());
+        page.setContent(mappedList);
+
+        return page;
+    }
+
+
 }

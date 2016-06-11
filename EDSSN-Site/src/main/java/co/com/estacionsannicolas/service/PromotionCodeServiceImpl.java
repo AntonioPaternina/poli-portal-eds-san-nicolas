@@ -4,12 +4,15 @@ import co.com.estacionsannicolas.beans.*;
 import co.com.estacionsannicolas.entities.MarketingCampaignEntity;
 import co.com.estacionsannicolas.entities.PromotionCodeEntity;
 import co.com.estacionsannicolas.repositories.PromotionCodeRepository;
+import co.com.estacionsannicolas.repositories.specifications.PromotionCodeSpecification;
 import co.com.estacionsannicolas.service.exceptions.InexistentPromotionCodeException;
 import co.com.estacionsannicolas.service.exceptions.PromotionCodeAlreadyUsedException;
 import co.com.estacionsannicolas.util.DozerHelper;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,16 +48,20 @@ public class PromotionCodeServiceImpl extends BaseService implements PromotionCo
     }
 
     @Override
-    public List<PromotionCodeBean> getAll() {
-        List<PromotionCodeBean> promotionCodeBeanList = null;
-        List<PromotionCodeEntity> promotionCodeEntityList = promotionCodeRepository.findAll();
-        promotionCodeBeanList = DozerHelper.map(mapper, promotionCodeEntityList, PromotionCodeBean.class);
-        return promotionCodeBeanList;
+    public PageBean<PromotionCodeBean> getAll(Pageable pageRequest) {
+        Page<PromotionCodeEntity> promotionCodeEntityPage = promotionCodeRepository.findAll(pageRequest);
+        return DozerHelper.map(mapper, promotionCodeEntityPage, PromotionCodeBean.class);
     }
 
     @Override
-    public void delete(PromotionCodeBean promotionCode) {
-        promotionCodeRepository.delete(promotionCode.getId());
+    public PageBean<PromotionCodeBean> getAll(PromotionCodeSpecification specification, Pageable pageRequest) {
+        Page<PromotionCodeEntity> promotionCodeEntityPage = promotionCodeRepository.findAll(specification, pageRequest);
+        return DozerHelper.map(mapper, promotionCodeEntityPage, PromotionCodeBean.class);
+    }
+
+    @Override
+    public void delete(long id) {
+        promotionCodeRepository.delete(id);
     }
 
     @Override
@@ -138,6 +145,12 @@ public class PromotionCodeServiceImpl extends BaseService implements PromotionCo
         MarketingCampaignEntity marketingCampaignEntity = mapper.map(marketingCampaign, MarketingCampaignEntity.class);
         return promotionCodeRepository.countByMarketingCampaign(marketingCampaignEntity);
     }
+
+    @Override
+    public long getCount() {
+        return promotionCodeRepository.count();
+    }
+
 
     @Override
     public PromotionCodeBean getByCode(String code) {

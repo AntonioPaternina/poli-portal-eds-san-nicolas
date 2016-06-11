@@ -1,0 +1,12 @@
+<div>
+    <div>
+        <h1 class="text-center">Administración de Códigos Promocionales</h1>
+        <div>
+            <a href="/#/promotion-codes-create" class="btn btn-primary">Añadir</a>
+            <a href="/#/promotion-codes-detail" class="btn btn-info" ng-disabled="!selectedItem">Ver Detalle </a>
+            <a href="/#/promotion-codes-edit" class="btn btn-warning" ng-disabled="!selectedItem">Editar </a>
+            <a class="btn btn-danger" ng-click="deletePromotionCode()" ng-disabled="!selectedItem">Eliminar </a>
+        </div>
+        <div ui-grid="gridOpts" ui-grid-selection ui-grid-pagination ui-grid-exporter></div>
+    </div>
+</div>

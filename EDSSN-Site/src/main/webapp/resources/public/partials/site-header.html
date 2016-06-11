@@ -30,6 +30,11 @@
             <a href="/#/award-list">Administrar Premios</a>
         </li>
         <li class="edssn-menu-link"
+            ng-if="isAuthorized(userRoles.admin)"
+            ng-cloak>
+            <a href="/#/promotion-code-list">Administrar Cupones</a>
+        </li>
+        <li class="edssn-menu-link"
             ng-if="isAuthorized(userRoles.customer)"
             ng-cloak>
             <a href="/#/account">Mi Cuenta ({{currentUser.username}})</a>
