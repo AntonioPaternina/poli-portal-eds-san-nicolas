@@ -105,17 +105,35 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
         List<MarketingCampaignBean> campaigns = new ArrayList<>();
         campaigns.add(tanquearSiPagaCampaign);
 
-        for (int i = 1; i < 5; i++) {
-            AwardBean testAward = new AwardBean();
-            testAward.setCostInPoints(1000L);
-            testAward.setDescription("Premio de prueba " + i);
-            testAward.setName("Premio de prueba" + i);
-            testAward.setImageLocation("ruta_imagen" + i);
-            testAward.setMarketingCampaigns(campaigns);
-            testAward.setReference("00" + i);
-            testAward.setPrice(BigDecimal.ONE);
-            awardService.save(testAward);
-        }
+        AwardBean perfumeHombre = new AwardBean();
+        perfumeHombre.setName("Perfume Hombre Invictus Paco Rabanne");
+        perfumeHombre.setDescription("Un perfume original Invictus Paco Rabanne de 150 ml");
+        perfumeHombre.setCostInPoints(10000L);
+        perfumeHombre.setImageLocation("https://s3-sa-east-1.amazonaws.com/edssn-image-bucket/AwardImages/perfume-hombre-paco-rabanne.webp");
+        perfumeHombre.setMarketingCampaigns(campaigns);
+        perfumeHombre.setReference("001");
+        perfumeHombre.setPrice(new BigDecimal("200000"));
+        awardService.save(perfumeHombre);
+
+        AwardBean llavero = new AwardBean();
+        llavero.setName("Gobadges Kc002 Cooper Mini Llavero");
+        llavero.setDescription("Cuero protector de llaves. Simple, elegante y personalizable.");
+        llavero.setCostInPoints(2000L);
+        llavero.setImageLocation("https://s3-sa-east-1.amazonaws.com/edssn-image-bucket/AwardImages/gobadges-kc002-cooper-mini-llavero-negro-con-punto-rojo--D_NQ_NP_440321-MCO20737448253_052016-O.webp");
+        llavero.setMarketingCampaigns(campaigns);
+        llavero.setReference("001");
+        llavero.setPrice(new BigDecimal("100000"));
+        awardService.save(llavero);
+
+        AwardBean testAward = new AwardBean();
+        testAward.setName("Manos Libres Bluetooth");
+        testAward.setDescription("Un manos libres para dos celulares Bluetooth");
+        testAward.setCostInPoints(300L);
+        testAward.setImageLocation("https://s3-sa-east-1.amazonaws.com/edssn-image-bucket/AwardImages/manos-libres-carro.webp");
+        testAward.setMarketingCampaigns(campaigns);
+        testAward.setReference("001");
+        testAward.setPrice(new BigDecimal("60000"));
+        awardService.save(testAward);
     }
 
     private void createDefaultUsers() throws UsernameIsNotUniqueException {

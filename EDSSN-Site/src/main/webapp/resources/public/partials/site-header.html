@@ -22,17 +22,17 @@
         <li class="edssn-menu-link"
             ng-if="isAuthorized(userRoles.admin)"
             ng-cloak>
-            <a href="/#/customers">Administrar Clientes</a>
+            <a href="/#/customers">Clientes</a>
         </li>
         <li class="edssn-menu-link"
             ng-if="isAuthorized(userRoles.admin)"
             ng-cloak>
-            <a href="/#/award-list">Administrar Premios</a>
+            <a href="/#/award-list">Adm. Premios</a>
         </li>
         <li class="edssn-menu-link"
             ng-if="isAuthorized(userRoles.admin)"
             ng-cloak>
-            <a href="/#/promotion-code-list">Administrar Cupones</a>
+            <a href="/#/promotion-code-list">Cupones</a>
         </li>
         <li class="edssn-menu-link"
             ng-if="isAuthorized(userRoles.customer)"
@@ -42,7 +42,7 @@
         <li class="edssn-menu-link"
             ng-if="isAuthorized(userRoles.admin)"
             ng-cloak>
-            <a href="/#/">Mi Cuenta ({{currentUser.username}})</a>
+            <a href="/#/">({{currentUser.username}})</a>
         </li>
         <li class="edssn-menu-link"
             ng-if="currentUser"
