@@ -1,6 +1,8 @@
 angular.module('edssnApp')
-    .controller('MainController', ['$scope', '$http', '$rootScope', '$location', 'UserService', 'AuthService', 'USER_ROLES', 'AUTH_EVENTS', 'Session', 'uiGridConstants',
-        function ($scope, $http, $rootScope, $location, UserService, AuthService, USER_ROLES, AUTH_EVENTS, Session, uiGridConstants) {
+    .controller('MainController', ['$scope', '$http', '$rootScope', '$location', 'UserService', 'AuthService', 'USER_ROLES', 'AUTH_EVENTS', 'Session', 'uiGridConstants', 'i18nService',
+        function ($scope, $http, $rootScope, $location, UserService, AuthService, USER_ROLES, AUTH_EVENTS, Session, uiGridConstants, i18nService) {
+            i18nService.setCurrentLang('es');
+
             $scope.currentUser = null;
             $scope.userRoles = USER_ROLES;
             $scope.isAuthorized = AuthService.isAuthorized;
