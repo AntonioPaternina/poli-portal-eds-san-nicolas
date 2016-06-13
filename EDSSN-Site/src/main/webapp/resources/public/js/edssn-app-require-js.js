@@ -1,4 +1,5 @@
 require.config({
+    waitSeconds: 0,
     paths: {
         angular: '/resources/bower_components/angular/angular.min',
         angularMessages: '/resources/bower_components/angular-messages/angular-messages.min',

@@ -89,6 +89,8 @@ angular.module('edssnApp')
                 $scope.customer.birthdate = $scope.vm.birthdate;
                 $scope.customer.vehicles = $scope.vm.vehicles;
                 $scope.customer.gender = $scope.vm.gender;
+                $scope.customer.phoneNumber = $scope.vm.phoneNumber;
+                $scope.customer.cellphone = $scope.vm.cellphone;
 
 
                 $scope.customer.$save(function () {

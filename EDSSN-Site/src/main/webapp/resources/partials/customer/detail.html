@@ -1,0 +1,70 @@
+<div class="">
+    <h1>Detalle del Cliente</h1>
+
+    <!-- username -->
+    <div class="row">
+        <label class="col-xs-6">Nombre de usuario</label>
+        <input type="text"
+               class="col-xs-6"
+               value="{{selectedCustomer.username}}"
+               disabled/>
+    </div>
+    <!-- national id -->
+    <div class="row">
+        <label class="col-xs-6">No. de identificación</label>
+        <input type="text"
+               class="col-xs-6"
+               value="{{selectedCustomer.nationalId}}"
+               disabled/>
+    </div>
+    <!-- fullname -->
+    <div class="row">
+        <label class="col-xs-6">Nombre Completo</label>
+        <input type="text"
+               class="col-xs-6"
+               value="{{selectedCustomer.fullName}}"
+               disabled/>
+    </div>
+    <!-- gender -->
+    <div class="row">
+        <label class="col-xs-6">Sexo</label>
+        <input type="text"
+               class="col-xs-6"
+               value="{{selectedCustomer.gender == 'MALE' ? 'Hombre' : 'Mujer'}}"
+               disabled/>
+    </div>
+    <!-- email -->
+    <div class="row">
+        <label class="col-xs-6">Correo electrónico</label>
+        <input type="text"
+               class="col-xs-6"
+               value="{{selectedCustomer.email}}"
+               disabled/>
+    </div>
+    <!-- address -->
+    <div class="row">
+        <label class="col-xs-6">Dirección</label>
+        <textarea
+                class="col-xs-6"
+                disabled>{{selectedCustomer.address}}</textarea>
+    </div>
+    <!-- telephone -->
+    <div class="row">
+        <label class="col-xs-6">Teléfono</label>
+        <input type="text"
+               class="col-xs-6"
+               value="{{selectedCustomer.phoneNumber}}"
+               disabled/>
+    </div>
+    <!-- cellphone -->
+    <div class="row">
+        <label class="col-xs-6">Celular</label>
+        <input type="text"
+               class="col-xs-6"
+               value="{{selectedCustomer.cellphone}}"
+               disabled/>
+    </div>
+    <!-- vehicles -->
+    <div ui-grid="gridOpts"></div>
+
+</div>

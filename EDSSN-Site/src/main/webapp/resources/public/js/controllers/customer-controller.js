@@ -1,6 +1,6 @@
 angular.module('edssnApp')
-    .controller('CustomerController', ['$scope', '$location', 'Customer', 'RedeemPointsCustomer',
-        function ($scope, $location, Customer, RedeemPointsCustomer) {
+    .controller('CustomerController', ['$scope', '$location', 'Customer', 'RedeemPointsCustomer', 'SelectedCustomer',
+        function ($scope, $location, Customer, RedeemPointsCustomer, SelectedCustomer) {
             var columnDefs = [{
                 name: 'Usuario',
                 field: 'username',
@@ -37,6 +37,7 @@ angular.module('edssnApp')
                 $scope.gridApi = gridApi;
                 gridApi.selection.on.rowSelectionChanged($scope, function (row) {
                     $scope.selectedItem = row.entity;
+                    SelectedCustomer.customer = row.entity;
                 });
             };
 
@@ -46,4 +47,23 @@ angular.module('edssnApp')
                 $location.url('/redeem-points');
             }
 
-        }]);
+        }])
+    .controller('CustomerDetailController', ['$scope', 'SelectedCustomer', function ($scope, SelectedCustomer) {
+        $scope.selectedCustomer = SelectedCustomer.customer;
+
+        var columnDefs = [{
+            name: 'placa',
+            field: 'licensePlate'
+        }, {
+            name: 'marca',
+            field: 'brand'
+        }, {
+            name: 'tipo',
+            field: 'vehicleType'
+        }
+        ];
+        $scope.gridOpts = {
+            columnDefs: columnDefs,
+            data: $scope.selectedCustomer.vehicles
+        }
+    }]);

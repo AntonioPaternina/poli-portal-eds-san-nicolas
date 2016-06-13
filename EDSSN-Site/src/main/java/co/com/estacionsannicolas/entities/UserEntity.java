@@ -7,7 +7,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -37,11 +36,15 @@ public class UserEntity extends BaseEntity implements Serializable {
     @Column(name = "active")
     private boolean acive;
 
-    @Column
+    @Column(name = "address")
     private String address;
 
-    @OneToMany(mappedBy = "user")
-    private List<ContactNumberEntity> contactNumbers;
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Column(name = "cellphone")
+    private String cellphone;
+
     @Enumerated
     private GenderEnum gender;
     @Temporal(TemporalType.DATE)
@@ -50,9 +53,9 @@ public class UserEntity extends BaseEntity implements Serializable {
     @NotEmpty
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(joinColumns = {
-        @JoinColumn(name = "user_id")},
+            @JoinColumn(name = "user_id")},
             inverseJoinColumns = {
-                @JoinColumn(name = "user_role_id")})
+                    @JoinColumn(name = "user_role_id")})
     private Set<RoleEntity> userRoles = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -127,12 +130,20 @@ public class UserEntity extends BaseEntity implements Serializable {
         this.address = address;
     }
 
-    public List<ContactNumberEntity> getContactNumbers() {
-        return contactNumbers;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setContactNumbers(List<ContactNumberEntity> contactNumbers) {
-        this.contactNumbers = contactNumbers;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getCellphone() {
+        return cellphone;
+    }
+
+    public void setCellphone(String cellphone) {
+        this.cellphone = cellphone;
     }
 
     public GenderEnum getGender() {

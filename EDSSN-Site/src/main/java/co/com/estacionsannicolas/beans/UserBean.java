@@ -9,7 +9,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id", scope = UserBean.class)
@@ -23,7 +22,8 @@ public class UserBean extends BaseBean {
     private String email;
     private boolean acive;
     private String address;
-    private List<ContactNumberBean> contactNumbers;
+    private String phoneNumber;
+    private String cellphone;
     private GenderEnum gender;
     private Date birthdate;
     @JsonProperty(access = Access.READ_ONLY)
@@ -99,14 +99,6 @@ public class UserBean extends BaseBean {
         this.address = address;
     }
 
-    public List<ContactNumberBean> getContactNumbers() {
-        return contactNumbers;
-    }
-
-    public void setContactNumbers(List<ContactNumberBean> contactNumbers) {
-        this.contactNumbers = contactNumbers;
-    }
-
     public GenderEnum getGender() {
         return gender;
     }
@@ -155,4 +147,19 @@ public class UserBean extends BaseBean {
         this.awardRequests = awardRequests;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getCellphone() {
+        return cellphone;
+    }
+
+    public void setCellphone(String cellphone) {
+        this.cellphone = cellphone;
+    }
 }

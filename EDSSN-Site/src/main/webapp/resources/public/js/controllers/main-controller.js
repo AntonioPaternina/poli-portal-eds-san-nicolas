@@ -48,6 +48,13 @@ angular.module('edssnApp')
                 };
                 focusedField = undefined;
             };
+            $scope.clearMessages = function () {
+                if ($scope.vm) {
+                    $scope.vm.errorMessages = [];
+                    $scope.vm.infoMessages = [];
+                    $scope.vm.successMessages = [];
+                }
+            };
             $scope.$on('$routeChangeStart', $scope.resetVM);
 
 
@@ -103,17 +110,17 @@ angular.module('edssnApp')
 
 
             $rootScope.addError = function (errorMessage) {
-                $scope.resetVM();
+                $scope.clearMessages();
                 $scope.vm.errorMessages
                     .push({description: errorMessage});
 
             };
             $rootScope.addInfoMessage = function (infoMessage) {
-                $scope.resetVM();
+                $scope.clearMessages();
                 $scope.vm.infoMessages.push({description: infoMessage});
             };
             $rootScope.addSuccessMessage = function (successMessage) {
-                $scope.resetVM();
+                $scope.clearMessages();
                 $scope.vm.successMessages.push({description: successMessage});
             };
 

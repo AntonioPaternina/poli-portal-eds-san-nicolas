@@ -46,6 +46,14 @@ angular.module('edssnApp')
                     authorizedRoles: [USER_ROLES.admin]
                 }
             })
+            .when('/customer-detail', {
+                templateUrl: '/resources/partials/customer/detail.html',
+                controller: 'CustomerDetailController',
+                controllerAs: 'ctrl',
+                data: {
+                    authorizedRoles: [USER_ROLES.admin]
+                }
+            })
             .when('/redeem-points', {
                 templateUrl: '/resources/partials/redeem-points.html',
                 controller: 'RedeemAwardPointsController',

@@ -1,5 +1,7 @@
 package co.com.estacionsannicolas.beans;
 
+import co.com.estacionsannicolas.util.GlobalConstants;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -14,6 +16,7 @@ public class PromotionCodeBean extends BaseBean {
 
     private Long points;
 
+    @JsonFormat(pattern = GlobalConstants.DATE_FORMAT)
     private Date creationDate;
 
     private MarketingCampaignBean marketingCampaign;

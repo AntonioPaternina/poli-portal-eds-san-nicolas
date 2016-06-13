@@ -4,4 +4,7 @@ angular.module('edssnApp')
     }])
     .factory('RedeemPointsCustomer', function () {
         return {customer: null};
+    })
+    .factory('SelectedCustomer', function () {
+        return {customer: null};
     });

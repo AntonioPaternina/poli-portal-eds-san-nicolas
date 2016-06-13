@@ -158,7 +158,8 @@
                            ng-repeat="gender in genre">
                         <input type="radio"
                                name="gender"
-                               value="{{gender.value}}">
+                               value="{{gender.value}}"
+                               ng-model="vm.gender">
                         {{gender.label}}
                     </label>
                             <span class="help-block edssn-error-messages"
@@ -258,7 +259,7 @@
                            ng-focus="onFocus('tmp_plate')"
                            ng-blur="onBlur('tmp_plate')"
                            placeholder="ej. CKT-456"
-                           required/>
+                    />
                     <span class="help-block">la placa de tu vehículo</span>
                      <span class="help-block edssn-error-messages"
                            ng-show="isErrorMessageListVisible('tmp_plate')"
@@ -279,7 +280,7 @@
                            ng-focus="onFocus('tmp_brand')"
                            ng-blur="onBlur('tmp_brand')"
                            placeholder="ej. Toyota"
-                           required/>
+                    />
                     <span class="help-block">la marca de tu vehículo</span>
                     <span class="help-block edssn-error-messages"
                           ng-show="isErrorMessageListVisible('tmp_brand')"
@@ -298,7 +299,7 @@
                             ng-focus="onFocus('tmp_type')"
                             ng-blur="onBlur('tmp_type')"
                             class="form-control input-md"
-                            required>
+                    >
                         <option ng-repeat="tipo in tipos"
                                 value="{{tipo.value}}">{{tipo.label}}
                         </option>

@@ -155,9 +155,33 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
     }
 
     private void createDefaultCustomers() throws UsernameIsNotUniqueException {
+        createDefaultCustomer("cliente", "cliente_prueba_edssn@gmail.com", "José Francisco Gómez Pérez", "1056848751", GenderEnum.MALE, "Calle 85 #89-65");
+
         for (int i = 0; i < 50; i++) {
             createRandomCustomer();
         }
+    }
+
+    private void createDefaultCustomer(String cliente, String email, String fullName, String nationalId, GenderEnum male, String address) throws UsernameIsNotUniqueException {
+        createCustomer(cliente, email, fullName, nationalId, male, address);
+    }
+
+    private void createCustomer(String cliente, String email, String fullName, String nationalId, GenderEnum male, String address) throws UsernameIsNotUniqueException {
+        UserBean customer = new UserBean();
+        customer.setUsername(cliente);
+        customer.setPassword("Cliente01.");
+        customer.setAcive(true);
+        customer.setEmail(email);
+        customer.setFullName(fullName);
+        customer.setNationalId(nationalId);
+        customer.setGender(male);
+        customer.setAddress(address);
+        customer.setBirthdate(getRandomBirthDate());
+
+        createRandomVehicleForCustomer(customer);
+
+        customer = userService.create(customer, RoleTypeEnum.CUSTOMER);
+        randomlyAssignTestCodes(customer);
     }
 
     private void createRandomCustomer() throws UsernameIsNotUniqueException {
@@ -166,22 +190,7 @@ public class SeedDataInitializer implements ApplicationListener<ContextRefreshed
         StringBuilder username = new StringBuilder();
         generateRandomNameAndUsernameBasedOnGender(gender, fullName, username);
 
-        UserBean customer = new UserBean();
-        customer.setUsername(username.toString());
-        customer.setPassword("Admin01.");
-        customer.setAcive(true);
-        customer.setEmail(username.append("@gmail.com").toString());
-        customer.setFullName(fullName.toString());
-        customer.setNationalId(RandomStringUtils.randomNumeric(10));
-        customer.setGender(gender);
-        customer.setAddress(RandomStringUtils.randomAlphanumeric(20));
-        customer.setBirthdate(getRandomBirthDate());
-
-        createRandomVehicleForCustomer(customer);
-
-        customer = userService.create(customer, RoleTypeEnum.CUSTOMER);
-
-        randomlyAssignTestCodes(customer);
+        createCustomer(username.toString(), username.append("@gmail.com").toString(), fullName.toString(), RandomStringUtils.randomNumeric(10), gender, RandomStringUtils.randomAlphanumeric(20));
     }
 
     private void randomlyAssignTestCodes(UserBean customer) {
